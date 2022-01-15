@@ -19,7 +19,8 @@ public class OI {
     public static Button StartButton = new JoystickButton(xbox,RobotMap.BUTTON_START);
 
     public OI(){
-
+        LeftBumpButton.whenPressed(new ShootBalls.ShootFast());
+        RightBumpButton.whenPressed(new ShootBalls.ShootSlow());
     }
     
     
