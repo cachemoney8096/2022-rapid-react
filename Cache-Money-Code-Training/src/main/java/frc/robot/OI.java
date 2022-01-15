@@ -3,6 +3,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import frc.robot.command.ShootBalls;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
@@ -19,8 +20,9 @@ public class OI {
     public static Button StartButton = new JoystickButton(xbox,RobotMap.BUTTON_START);
 
     public OI(){
-        LeftBumpButton.whenPressed(new ShootBalls.ShootFast());
-        RightBumpButton.whenPressed(new ShootBalls.ShootSlow());
+        LeftBumpButton.whenPressed(new ShootBalls());
+        RightBumpButton.whenPressed(new ShootBalls());
+        
     }
     
     

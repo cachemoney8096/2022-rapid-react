@@ -1,6 +1,7 @@
 package frc.robot.command;
 import frc.robot.RobotMap;
 import frc.robot.Robot; 
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ShootBalls extends Command{
@@ -34,16 +35,16 @@ public class ShootBalls extends Command{
   }
   
   public static void ShootFast(){
-    
-   Shooter.setmotor1(0.75);
-   Shooter.setmotor2(0.75);
+   
+   Shooter.setMotor1(0.75);
+   Shooter.setMotor2(0.75);
 
   }
 
   public static void ShootSlow(){
     
-   Shooter.setmotor1(0.5);
-   Shooter.setmotor2(0.5);
+   Shooter.setMotor1(0.5);
+   Shooter.setMotor2(0.5);
    
 
 }

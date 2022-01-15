@@ -9,12 +9,14 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.SampleSubsystem;
+import frc.robot.subsystems.Shooter;
 import frc.robot.OI;
 
 
@@ -27,6 +29,7 @@ import frc.robot.OI;
 public class Robot extends TimedRobot {
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
+public static final Subsystem Shooter = new Shooter();
   private String m_autoSelected;
   public static OI m_oi;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
