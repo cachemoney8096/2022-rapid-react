@@ -12,6 +12,8 @@ public class RobotMap {
   public static final int  MOTOR_RIGHT_2_ID = 24;
   public static final int  DRIVERCONTROLLER = 1;
   public static final int  BUTTONCONTROLLER = 1;
+
+  //Controller Id's
   public static final int RIGHT_STICK_Y = 0;
   public static final int RIGHT_STICK_X = 1;
   public static final int BUTTON_LEFTTRIG = 2;
@@ -29,4 +31,14 @@ public class RobotMap {
   public final static int BUTTON_LEFTSTICK = 9;
   public final static int BUTTON_RIGHTSTICK = 10;
     
+
+  //Shooter Id's
+
+
+
+  //Intake Id's
+
+
+
+
 }
