@@ -66,8 +66,8 @@ for v in lToTest:
   Times = [smoothness*x for x in range(0,80)]
   Xpos = 0
   Ypos = HeightOfRelease
-  cacheX = []
-  cacheY = []
+  cacheX = [0]
+  cacheY = [HeightOfRelease]
   Xvel = v*math.cos(LaunchAngle)
   Yvel = v*math.sin(LaunchAngle)
 
