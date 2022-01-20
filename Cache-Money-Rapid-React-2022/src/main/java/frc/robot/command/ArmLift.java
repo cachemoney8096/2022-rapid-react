@@ -1,10 +1,12 @@
 package frc.robot.command;
+
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.Arm;
 
 public class ArmLift extends Command{
     public void ArmLift(){
-        requires Robot.subsystem;
+        requires(Robot.subsystem);
     }
 
     @Override

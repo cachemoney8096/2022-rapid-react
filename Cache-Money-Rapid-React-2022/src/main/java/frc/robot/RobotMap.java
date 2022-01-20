@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class RobotMap {
-     //Drive train Id's
+  //Drive Train Motor Id's
   public static final int  MOTOR_LEFT_1_ID = 21;  
   public static final int  MOTOR_LEFT_2_ID = 22;
   public static final int  MOTOR_RIGHT_1_ID = 23;
@@ -42,6 +42,7 @@ public class RobotMap {
   public final static int BUTTON_START = 8;
   public final static int BUTTON_LEFTSTICK = 9;
   public final static int BUTTON_RIGHTSTICK = 10;
+
     
 
   //Shooter Id's
@@ -50,7 +51,11 @@ public class RobotMap {
 
   //Intake Id's
 
-
+  //CLIMB MOTOR VALUES
+  public static final int LEFT_EXT_MOTOR = 0; //! NEEDS TO BE FILLED OUT
+  public static final int RIGHT_EXT_MOTOR = 0; //! NEEDS TO BE FILLED OUT
+  public static final int RIGHT_PIVOT_MOTOR = 0; //! NEEDS TO BE FILLED OUT
+  public static final int LEFT_PIVOT_MOTOR = 0; //! NEEDS TO BE FILLED OUT
 
 
 }
