@@ -87,6 +87,7 @@ public static final Subsystem Shooter = new Shooter();
       case kDefaultAuto:
       default:
         // Put default auto code here
+        TankDrive.test();
         break;
     }
   }
@@ -98,7 +99,7 @@ public static final Subsystem Shooter = new Shooter();
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    
+    TankDrive.move();
    
   }
 
