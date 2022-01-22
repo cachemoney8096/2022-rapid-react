@@ -18,6 +18,8 @@ public class OI {
     public static Button RightBumpButton = new JoystickButton(xbox,RobotMap.BUTTON_RIGHTBUMP);
     public static Button BackButton = new JoystickButton(xbox,RobotMap.BUTTON_BACK);
     public static Button StartButton = new JoystickButton(xbox,RobotMap.BUTTON_START);
+    public static Button leftTrigger = new JoystickButton(xbox, RobotMap.BUTTON_LEFTTRIG);
+    public static Button rightTrigger = new JoystickButton(xbox, RobotMap.BUTTON_RIGHTTRIG);
 
     public OI(){
         LeftBumpButton.whenPressed(new ShootBalls());
