@@ -46,7 +46,7 @@ public class TankDrive extends Command{
     DriveTrain.move(left,right);
   }
 
-  public static void test(){
+  public static void test(double speed){
     DriveTrain.setRight2(speed);
   }
   

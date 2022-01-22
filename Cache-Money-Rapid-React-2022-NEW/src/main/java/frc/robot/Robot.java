@@ -18,6 +18,7 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.SampleSubsystem;
 import frc.robot.subsystems.Shooter;
 import frc.robot.OI;
+import frc.robot.command.TankDrive;
 
 
 /**
@@ -36,6 +37,7 @@ public static final Subsystem Shooter = new Shooter();
   public static SampleSubsystem subsystem = new SampleSubsystem();
   public static Arm arm = new Arm();
   public static Lift lift = new Lift();
+  public static DriveTrain driveTrain = new DriveTrain();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -87,7 +89,7 @@ public static final Subsystem Shooter = new Shooter();
       case kDefaultAuto:
       default:
         // Put default auto code here
-        TankDrive.test();
+        TankDrive.test(0.5);
         break;
     }
   }

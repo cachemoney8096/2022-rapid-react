@@ -26,6 +26,10 @@ public class OI {
         RightBumpButton.whenPressed(new ShootBalls());
         
     }
+
+    public double getDriverRawAxis(int axis){
+        return xbox.getRawAxis(axis);
+    }
     
     
 }
