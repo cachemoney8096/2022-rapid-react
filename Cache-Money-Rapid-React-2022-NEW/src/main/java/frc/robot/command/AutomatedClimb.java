@@ -51,29 +51,36 @@ public class AutomatedClimb extends Command {
             AutomatedClimb.MoveArm(1, false); //TODO Need to fill out distance
             auto[3] = true;
         } else if(!auto[4]){
-            AutomatedClimb.RotateArm(1, false); //TODO need to fill out angle
+            AutomatedClimb.RotateArm(1, false); //TODO need to fill out angle and understand forward and backward
             auto[4] = true;
         } else if(!auto[5]){
+            AutomatedClimb.MoveArm(1, true); //TODO need to fill out distance
             auto[5] = true;
         } else if(!auto[6]){
+            AutomatedClimb.RotateArm(1, true); //TODO Need to fill out angle and understand forward and backward
             auto[6] = true;
         } else if(!auto[7]){
+            // TODO Add Arm Latch Mechanism
             auto[7] = true;
         } else if(!auto[8]){
+            AutomatedClimb.MoveArm(1, false); //TODO Need to fill out distance
             auto[8] = true;
         } else if(!auto[9]){
+            AutomatedClimb.RotateArm(1, false); //TODO need to fill out angle and understand forward and backward
             auto[9] = true;
         } else if(!auto[10]){
+            AutomatedClimb.MoveArm(1, true); //TODO Need to fill out distance
             auto[10] = true;
         } else if(!auto[11]){
+            AutomatedClimb.RotateArm(1, true); //TODO Need to fill out angle and understand forward and backward
             auto[11] = true;
         } else if(!auto[12]){
+            // TODO Add Arm Latach Mechanism 
             auto[12] = true;
         } else if(!auto[13]){
+            AutomatedClimb.MoveArm(1, false); //TODO Neded to fill out distance
             auto[13] = true;
-        } else if(!auto[14]){
-            auto[14] = true;
-        }
+        } 
     }
 
     @Override
@@ -93,7 +100,5 @@ public class AutomatedClimb extends Command {
         if(forward){dir_coeff=1;} else {dir_coeff=-1;}
         Climb.setPivotMotorPosition(distance*RobotMap.CLIMB_DISTANCE_CONVERSION_FACTOR*dir_coeff);
     }
-
-
     
 }

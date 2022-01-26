@@ -5,10 +5,10 @@ import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class TankDrive extends Command{
-
-    public TankDrive(){
-        requires(Robot.m_drivetrain);
-    }
+  
+  public TankDrive(){
+      requires(Robot.m_drivetrain);
+  }
      // Called when the command is initially scheduled.
   @Override
   // variables and mapping out buttons for the controller when it starts
@@ -50,6 +50,9 @@ public class TankDrive extends Command{
     DriveTrain.setRight2(speed);
   }
   public static void MovementUntilShadowLine() {
+    while(!DriveTrain.colorMatchCheck(RobotMap.SHADOW_RUNG_COLOR)){
+      DriveTrain.move(0.2, 0.2); //TODO Test to see if these values are correct
+    }
     
   }
   
