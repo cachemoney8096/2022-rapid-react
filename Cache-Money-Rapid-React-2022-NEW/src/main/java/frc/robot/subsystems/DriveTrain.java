@@ -49,7 +49,7 @@ public class DriveTrain extends Subsystem {
 
     public static boolean colorMatchCheck(Color c){
         ColorMatchResult match = colormatcher.matchClosestColor(DriveTrain.getColor());
-        if(match.color == c){
+        if(match.color == c && match.confidence >= RobotMap.COLOR_MATCH_CONFIDENCE_INTERVAL){
             return true;
         } else {
             return false;

@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.util.Color;
+
 public class RobotMap {
   //Drive Train Motor Id's
   public static final int  MOTOR_LEFT_1_ID = 10;  
@@ -57,9 +58,10 @@ public class RobotMap {
   public static final int RIGHT_EXT_MOTOR = 0; //TODO NEEDS TO BE FILLED OUT
   public static final int RIGHT_PIVOT_MOTOR = 0; //TODO NEEDS TO BE FILLED OUT
   public static final int LEFT_PIVOT_MOTOR = 0; //TODO NEEDS TO BE FILLED OUT
-  public static final double CLIMB_DISTANCE_CONVERSION_FACTOR = 0; //TODOO NEEDS TO BE FILLED OUT
+  public static final double CLIMB_DISTANCE_CONVERSION_FACTOR = 0; //TODO NEEDS TO BE FILLED OUT
   public static final int CLIMB_PROCESS_LENGTH = 14;
-public static final Color SHADOW_RUNG_COLOR = null;
+  public static final Color SHADOW_RUNG_COLOR = null; //TODO NEEDS TO BE FILLED OUT
+  public static final double COLOR_MATCH_CONFIDENCE_INTERVAL = 0; //TODO NEEDS TO BE FILLED OUT
 
 
 }
