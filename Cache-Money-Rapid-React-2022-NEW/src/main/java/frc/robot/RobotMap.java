@@ -52,10 +52,12 @@ public class RobotMap {
   //Intake Id's
 
   //CLIMB MOTOR VALUES
-  public static final int LEFT_EXT_MOTOR = 0; //! NEEDS TO BE FILLED OUT
-  public static final int RIGHT_EXT_MOTOR = 0; //! NEEDS TO BE FILLED OUT
-  public static final int RIGHT_PIVOT_MOTOR = 0; //! NEEDS TO BE FILLED OUT
-  public static final int LEFT_PIVOT_MOTOR = 0; //! NEEDS TO BE FILLED OUT
+  public static final int LEFT_EXT_MOTOR = 0; //TODO NEEDS TO BE FILLED OUT
+  public static final int RIGHT_EXT_MOTOR = 0; //TODO NEEDS TO BE FILLED OUT
+  public static final int RIGHT_PIVOT_MOTOR = 0; //TODO NEEDS TO BE FILLED OUT
+  public static final int LEFT_PIVOT_MOTOR = 0; //TODO NEEDS TO BE FILLED OUT
+  public static final double CLIMB_DISTANCE_CONVERSION_FACTOR = 0;
+  public static final int CLIMB_PROCESS_LENGTH = 14;
 
 
 }

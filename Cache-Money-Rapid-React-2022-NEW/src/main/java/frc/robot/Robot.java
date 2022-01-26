@@ -12,8 +12,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.Lift;
+import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.SampleSubsystem;
 import frc.robot.subsystems.Shooter;
@@ -35,8 +34,9 @@ public static final Subsystem Shooter = new Shooter();
   public static OI m_oi;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   public static SampleSubsystem subsystem = new SampleSubsystem();
-  public static Arm arm = new Arm();
-  public static Lift lift = new Lift();
+
+  //Initializing Subsystems
+  public static Climb m_climb = new Climb();
   public static DriveTrain driveTrain = new DriveTrain();
 
   /**
@@ -49,7 +49,6 @@ public static final Subsystem Shooter = new Shooter();
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
     Robot.m_oi = new OI();
-    arm.goToDefault();
   }
 
   /**
