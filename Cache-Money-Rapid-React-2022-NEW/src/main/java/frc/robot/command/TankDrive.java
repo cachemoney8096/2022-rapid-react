@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class TankDrive extends Command{
 
     public TankDrive(){
-        requires(Robot.driveTrain);
+        requires(Robot.m_drivetrain);
     }
      // Called when the command is initially scheduled.
   @Override
@@ -48,6 +48,9 @@ public class TankDrive extends Command{
 
   public static void test(double speed){
     DriveTrain.setRight2(speed);
+  }
+  public static void MovementUntilShadowLine() {
+    
   }
   
 }

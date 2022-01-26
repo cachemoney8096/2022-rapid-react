@@ -5,7 +5,7 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.Climb;
 
-public class AutomatedClimb extends Command{
+public class AutomatedClimb extends Command {
     public static boolean[] auto = new boolean[RobotMap.CLIMB_PROCESS_LENGTH];
     //Move Towards Rung
     //Extend Arm
@@ -23,31 +23,35 @@ public class AutomatedClimb extends Command{
     //Retract Arm
     public AutomatedClimb(){
         requires(Robot.m_climb);
+        requires(Robot.m_drivetrain);
     }
 
     @Override
     protected void initialize() {
-        // TODO Auto-generated method stub
         super.initialize();
     }
     
     @Override
     protected boolean isFinished() {
-        // TODO Auto-generated method stub
-        return false;
+        return auto[RobotMap.CLIMB_PROCESS_LENGTH - 1];
     }
 
     @Override
     protected void execute() {
         if(!auto[0]){
+            TankDrive.MovementUntilShadowLine();
             auto[0] = true;
         } else if(!auto[1]){
-            auto[1] = true;
+            AutomatedClimb.MoveArm(1, true); //TODO Need to fill out distance
+            auto[1] = true; //TODO Does one method called for MoveArm run for the whole method or is it repeated?
         } else if(!auto[2]){
+            // TODO Addd Arm Latch Mechanism
             auto[2] = true;
         } else if(!auto[3]){
+            AutomatedClimb.MoveArm(1, false); //TODO Need to fill out distance
             auto[3] = true;
         } else if(!auto[4]){
+            AutomatedClimb.RotateArm(1, false); //TODO need to fill out angle
             auto[4] = true;
         } else if(!auto[5]){
             auto[5] = true;
@@ -74,7 +78,6 @@ public class AutomatedClimb extends Command{
 
     @Override
     protected void end() {
-        // TODO Auto-generated method stub
         super.end();
     }
 

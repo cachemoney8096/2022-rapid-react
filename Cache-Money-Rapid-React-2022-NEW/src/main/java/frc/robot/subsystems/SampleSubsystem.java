@@ -8,7 +8,6 @@ public class SampleSubsystem extends Subsystem {
     public static Servo armMotor = new Servo(0);
 	@Override
 	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
 		
     }
     
