@@ -1,10 +1,7 @@
 package frc.robot;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import frc.robot.command.ShootBalls;
-import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
      //Button inputs

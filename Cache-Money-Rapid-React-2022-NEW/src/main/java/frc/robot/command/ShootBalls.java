@@ -1,5 +1,4 @@
 package frc.robot.command;
-import frc.robot.RobotMap;
 import frc.robot.Robot; 
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.command.Command;
