@@ -51,13 +51,13 @@ public class AutomatedClimb extends Command {
             AutomatedClimb.MoveArm(1, false); //TODO Need to fill out distance
             auto[3] = true;
         } else if(!auto[4]){
-            AutomatedClimb.RotateArm(1, false); //TODO need to fill out angle and understand forward and backward
+            AutomatedClimb.RotateArm(1, true); //TODO need to fill out angle
             auto[4] = true;
         } else if(!auto[5]){
             AutomatedClimb.MoveArm(1, true); //TODO need to fill out distance
             auto[5] = true;
         } else if(!auto[6]){
-            AutomatedClimb.RotateArm(1, true); //TODO Need to fill out angle and understand forward and backward
+            AutomatedClimb.RotateArm(1, false); //TODO Need to fill out angle
             auto[6] = true;
         } else if(!auto[7]){
             // TODO Add Arm Latch Mechanism
@@ -66,13 +66,13 @@ public class AutomatedClimb extends Command {
             AutomatedClimb.MoveArm(1, false); //TODO Need to fill out distance
             auto[8] = true;
         } else if(!auto[9]){
-            AutomatedClimb.RotateArm(1, false); //TODO need to fill out angle and understand forward and backward
+            AutomatedClimb.RotateArm(1, true); //TODO need to fill out angle
             auto[9] = true;
         } else if(!auto[10]){
             AutomatedClimb.MoveArm(1, true); //TODO Need to fill out distance
             auto[10] = true;
         } else if(!auto[11]){
-            AutomatedClimb.RotateArm(1, true); //TODO Need to fill out angle and understand forward and backward
+            AutomatedClimb.RotateArm(1, false); //TODO Need to fill out angle
             auto[11] = true;
         } else if(!auto[12]){
             // TODO Add Arm Latach Mechanism 

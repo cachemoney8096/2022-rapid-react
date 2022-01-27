@@ -9,8 +9,8 @@ import frc.robot.RobotMap;
 
 public class Climb extends Subsystem {   
     //Motor Variable setup
-    private static TalonSRX leftExtension= new TalonSRX(RobotMap.LEFT_EXT_MOTOR);
-    private static TalonSRX rightExtension= new TalonSRX(RobotMap.RIGHT_EXT_MOTOR);
+    private static TalonSRX leftExtension = new TalonSRX(RobotMap.LEFT_EXT_MOTOR);
+    private static TalonSRX rightExtension = new TalonSRX(RobotMap.RIGHT_EXT_MOTOR);
     private static TalonSRX leftPivot = new TalonSRX(RobotMap.LEFT_PIVOT_MOTOR);
     private static TalonSRX rightPivot= new TalonSRX(RobotMap.RIGHT_PIVOT_MOTOR);
     
@@ -36,5 +36,5 @@ public class Climb extends Subsystem {
     protected void initDefaultCommand() {
         
     }
-};
+}
     
