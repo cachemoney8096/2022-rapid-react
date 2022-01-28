@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.SampleSubsystem;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.command.TankDrive;
 
@@ -29,7 +29,7 @@ public static final Subsystem Shooter = new Shooter();
   private String m_autoSelected;
   public static OI m_oi;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
-  public static SampleSubsystem subsystem = new SampleSubsystem();
+  public static Subsystem Intake= new Intake();
 
   //Initializing Subsystems
   public static Climb m_climb = new Climb();

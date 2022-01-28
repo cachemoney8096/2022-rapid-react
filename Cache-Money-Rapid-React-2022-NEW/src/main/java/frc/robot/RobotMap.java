@@ -9,20 +9,8 @@ public class RobotMap {
   public static final int  MOTOR_RIGHT_1_ID = 9;
   public static final int  MOTOR_RIGHT_2_ID = 8;
   public static final int  DRIVERCONTROLLER = 1;
-  public static final int  SHOOTERCONTROLLER = 2;
-  public static final int  INTAKECONTROLLER = 3;
-  public static final int  CLIMBCONTROLLER = 4;
   public static final int  BUTTONCONTROLLER = 1;
-  public static final int  SHOOTER_MOTOR_1_ID = 25;
-  public static final int  SHOOTER_MOTOR_2_ID = 26;
-  public static final int  INTAKE_MOTOR_1_ID = 27;
-  public static final int  INTAKE_MOTOR_2_ID = 28;
-  public static final int  INTAKE_MOTOR_3_ID = 30;
-  public static final int  INTAKE_MOTOR_4_ID = 31;
-  public static final int  CLIMB_MOTOR_1_ID = 32;
-  public static final int  CLIMB_MOTOR_2_ID = 33;
-  public static final int  CLIMB_MOTOR_3_ID = 34;
-  public static final int  CLIMB_MOTOR_4_ID = 35;
+
   //Controller Id's
   public static final int RIGHT_STICK_Y = 0;
   public static final int RIGHT_STICK_X = 1;
@@ -44,11 +32,16 @@ public class RobotMap {
     
 
   //Shooter Id's
-
+  public static final int  SHOOTER_MOTOR_1_ID = 25;
+  public static final int  SHOOTER_MOTOR_2_ID = 26;
+ 
+  
 
 
   //Intake Id's
-
+  public static final int TILT_INTAKE_MOTOR= 0;
+  public static final int GO_INTAKE_MOTOR= 0;  //This was coined by Jay, do not flame the software this time.
+  
   //CLIMB MOTOR VALUES
   public static final int LEFT_EXT_MOTOR = 0; //TODO NEEDS TO BE FILLED OUT
   public static final int RIGHT_EXT_MOTOR = 0; //TODO NEEDS TO BE FILLED OUT
