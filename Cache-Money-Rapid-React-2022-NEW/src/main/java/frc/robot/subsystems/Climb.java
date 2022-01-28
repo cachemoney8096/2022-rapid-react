@@ -1,18 +1,19 @@
 package frc.robot.subsystems;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
  
 import frc.robot.RobotMap;
 
 public class Climb extends Subsystem {   
     //Motor Variable setup
-    private static TalonSRX leftExtension = new TalonSRX(RobotMap.LEFT_EXT_MOTOR);
-    private static TalonSRX rightExtension = new TalonSRX(RobotMap.RIGHT_EXT_MOTOR);
-    private static TalonSRX leftPivot = new TalonSRX(RobotMap.LEFT_PIVOT_MOTOR);
-    private static TalonSRX rightPivot= new TalonSRX(RobotMap.RIGHT_PIVOT_MOTOR);
+    private static TalonFX leftExtension = new TalonFX(RobotMap.LEFT_EXT_MOTOR);
+    private static TalonFX rightExtension = new TalonFX(RobotMap.RIGHT_EXT_MOTOR);
+    private static TalonFX leftPivot = new TalonFX(RobotMap.LEFT_PIVOT_MOTOR);
+    private static TalonFX rightPivot= new TalonFX(RobotMap.RIGHT_PIVOT_MOTOR);
+
     
     public static void setExtensionMotorSpeed(double speed){
         leftExtension.set(ControlMode.PercentOutput, speed);
@@ -32,6 +33,7 @@ public class Climb extends Subsystem {
         leftPivot.set(ControlMode.Position, distance);
         rightPivot.set(ControlMode.Position, distance);
     }
+
     @Override
     protected void initDefaultCommand() {
         
