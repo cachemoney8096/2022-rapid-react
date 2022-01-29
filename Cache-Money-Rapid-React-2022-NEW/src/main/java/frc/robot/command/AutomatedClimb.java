@@ -41,13 +41,13 @@ public class AutomatedClimb extends Command {
     @Override
     protected void execute() {
         if(!auto[0]){
-            TankDrive.MovementUntilShadowLine();
+            TankDrive.MovementUntilShadowLine(true);
             auto[0] = true;
         } else if(!auto[1]){
             AutomatedClimb.MoveArm(1, true); //TODO Need to fill out distance
             auto[1] = true; //TODO Does one method called for MoveArm run for the whole method or is it repeated?
         } else if(!auto[2]){
-            // TODO Addd Arm Latch Mechanism
+            TankDrive.MovementUntilShadowLine(false);
             auto[2] = true;
         } else if(!auto[3]){
             AutomatedClimb.MoveArm(1, false); //TODO Need to fill out distance

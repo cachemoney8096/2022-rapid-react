@@ -56,5 +56,7 @@ public class DriveTrain extends Subsystem {
     protected void initDefaultCommand() {
         
     }
+    public static void moveDistance(double d) {
+    }
 }
     

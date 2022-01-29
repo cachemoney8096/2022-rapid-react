@@ -5,6 +5,9 @@ import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class TankDrive extends Command{
+
+  public static boolean arrived = false;
+  public static boolean slightForward = false;
   
   public TankDrive(){
       requires(Robot.m_drivetrain);
@@ -49,11 +52,26 @@ public class TankDrive extends Command{
   public static void test(double speed){
     DriveTrain.setRight2(speed);
   }
-  public static void MovementUntilShadowLine() {
-    while(!DriveTrain.colorMatchCheck(RobotMap.SHADOW_RUNG_COLOR)){
-      DriveTrain.move(0.2, 0.2); //TODO Test to see if these values are correct
+  public static void MovementUntilShadowLine(boolean ArmLatch) {
+    if(!ArmLatch){
+      if(!arrived){
+        if(!DriveTrain.colorMatchCheck(RobotMap.SHADOW_RUNG_COLOR)){
+          DriveTrain.move(0.2, 0.2); //TODO Test to see if these values are correct
+        } else {
+          DriveTrain.move(0.0, 0.0);
+          arrived = true;
+        }
+      } else {
+        if(!slightForward){
+          DriveTrain.moveDistance(1.0); //TODO Add Encoder-Based Method in Java TODO Test to see if this is correct
+        } else {
+          slightForward = true;
+        }
+      }
+
+    } else {
+
     }
-    
   }
   
 }
