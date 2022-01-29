@@ -1,11 +1,10 @@
 package frc.robot.subsystems;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.Joystick;
@@ -15,8 +14,8 @@ import com.ctre.phoenix.motorcontrol.DemandType;
 
 public class Shooter extends Subsystem {   
     //Motor Variable setup
-    private static TalonSRX motor1= new TalonSRX(RobotMap.SHOOTER_MOTOR_1_ID);
-    private static TalonSRX motor2= new TalonSRX(RobotMap.SHOOTER_MOTOR_2_ID);
+    private static TalonFX motor1= new TalonFX(RobotMap.SHOOTER_MOTOR_1_ID);
+    private static TalonFX motor2= new TalonFX(RobotMap.SHOOTER_MOTOR_2_ID);
     
     public static void SmartDashBoard(){
     SmartDashboard.putNumber("kP", 0.00015);//TODO Figure out how to use this
@@ -46,6 +45,7 @@ public class Shooter extends Subsystem {
         motor2.configMotionAcceleration(MotionAcceleration); //It's in Sensor Units Per 100ms
         motor2.configMotionSCurveStrength(SmoothingStrength); //0 for trapezoidal acceleration, higher values for more smoothing
     }
+
     public static void setMotionMagic(double targetPos, double kF){
         motor1.set(ControlMode.MotionMagic, targetPos, DemandType.ArbitraryFeedForward, kF);
         motor2.set(ControlMode.MotionMagic, targetPos, DemandType.ArbitraryFeedForward, kF);

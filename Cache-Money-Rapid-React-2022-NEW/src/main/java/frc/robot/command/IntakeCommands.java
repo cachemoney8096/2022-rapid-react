@@ -28,6 +28,18 @@ public class IntakeCommands extends Command{
     protected void end() {
         super.end();
     }
+    public static void go(){
+   
+   Intake.go(0.5);
+
+  }
+
+  public static void tilt(){
+    
+   Intake.tilt(0.5);
+   
+
+}
 
 
     

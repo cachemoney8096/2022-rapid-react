@@ -69,6 +69,18 @@ public class RobotMap {
   public static final double PIVOT_COEFFICIENT_CMV = 0;
   public static final double PIVOT_COEFFICIENT_MOTION_ACCELERATION = 0;
   public static final int PIVOT_COEFFICIENT_SMOOTHING_STRENGTH = 0;
+public static final double ARM_EXT_LENGTH_ONE = 0;
+public static final double ARM_EXT_LENGTH_TWO = 0;
+public static final double ARM_EXT_LENGTH_THREE = 0;
+public static final double ARM_EXT_LENGTH_FOUR = 0;
+public static final double ARM_EXT_LENGTH_FIVE = 0;
+public static final double ARM_EXT_LENGTH_SIX = 0;
+public static final double ARM_EXT_LENGTH_SEVEN = 0;
+public static final double ARM_EXT_LENGTH_EIGHT = 0;
+public static final double ARM_PIV_ANGLE_ONE = 0;
+public static final double ARM_PIV_ANGLE_TWO = 0;
+public static final double ARM_PIV_ANGLE_THREE = 0;
+public static final double ARM_PIV_ANGLE_FOUR = 0;
 
 
 

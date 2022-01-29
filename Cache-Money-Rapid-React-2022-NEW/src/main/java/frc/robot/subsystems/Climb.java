@@ -45,6 +45,14 @@ public class Climb extends Subsystem {
         rightPivot.set(ControlMode.MotionMagic, targetPos, DemandType.ArbitraryFeedForward, kF);
     }
 
+    public static double getExtensionPosition(){
+        return rightExtension.getActiveTrajectoryPosition();
+    }
+
+    public static double getPivotPosition(){
+        return rightPivot.getActiveTrajectoryPosition();
+    }
+
     public static void configureExtensionPIDValues(double kP, double kI, double kD, double kF, double CMV, double MotionAcceleration, int SmoothingStrength){
         leftExtension.config_kP(0, kP); //TODO Understand what slotIdx means (first parameter)
         leftExtension.config_kI(0, kI); //TODO Understand what slotIdx means (first parameter)
