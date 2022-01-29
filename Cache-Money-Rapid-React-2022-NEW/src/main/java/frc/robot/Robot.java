@@ -84,7 +84,7 @@ public static final Subsystem Shooter = new Shooter();
       case kDefaultAuto:
       default:
         // Put default auto code here
-        TankDrive.test(0.5);
+        TankDrive.test(0.2);
         break;
     }
   }

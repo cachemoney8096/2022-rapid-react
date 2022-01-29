@@ -51,7 +51,8 @@ public class TankDrive extends Command{
   }
 
   public static void test(double speed){
-    DriveTrain.setRight2(speed);
+    DriveTrain.setRightMotors(speed);
+    DriveTrain.setLeftMotors(speed);
   }
 
   public static void MovementUntilShadowLine(boolean ArmLatch) {
