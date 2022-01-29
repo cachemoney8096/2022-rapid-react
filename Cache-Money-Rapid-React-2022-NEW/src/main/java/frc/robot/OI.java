@@ -1,8 +1,8 @@
 package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
-import frc.robot.command.ShootBalls;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
 public class OI {
      //Button inputs
     public static Joystick xbox = new Joystick(RobotMap.DRIVERCONTROLLER);

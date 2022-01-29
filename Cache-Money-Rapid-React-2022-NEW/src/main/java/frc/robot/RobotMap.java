@@ -52,5 +52,24 @@ public class RobotMap {
   public static final Color SHADOW_RUNG_COLOR = null; //TODO NEEDS TO BE FILLED OUT
   public static final double COLOR_MATCH_CONFIDENCE_INTERVAL = 0; //TODO NEEDS TO BE FILLED OUT
 
+  //CLIMB EXTENSION PID PARAMETERS
+  public static final double EXTENSION_COEFFICIENT_kP = 0;
+  public static final double EXTENSION_COEFFICIENT_kI = 0;
+  public static final double EXTENSION_COEFFICIENT_kD = 0;
+  public static final double EXTENSION_COEFFICIENT_kF = 0;
+  public static final double EXTENSION_COEFFICIENT_CMV = 0;
+  public static final double EXTENSION_COEFFICIENT_MOTION_ACCELERATION = 0;
+  public static final int EXTENSION_COEFFICIENT_SMOOTHING_STRENGTH = 0;
+
+  //CLIMB PIVOT PID PARAMETERS
+  public static final double PIVOT_COEFFICIENT_kP = 0;
+  public static final double PIVOT_COEFFICIENT_kI = 0;
+  public static final double PIVOT_COEFFICIENT_kD = 0;
+  public static final double PIVOT_COEFFICIENT_kF = 0;
+  public static final double PIVOT_COEFFICIENT_CMV = 0;
+  public static final double PIVOT_COEFFICIENT_MOTION_ACCELERATION = 0;
+  public static final int PIVOT_COEFFICIENT_SMOOTHING_STRENGTH = 0;
+
+
 
 }

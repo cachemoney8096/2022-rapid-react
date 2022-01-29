@@ -24,6 +24,8 @@ public class AutomatedClimb extends Command {
     public AutomatedClimb(){
         requires(Robot.m_climb);
         requires(Robot.m_drivetrain);
+        Climb.configureExtensionPIDValues(RobotMap.EXTENSION_COEFFICIENT_kP, RobotMap.EXTENSION_COEFFICIENT_kI, RobotMap.EXTENSION_COEFFICIENT_kD, RobotMap.EXTENSION_COEFFICIENT_kF, RobotMap.EXTENSION_COEFFICIENT_CMV, RobotMap.EXTENSION_COEFFICIENT_MOTION_ACCELERATION, RobotMap.EXTENSION_COEFFICIENT_SMOOTHING_STRENGTH); //TODO Fill out PID Parameters
+        Climb.configureExtensionPIDValues(RobotMap.PIVOT_COEFFICIENT_kP, RobotMap.PIVOT_COEFFICIENT_kI, RobotMap.PIVOT_COEFFICIENT_kD, RobotMap.EXTENSION_COEFFICIENT_kF, RobotMap.PIVOT_COEFFICIENT_CMV, RobotMap.PIVOT_COEFFICIENT_MOTION_ACCELERATION, RobotMap.PIVOT_COEFFICIENT_SMOOTHING_STRENGTH); //TODO Fill out PID Parameters
     }
 
     @Override
@@ -60,7 +62,7 @@ public class AutomatedClimb extends Command {
             AutomatedClimb.RotateArm(1, false); //TODO Need to fill out angle
             auto[6] = true;
         } else if(!auto[7]){
-            // TODO Add Arm Latch Mechanism
+            AutomatedClimb.MoveArm(1, false); //TODO Need to fill out distance
             auto[7] = true;
         } else if(!auto[8]){
             AutomatedClimb.MoveArm(1, false); //TODO Need to fill out distance
@@ -75,7 +77,7 @@ public class AutomatedClimb extends Command {
             AutomatedClimb.RotateArm(1, false); //TODO Need to fill out angle
             auto[11] = true;
         } else if(!auto[12]){
-            // TODO Add Arm Latach Mechanism 
+            AutomatedClimb.MoveArm(1, false); //TODO Need to fill out distance
             auto[12] = true;
         } else if(!auto[13]){
             AutomatedClimb.MoveArm(1, false); //TODO Neded to fill out distance
@@ -91,14 +93,14 @@ public class AutomatedClimb extends Command {
     public static void MoveArm(double distance, boolean forward){
         int dir_coeff = 0;
         if(forward){dir_coeff=1;} else {dir_coeff=-1;}
-        Climb.setExtensionMotorPosition(distance*RobotMap.CLIMB_DISTANCE_CONVERSION_FACTOR*dir_coeff);
+        Climb.setExtensionMotionMagic(distance*RobotMap.CLIMB_DISTANCE_CONVERSION_FACTOR*dir_coeff, RobotMap.EXTENSION_COEFFICIENT_kF); //TODO fill out the values of kF
     }
     // TODO research ControlMode.Position for encoders and distance input
 
     public static void RotateArm(double distance, boolean forward){
         int dir_coeff = 0;
         if(forward){dir_coeff=1;} else {dir_coeff=-1;}
-        Climb.setPivotMotorPosition(distance*RobotMap.CLIMB_DISTANCE_CONVERSION_FACTOR*dir_coeff);
+        Climb.setPivotMotionMagic(distance*RobotMap.CLIMB_DISTANCE_CONVERSION_FACTOR*dir_coeff, RobotMap.PIVOT_COEFFICIENT_kF); //TODO fill out the values of kF
     }
     
 }
