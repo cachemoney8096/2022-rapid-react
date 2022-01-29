@@ -11,6 +11,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.ctre.phoenix.motorcontrol.DemandType;
 
 public class Shooter extends Subsystem {   
     //Motor Variable setup
@@ -44,6 +45,10 @@ public class Shooter extends Subsystem {
         motor2.configMotionCruiseVelocity(CMV); //It's in Sensor Units Per 100ms
         motor2.configMotionAcceleration(MotionAcceleration); //It's in Sensor Units Per 100ms
         motor2.configMotionSCurveStrength(SmoothingStrength); //0 for trapezoidal acceleration, higher values for more smoothing
+    }
+    public static void setMotionMagic(double targetPos, double kF){
+        motor1.set(ControlMode.MotionMagic, targetPos, DemandType.ArbitraryFeedForward, kF);
+        motor2.set(ControlMode.MotionMagic, targetPos, DemandType.ArbitraryFeedForward, kF);
     }
 
     public static void setMotor1(double speed){

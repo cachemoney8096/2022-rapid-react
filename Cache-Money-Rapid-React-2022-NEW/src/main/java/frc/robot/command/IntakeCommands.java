@@ -6,7 +6,7 @@ import frc.robot.Robot;
 public class IntakeCommands extends Command{
 
     public IntakeCommands(){
-        requires(Robot.Intake);
+        requires(Robot.m_intake);
     }
 
     @Override

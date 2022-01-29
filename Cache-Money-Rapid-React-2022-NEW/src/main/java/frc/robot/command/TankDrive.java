@@ -8,6 +8,7 @@ public class TankDrive extends Command{
 
   public static boolean arrived = false;
   public static boolean slightForward = false;
+  public static boolean slightBackward = false;
   
   public TankDrive(){
       requires(Robot.m_drivetrain);
@@ -52,6 +53,7 @@ public class TankDrive extends Command{
   public static void test(double speed){
     DriveTrain.setRight2(speed);
   }
+
   public static void MovementUntilShadowLine(boolean ArmLatch) {
     if(!ArmLatch){
       if(!arrived){
@@ -65,13 +67,28 @@ public class TankDrive extends Command{
         if(!slightForward){
           DriveTrain.moveDistance(1.0); //TODO Add Encoder-Based Method in Java TODO Test to see if this is correct
         } else {
+          DriveTrain.move(0.0, 0.0);
           slightForward = true;
         }
       }
-
     } else {
-
+      if(slightForward && arrived){
+        slightForward = false;
+        arrived = false;
+      }
+      if(!slightBackward){
+        DriveTrain.moveDistance(1.0); //TODO Add Encoder-Based Method in Java TODO Test to see if this is correct
+      } else {
+        slightBackward = true;
+      }
     }
+  }
+
+  public static boolean ClimbMovementFinished(){
+    if(slightForward || slightBackward){
+      return true;
+    }
+    return false;
   }
   
 }

@@ -29,9 +29,9 @@ public static final Subsystem Shooter = new Shooter();
   private String m_autoSelected;
   public static OI m_oi;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
-  public static Subsystem Intake= new Intake();
 
   //Initializing Subsystems
+  public static Subsystem m_intake= new Intake();
   public static Climb m_climb = new Climb();
   public static DriveTrain m_drivetrain = new DriveTrain();
 
