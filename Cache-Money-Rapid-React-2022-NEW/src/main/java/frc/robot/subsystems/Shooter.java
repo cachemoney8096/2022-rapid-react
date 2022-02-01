@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.DemandType;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 public class Shooter extends Subsystem {   
     //Motor Variable setup
@@ -36,6 +37,8 @@ public class Shooter extends Subsystem {
         motor1.configMotionCruiseVelocity(CMV); //It's in Sensor Units Per 100ms
         motor1.configMotionAcceleration(MotionAcceleration); //It's in Sensor Units Per 100ms
         motor1.configMotionSCurveStrength(SmoothingStrength); //0 for trapezoidal acceleration, higher values for more smoothing
+        motor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+
 
         motor2.config_kP(0, kP); //TODO Understand what slotIdx means (first parameter)
         motor2.config_kI(0, kI); //TODO Understand what slotIdx means (first parameter)
@@ -44,6 +47,7 @@ public class Shooter extends Subsystem {
         motor2.configMotionCruiseVelocity(CMV); //It's in Sensor Units Per 100ms
         motor2.configMotionAcceleration(MotionAcceleration); //It's in Sensor Units Per 100ms
         motor2.configMotionSCurveStrength(SmoothingStrength); //0 for trapezoidal acceleration, higher values for more smoothing
+        motor2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     }
 
     public static void setMotionMagic(double targetPos, double kF){
