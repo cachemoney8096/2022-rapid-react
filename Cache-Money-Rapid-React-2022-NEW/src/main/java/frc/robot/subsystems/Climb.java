@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 import frc.robot.RobotMap;
 
@@ -61,6 +62,7 @@ public class Climb extends Subsystem {
         leftExtension.configMotionCruiseVelocity(CMV); //It's in Sensor Units Per 100ms
         leftExtension.configMotionAcceleration(MotionAcceleration); //It's in Sensor Units Per 100ms
         leftExtension.configMotionSCurveStrength(SmoothingStrength); //0 for trapezoidal acceleration, higher values for more smoothing
+        leftExtension.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
 
         rightExtension.config_kP(0, kP); //TODO Understand what slotIdx means (first parameter)
         rightExtension.config_kI(0, kI); //TODO Understand what slotIdx means (first parameter)
@@ -69,6 +71,7 @@ public class Climb extends Subsystem {
         rightExtension.configMotionCruiseVelocity(CMV); //It's in Sensor Units Per 100ms
         rightExtension.configMotionAcceleration(MotionAcceleration); //It's in Sensor Units Per 100ms
         rightExtension.configMotionSCurveStrength(SmoothingStrength); //0 for trapezoidal acceleration, higher values for more smoothing
+        rightExtension.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     }
 
     public static void configurePivotPIDValues(double kP, double kI, double kD, double kF, double CMV, double MotionAcceleration, int SmoothingStrength){
@@ -77,16 +80,18 @@ public class Climb extends Subsystem {
         leftPivot.config_kD(0, kD); //TODO Understand what slotIdx means (first parameter)
         leftPivot.config_kF(0, kF); //TODO Understand what slotIdx means (first parameter)
         leftPivot.configMotionCruiseVelocity(CMV); //It's in Sensor Units Per 100ms
-        leftExtension.configMotionAcceleration(MotionAcceleration); //It's in Sensor Units Per 100ms
-        leftExtension.configMotionSCurveStrength(SmoothingStrength); //0 for trapezoidal acceleration, higher values for more smoothing
+        leftPivot.configMotionAcceleration(MotionAcceleration); //It's in Sensor Units Per 100ms
+        leftPivot.configMotionSCurveStrength(SmoothingStrength); //0 for trapezoidal acceleration, higher values for more smoothing
+        leftPivot.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
 
-        rightExtension.config_kP(0, kP); //TODO Understand what slotIdx means (first parameter)
-        rightExtension.config_kI(0, kI); //TODO Understand what slotIdx means (first parameter)
-        rightExtension.config_kD(0, kD); //TODO Understand what slotIdx means (first parameter)
-        rightExtension.config_kF(0, kF); //TODO Understand what slotIdx means (first parameter)
-        rightExtension.configMotionCruiseVelocity(CMV); //It's in Sensor Units Per 100ms
-        rightExtension.configMotionAcceleration(MotionAcceleration); //It's in Sensor Units Per 100ms
-        rightExtension.configMotionSCurveStrength(SmoothingStrength); //0 for trapezoidal acceleration, higher values for more smoothing
+        rightPivot.config_kP(0, kP); //TODO Understand what slotIdx means (first parameter)
+        rightPivot.config_kI(0, kI); //TODO Understand what slotIdx means (first parameter)
+        rightPivot.config_kD(0, kD); //TODO Understand what slotIdx means (first parameter)
+        rightPivot.config_kF(0, kF); //TODO Understand what slotIdx means (first parameter)
+        rightPivot.configMotionCruiseVelocity(CMV); //It's in Sensor Units Per 100ms
+        rightPivot.configMotionAcceleration(MotionAcceleration); //It's in Sensor Units Per 100ms
+        rightPivot.configMotionSCurveStrength(SmoothingStrength); //0 for trapezoidal acceleration, higher values for more smoothing
+        rightPivot.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     }
 
 

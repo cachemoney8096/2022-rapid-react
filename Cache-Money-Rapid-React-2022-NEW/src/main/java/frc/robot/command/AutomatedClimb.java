@@ -79,6 +79,12 @@ public class AutomatedClimb extends Command {
         } 
     }
 
+
+    @Override
+    protected void end() {
+        super.end();
+    }
+
     public static boolean ArmExtenstionFinished(double targetPos, double initPosition) {
         if(Math.abs(Climb.getExtensionPosition()-initPosition) == Math.abs(targetPos)){
             return true;
@@ -91,11 +97,6 @@ public class AutomatedClimb extends Command {
             return true;
         }
         return false;
-    }
-
-    @Override
-    protected void end() {
-        super.end();
     }
 
     public static void AutomatedExtension(int indexLocation, double TargetPos, boolean forward){
