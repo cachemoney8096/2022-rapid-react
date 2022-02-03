@@ -2,7 +2,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-
+import frc.robot.command.*;
+import frc.robot.subsystems.*;
 public class OI {
      //Button inputs
     public static Joystick xbox = new Joystick(RobotMap.DRIVERCONTROLLER);
@@ -19,7 +20,9 @@ public class OI {
     public static Button rightTrigger = new JoystickButton(xbox, RobotMap.BUTTON_RIGHTTRIG);
 
     public OI(){
-        
+        rightTrigger.whenPressed(new ShootBalls());
+        RedButton.whenPressed(new AutomatedClimb());
+        RightBumpButton.whenPressed(new IntakeCommands());
         
     }
 

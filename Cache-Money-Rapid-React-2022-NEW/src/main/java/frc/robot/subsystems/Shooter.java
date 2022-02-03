@@ -55,18 +55,11 @@ public class Shooter extends Subsystem {
         motor2.set(ControlMode.MotionMagic, targetPos, DemandType.ArbitraryFeedForward, kF);
     }
 
-    public static void setMotor1(double speed){
-        motor1.set(ControlMode.PercentOutput, speed);
- 
+    public static void setVelocity(double targetVel, double kF){
+        motor1.set(ControlMode.Velocity, targetVel, DemandType.ArbitraryFeedForward, kF);
+        motor2.set(ControlMode.Velocity, targetVel, DemandType.ArbitraryFeedForward, kF);
     }
-    public static void setMotor2(double speed){
-        motor2.set(ControlMode.PercentOutput, speed);
-    }
-    public static void shoot(double right){
-        setMotor1(right);
-        setMotor2(right);
-        
-    }
+
     @Override
     protected void initDefaultCommand() {
         
