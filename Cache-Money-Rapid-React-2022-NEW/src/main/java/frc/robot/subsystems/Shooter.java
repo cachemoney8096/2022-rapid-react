@@ -1,22 +1,22 @@
 package frc.robot.subsystems;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.DemandType;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 public class Shooter extends Subsystem {   
     //Motor Variable setup
-    private static TalonSRX motor1= new TalonSRX(RobotMap.SHOOTER_MOTOR_1_ID);
-    private static TalonSRX motor2= new TalonSRX(RobotMap.SHOOTER_MOTOR_2_ID);
+    private static TalonFX motor1= new TalonFX(RobotMap.SHOOTER_MOTOR_1_ID);
+    private static TalonFX motor2= new TalonFX(RobotMap.SHOOTER_MOTOR_2_ID);
     
     public static void SmartDashBoard(){
     SmartDashboard.putNumber("kP", 0.00015);//TODO Figure out how to use this
@@ -37,6 +37,8 @@ public class Shooter extends Subsystem {
         motor1.configMotionCruiseVelocity(CMV); //It's in Sensor Units Per 100ms
         motor1.configMotionAcceleration(MotionAcceleration); //It's in Sensor Units Per 100ms
         motor1.configMotionSCurveStrength(SmoothingStrength); //0 for trapezoidal acceleration, higher values for more smoothing
+        motor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+
 
         motor2.config_kP(0, kP); //TODO Understand what slotIdx means (first parameter)
         motor2.config_kI(0, kI); //TODO Understand what slotIdx means (first parameter)
@@ -45,24 +47,19 @@ public class Shooter extends Subsystem {
         motor2.configMotionCruiseVelocity(CMV); //It's in Sensor Units Per 100ms
         motor2.configMotionAcceleration(MotionAcceleration); //It's in Sensor Units Per 100ms
         motor2.configMotionSCurveStrength(SmoothingStrength); //0 for trapezoidal acceleration, higher values for more smoothing
+        motor2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     }
+
     public static void setMotionMagic(double targetPos, double kF){
         motor1.set(ControlMode.MotionMagic, targetPos, DemandType.ArbitraryFeedForward, kF);
         motor2.set(ControlMode.MotionMagic, targetPos, DemandType.ArbitraryFeedForward, kF);
     }
 
-    public static void setMotor1(double speed){
-        motor1.set(ControlMode.PercentOutput, speed);
- 
+    public static void setVelocity(double targetVel, double kF){
+        motor1.set(ControlMode.Velocity, targetVel, DemandType.ArbitraryFeedForward, kF);
+        motor2.set(ControlMode.Velocity, targetVel, DemandType.ArbitraryFeedForward, kF);
     }
-    public static void setMotor2(double speed){
-        motor2.set(ControlMode.PercentOutput, speed);
-    }
-    public static void shoot(double right){
-        setMotor1(right);
-        setMotor2(right);
-        
-    }
+
     @Override
     protected void initDefaultCommand() {
         

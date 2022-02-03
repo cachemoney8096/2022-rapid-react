@@ -43,18 +43,15 @@ public class ShootBalls extends Command{
   }
   
   public static void ShootFast(){
-   
-   Shooter.setMotor1(0.75);
-   Shooter.setMotor2(0.75);
+    Shooter.configureShooterPIDValues(kP, kI, kD, kF, CMV, MotionAcceleration, SmoothingStrength);
+    Shooter.setMotionMagic(targetPos, kF);
+    
 
   }
 
-  public static void ShootSlow(){
-    
-   Shooter.setMotor1(0.5);
-   Shooter.setMotor2(0.5);
-   
+  public static void ShootVel(double targetVel, double kF){
+    Shooter.setVelocity(targetVel, kF);
+  }
 
-}
   
 }
