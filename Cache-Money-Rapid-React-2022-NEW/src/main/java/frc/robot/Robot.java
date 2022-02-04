@@ -34,6 +34,7 @@ public static final Subsystem Shooter = new Shooter();
   public static Subsystem m_intake= new Intake();
   public static Climb m_climb = new Climb();
   public static DriveTrain m_drivetrain = new DriveTrain();
+  public static Shooter m_shooter = new Shooter();
 
   /**
    * This function is run when the robot is first started up and should be used for any

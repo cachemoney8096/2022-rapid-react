@@ -8,6 +8,7 @@ public class RobotMap {
   public static final int  MOTOR_LEFT_2_ID = 11;
   public static final int  MOTOR_RIGHT_1_ID = 9;
   public static final int  MOTOR_RIGHT_2_ID = 8;
+  public static final int Gyro_ID= 7; //figure this out at some point
   public static final int  DRIVERCONTROLLER = 1;
   public static final int  BUTTONCONTROLLER = 1;
 
@@ -81,6 +82,13 @@ public static final double ARM_PIV_ANGLE_ONE = 0;
 public static final double ARM_PIV_ANGLE_TWO = 0;
 public static final double ARM_PIV_ANGLE_THREE = 0;
 public static final double ARM_PIV_ANGLE_FOUR = 0;
+public static final int UPPER_HUB_HEIGHT = 0;
+public static final int HEIGHT_TO_LIMELIGHT = 0;
+public static final double DEFAULT_LIMELIGHT_HEIGHT = 0;
+public static final int LOWER_HUB_HEIGHT = 0;
+public static final int HEIGHT_TO_SHOOTER = 0;
+public static final double SHOOTER_ANGLE = 0;
+public static final double ACCELERATION_DUE_TO_GRAVITY = 0;
 
 
 
