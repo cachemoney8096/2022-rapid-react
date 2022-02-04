@@ -43,8 +43,8 @@ public class ShootBalls extends Command{
   }
   
   public static void ShootFast(){
-    Shooter.configureShooterPIDValues(kP, kI, kD, kF, CMV, MotionAcceleration, SmoothingStrength);
-    Shooter.setMotionMagic(targetPos, kF);
+    //Shooter.configureShooterPIDValues(kP, kI, kD, kF, CMV, MotionAcceleration, SmoothingStrength);
+    //Shooter.setMotionMagic(targetPos, kF);
     
 
   }
