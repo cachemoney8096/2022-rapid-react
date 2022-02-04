@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -48,6 +50,25 @@ public class Shooter extends Subsystem {
         motor2.configMotionAcceleration(MotionAcceleration); //It's in Sensor Units Per 100ms
         motor2.configMotionSCurveStrength(SmoothingStrength); //0 for trapezoidal acceleration, higher values for more smoothing
         motor2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    }
+
+    public static double getHorizontalOffsetAngle(){
+        return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
+    }
+
+    public static double getVerticalOffsetAngle(){
+        return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
+    }
+
+    public static boolean checkValidTargets(){
+        if(NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0) == 1){
+            return true;
+        }
+        return false;
+    }
+
+    public static double getTargetArea(){
+        return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
     }
 
     public static void setMotionMagic(double targetPos, double kF){

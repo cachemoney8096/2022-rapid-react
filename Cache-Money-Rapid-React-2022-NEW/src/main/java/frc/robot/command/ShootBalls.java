@@ -1,5 +1,6 @@
 package frc.robot.command;
-import frc.robot.Robot; 
+import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.command.Command;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -8,6 +9,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.Shooter;
+
 
 
 public class ShootBalls extends Command{
@@ -47,6 +50,30 @@ public class ShootBalls extends Command{
     //Shooter.setMotionMagic(targetPos, kF);
     
 
+  }
+
+  public static double getInitialVelocity(boolean upper){
+    double dH = 0;
+    if(upper){
+      dH = RobotMap.UPPER_HUB_HEIGHT - RobotMap.HEIGHT_TO_SHOOTER;
+    } else {
+      dH = RobotMap.LOWER_HUB_HEIGHT - RobotMap.HEIGHT_TO_SHOOTER;
+    }
+    double d = ShootBalls.getShotDistance(upper);
+    double theta = RobotMap.SHOOTER_ANGLE;
+    double G = RobotMap.ACCELERATION_DUE_TO_GRAVITY;
+    double v = d*Math.sqrt(G)*Math.cos(theta)/Math.sqrt(2*d*Math.sin(theta)*Math.cos(theta)+2*dH);
+    return v;
+  }
+
+  public static double getShotDistance(boolean upper){
+    double distance = 0.0;
+    if(upper){
+      distance = (RobotMap.UPPER_HUB_HEIGHT - RobotMap.HEIGHT_TO_LIMELIGHT) / Math.tan(RobotMap.DEFAULT_LIMELIGHT_HEIGHT + Shooter.getVerticalOffsetAngle());
+    } else {
+      distance = (RobotMap.LOWER_HUB_HEIGHT - RobotMap.HEIGHT_TO_LIMELIGHT) / Math.tan(RobotMap.DEFAULT_LIMELIGHT_HEIGHT + Shooter.getVerticalOffsetAngle());
+    }
+    return distance;
   }
 
   public static void ShootVel(double targetVel, double kF){

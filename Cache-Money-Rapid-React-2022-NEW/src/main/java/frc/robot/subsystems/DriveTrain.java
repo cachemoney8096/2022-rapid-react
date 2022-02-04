@@ -1,10 +1,11 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.estimator.AngleStatistics;
 import edu.wpi.first.wpilibj.I2C;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.util.Color;
-
+import edu.wpi.first.wpilibj.AnalogGyro;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
@@ -21,6 +22,7 @@ public class DriveTrain extends Subsystem {
     private static CANSparkMax motorRight2 = new CANSparkMax(RobotMap.MOTOR_RIGHT_2_ID, MotorType.kBrushless);
     private static ColorSensorV3 colorsensor = new ColorSensorV3(i2cport);
     private static ColorMatch colormatcher = new ColorMatch();
+    private static AnalogGyro AnalogGyro= new AnalogGyro(RobotMap.Gyro_ID);
     
     public static void setLeftMotors(double speed){
         motorLeft1.set(speed);
@@ -36,6 +38,15 @@ public class DriveTrain extends Subsystem {
     public static void move(double left, double right){
         setLeftMotors(left);
         setRightMotors(right);
+    }
+    public static void turn(double Angle){
+        AnalogGyro.initGyro();
+        AnalogGyro.getCenter();
+        while(AnalogGyro.getAngle()<=Angle){
+            DriveTrain.move(0.3,0);
+
+        } 
+        DriveTrain.move(0,0);
     }
 
     public static Color getColor(){
