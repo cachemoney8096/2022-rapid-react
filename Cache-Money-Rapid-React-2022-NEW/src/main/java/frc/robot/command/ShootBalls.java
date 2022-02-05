@@ -29,8 +29,10 @@ public class ShootBalls extends Command{
   //variables and mapping out buttons called 50 times per second
   @Override
   public void execute() {
+    Shooter.ShootBraindead(.05);
     
-//The Left stick is speed control, the Right stick is turning control
+    
+
     
   }
   // When the stop button is hit, the motors turn off
@@ -79,6 +81,8 @@ public class ShootBalls extends Command{
   public static void ShootVel(double targetVel, double kF){
     Shooter.setVelocity(targetVel, kF);
   }
+
+  
 
   
 }

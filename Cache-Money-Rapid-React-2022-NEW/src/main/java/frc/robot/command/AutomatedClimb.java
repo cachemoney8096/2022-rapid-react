@@ -43,14 +43,14 @@ public class AutomatedClimb extends Command {
     @Override
     protected void execute() {
         if(!auto[0]){
-            TankDrive.MovementUntilShadowLine(false);
+          //  TankDrive.MovementUntilShadowLine(false);
             if(TankDrive.ClimbMovementFinished()){
                 auto[0] = true;
             }
         } else if(!auto[1]){
             AutomatedClimb.AutomatedExtension(1, RobotMap.ARM_EXT_LENGTH_ONE, true);
         } else if(!auto[2]){
-            TankDrive.MovementUntilShadowLine(true);
+          //  TankDrive.MovementUntilShadowLine(true);
             if(TankDrive.ClimbMovementFinished()){
                 auto[2] = true;
             }

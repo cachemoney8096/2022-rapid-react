@@ -43,7 +43,7 @@ public class TankDrive extends Command{
   }
   public static void move(){
     double speed= Robot.m_oi.getDriverRawAxis(RobotMap.LEFT_STICK_Y);
-    double turn= Robot.m_oi.getDriverRawAxis(RobotMap.RIGHT_STICK_Y);
+    double turn= Robot.m_oi.getDriverRawAxis(RobotMap.RIGHT_STICK_X);
     //The Left is pos the right is neg
     double right = speed + turn;
     double left = speed - turn;
@@ -55,7 +55,7 @@ public class TankDrive extends Command{
     DriveTrain.move(speed, speed);
   }
 
-  public static void MovementUntilShadowLine(boolean ArmLatch) {
+ /* public static void MovementUntilShadowLine(boolean ArmLatch) {
     if(!ArmLatch){
       if(!arrived){
         if(!DriveTrain.colorMatchCheck(RobotMap.SHADOW_RUNG_COLOR)){
@@ -84,7 +84,7 @@ public class TankDrive extends Command{
       }
     }
   }
-
+*/
   public static boolean ClimbMovementFinished(){
     if(slightForward || slightBackward){
       return true;

@@ -40,7 +40,7 @@ public class ShooterAuto extends Command {
       public static void ShootSimple(){
        //  DriveTrain Pid Move
        Intake.go(0.5);  //value for this will be the same for everything once we figure it out
-       DriveTrain.turn(90);
+      // DriveTrain.turn(90);
        //ShootBalls.ShootVel(targetVel, kF);  //Value for this will vary based on where we are shooting
       }
 

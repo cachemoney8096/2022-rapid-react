@@ -66,6 +66,10 @@ public class Shooter extends Subsystem {
         }
         return false;
     }
+    public static void ShootBraindead(double speed){
+        motor1.set(ControlMode.PercentOutput, speed);
+        motor2.set(ControlMode.PercentOutput, speed);
+    }
 
     public static double getTargetArea(){
         return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);

@@ -20,9 +20,9 @@ public class DriveTrain extends Subsystem {
     private static CANSparkMax motorLeft2 = new CANSparkMax(RobotMap.MOTOR_LEFT_2_ID, MotorType.kBrushless);
     private static CANSparkMax motorRight1 = new CANSparkMax(RobotMap.MOTOR_RIGHT_1_ID, MotorType.kBrushless);
     private static CANSparkMax motorRight2 = new CANSparkMax(RobotMap.MOTOR_RIGHT_2_ID, MotorType.kBrushless);
-    private static ColorSensorV3 colorsensor = new ColorSensorV3(i2cport);
-    private static ColorMatch colormatcher = new ColorMatch();
-    private static AnalogGyro AnalogGyro= new AnalogGyro(RobotMap.Gyro_ID);
+  //  private static ColorSensorV3 colorsensor = new ColorSensorV3(i2cport);
+   // private static ColorMatch colormatcher = new ColorMatch();
+ //   private static AnalogGyro AnalogGyro= new AnalogGyro(RobotMap.Gyro_ID);
     
     public static void setLeftMotors(double speed){
         motorLeft1.set(speed);
@@ -39,7 +39,7 @@ public class DriveTrain extends Subsystem {
         setLeftMotors(left);
         setRightMotors(right);
     }
-    public static void turn(double Angle){
+  /*  public static void turn(double Angle){
         AnalogGyro.initGyro();
         AnalogGyro.getCenter();
         while(AnalogGyro.getAngle()<=Angle){
@@ -47,9 +47,9 @@ public class DriveTrain extends Subsystem {
 
         } 
         DriveTrain.move(0,0);
-    }
+    }*/
 
-    public static Color getColor(){
+  /*  public static Color getColor(){
         return colorsensor.getColor();
     }  
 
@@ -59,9 +59,9 @@ public class DriveTrain extends Subsystem {
             return true;
         } else {
             return false;
-        }
+        }*/
 
-    }
+    //}
 
     @Override
     protected void initDefaultCommand() {

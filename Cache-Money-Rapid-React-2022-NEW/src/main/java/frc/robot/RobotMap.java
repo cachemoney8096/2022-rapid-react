@@ -9,16 +9,16 @@ public class RobotMap {
   public static final int  MOTOR_RIGHT_1_ID = 9;
   public static final int  MOTOR_RIGHT_2_ID = 8;
   public static final int Gyro_ID= 7; //figure this out at some point
-  public static final int  DRIVERCONTROLLER = 1;
+  public static final int  DRIVERCONTROLLER = 0;
   public static final int  BUTTONCONTROLLER = 1;
 
   //Controller Id's
-  public static final int RIGHT_STICK_Y = 0;
-  public static final int RIGHT_STICK_X = 1;
+  
+  public static final int RIGHT_STICK_X = 4;
   public static final int BUTTON_LEFTTRIG = 2;
   public static final int BUTTON_RIGHTTRIG = 3;
-  public static final int LEFT_STICK_Y = 4;
-  public static final int JOYSTICK_Y = 5;
+  public static final int LEFT_STICK_Y = 1;
+  
   public static final int BUTTON_GREEN = 1;
   public static final int BUTTON_RED = 2;
   public static final int BUTTON_BLUE = 3;
