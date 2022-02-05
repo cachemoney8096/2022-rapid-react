@@ -29,7 +29,8 @@ public class ShooterAuto extends Command {
 
     @Override
     protected void execute() {
-         
+        
+         Shooter.ShootBraindead(0.5);
 
 
     }

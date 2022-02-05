@@ -29,7 +29,8 @@ public class ShootBalls extends Command{
   //variables and mapping out buttons called 50 times per second
   @Override
   public void execute() {
-    Shooter.ShootBraindead(.05);
+    
+    Shooter.ShootBraindead(.5);
     
     
 
@@ -48,6 +49,7 @@ public class ShootBalls extends Command{
   }
   
   public static void ShootFast(){
+    Shooter.ShootBraindead(.45);
     //Shooter.configureShooterPIDValues(kP, kI, kD, kF, CMV, MotionAcceleration, SmoothingStrength);
     //Shooter.setMotionMagic(targetPos, kF);
     

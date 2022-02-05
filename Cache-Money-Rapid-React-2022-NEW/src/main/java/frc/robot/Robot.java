@@ -13,6 +13,7 @@ import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
+import frc.robot.command.ShootBalls;
 import frc.robot.command.TankDrive;
 
 
@@ -35,7 +36,7 @@ public static final Subsystem Shooter = new Shooter();
   public static Climb m_climb = new Climb();
   public static DriveTrain m_drivetrain = new DriveTrain();
   public static Shooter m_shooter = new Shooter();
-
+  
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -85,7 +86,7 @@ public static final Subsystem Shooter = new Shooter();
       case kDefaultAuto:
       default:
         // Put default auto code here
-        TankDrive.test(0.1);
+        ShootBalls.ShootFast();
         break;
     }
   }
@@ -98,7 +99,8 @@ public static final Subsystem Shooter = new Shooter();
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     TankDrive.move();
-   
+    
+    
   }
 
   /** This function is called once when the robot is disabled. */
