@@ -17,20 +17,24 @@ public class ShootBalls extends Command{
 
     public ShootBalls(){
         requires(Robot.Shooter);
+        Shooter.ShootBraindead(.5);
+
     }
      // Called when the command is initially scheduled.
   @Override
   // variables and mapping out buttons for the controller when it starts
   public void initialize() {
-    
+    SmartDashboard.putString("ShootBalls.intialize", "executed");
 
   }
 
   //variables and mapping out buttons called 50 times per second
   @Override
   public void execute() {
-    
+    SmartDashboard.putString("ShootBalls.execute", "before shootBraindead");
+
     Shooter.ShootBraindead(.5);
+    SmartDashboard.putString("ShootBalls.execute", "after shootBraindead");
     
     
 
@@ -55,6 +59,8 @@ public class ShootBalls extends Command{
     
 
   }
+
+  
 
   public static double getInitialVelocity(boolean upper){
     double dH = 0;

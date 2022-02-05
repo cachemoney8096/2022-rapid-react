@@ -99,7 +99,7 @@ public static final Subsystem Shooter = new Shooter();
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     TankDrive.move();
-    
+    ShootBalls.ShootFast();
     
   }
 
