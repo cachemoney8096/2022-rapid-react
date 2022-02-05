@@ -46,7 +46,10 @@ public static final Subsystem Shooter = new Shooter();
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
+    SmartDashboard.putString("robot init", "executed");
+
     Robot.m_oi = new OI();
+
   }
 
   /**
@@ -93,13 +96,18 @@ public static final Subsystem Shooter = new Shooter();
 
   /** This function is called once when teleop is enabled. */
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+    SmartDashboard.putString("teleop.intialize", "executed");
+   // Robot.m_oi.rightTrigger.whenPressed(new ShootBalls());
+  }
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
+    SmartDashboard.putString("teleop.periodic", "executed");
+
     Scheduler.getInstance().run();
     TankDrive.move();
-    ShootBalls.ShootFast();
+  
     
   }
 

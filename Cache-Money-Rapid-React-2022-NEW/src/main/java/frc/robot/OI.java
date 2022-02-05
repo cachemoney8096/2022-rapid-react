@@ -1,9 +1,9 @@
 package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.*;
 import frc.robot.command.*;
 import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class OI {
      //Button inputs
     public static Joystick xbox = new Joystick(RobotMap.DRIVERCONTROLLER);
@@ -16,13 +16,11 @@ public class OI {
     public static Button RightBumpButton = new JoystickButton(xbox,RobotMap.BUTTON_RIGHTBUMP);
     public static Button BackButton = new JoystickButton(xbox,RobotMap.BUTTON_BACK);
     public static Button StartButton = new JoystickButton(xbox,RobotMap.BUTTON_START);
-    public static Button leftTrigger = new JoystickButton(xbox, RobotMap.BUTTON_LEFTTRIG);
-    public static Button rightTrigger = new JoystickButton(xbox, RobotMap.BUTTON_RIGHTTRIG);
-
     public OI(){
-        rightTrigger.whenPressed(new ShootBalls());
-        RedButton.whenPressed(new AutomatedClimb());
-        RightBumpButton.whenPressed(new IntakeCommands());
+        SmartDashboard.putString("oi constructor", "executed");
+
+        
+        RightBumpButton.whileHeld(new ShootBalls());
         
     }
 
