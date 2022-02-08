@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.cameraserver.CameraServer;
 import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
@@ -47,7 +48,8 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
     SmartDashboard.putString("robot init", "executed");
-
+    CameraServer.startAutomaticCapture();
+    
     Robot.m_oi = new OI();
 
   }
@@ -89,7 +91,14 @@ public class Robot extends TimedRobot {
       case kDefaultAuto:
       default:
         // Put default auto code here
-        ShootBalls.ShootFast();
+        double horizOffset = m_shooter.getHorizontalOffsetAngle();
+        double vertOffset = m_shooter.getVerticalOffsetAngle();
+        boolean isValidTarget = m_shooter.checkValidTargets();
+        System.out.println("horiz"+horizOffset);
+        System.out.println("vert"+vertOffset);
+        System.out.println(isValidTarget);
+        System.out.println("proj distance" + ShootBalls.getShotDistance(true));
+        System.out.println("#####################");
         break;
     }
   }

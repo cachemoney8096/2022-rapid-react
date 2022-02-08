@@ -81,9 +81,9 @@ public class ShootBalls extends Command{
   public static double getShotDistance(boolean upper){
     double distance = 0.0;
     if(upper){
-      distance = (RobotMap.UPPER_HUB_HEIGHT - RobotMap.HEIGHT_TO_LIMELIGHT) / Math.tan(RobotMap.DEFAULT_LIMELIGHT_HEIGHT + Shooter.getVerticalOffsetAngle());
+      distance = (RobotMap.UPPER_HUB_HEIGHT - RobotMap.HEIGHT_TO_LIMELIGHT) / Math.tan(RobotMap.DEFAULT_LIMELIGHT_ANGLE + Shooter.getVerticalOffsetAngle());
     } else {
-      distance = (RobotMap.LOWER_HUB_HEIGHT - RobotMap.HEIGHT_TO_LIMELIGHT) / Math.tan(RobotMap.DEFAULT_LIMELIGHT_HEIGHT + Shooter.getVerticalOffsetAngle());
+      distance = (RobotMap.LOWER_HUB_HEIGHT - RobotMap.HEIGHT_TO_LIMELIGHT) / Math.tan(RobotMap.DEFAULT_LIMELIGHT_ANGLE + Shooter.getVerticalOffsetAngle());
     }
     return distance;
   }

@@ -61,7 +61,7 @@ public class Shooter extends Subsystem {
     }
 
     public static boolean checkValidTargets(){
-        if(NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0) == 1){
+        if(NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0) == 1){
             return true;
         }
         return false;
