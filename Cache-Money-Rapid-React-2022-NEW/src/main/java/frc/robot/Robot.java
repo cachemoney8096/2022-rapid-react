@@ -25,7 +25,7 @@ import frc.robot.command.TankDrive;
 public class Robot extends TimedRobot {
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
-public static final Subsystem Shooter = new Shooter();
+  public static final Subsystem Shooter = new Shooter();
   private String m_autoSelected;
   public static OI m_oi;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
