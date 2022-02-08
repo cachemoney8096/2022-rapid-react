@@ -15,8 +15,6 @@ public class RobotMap {
   //Controller Id's
   
   public static final int RIGHT_STICK_X = 4;
-  public static final int BUTTON_LEFTTRIG = 2;
-  public static final int BUTTON_RIGHTTRIG = 3;
   public static final int LEFT_STICK_Y = 1;
   
   public static final int BUTTON_GREEN = 1;

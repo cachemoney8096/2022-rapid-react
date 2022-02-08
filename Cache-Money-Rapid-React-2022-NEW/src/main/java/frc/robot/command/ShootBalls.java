@@ -9,7 +9,6 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.Shooter;
 
 
 
@@ -17,19 +16,26 @@ public class ShootBalls extends Command{
 
     public ShootBalls(){
         requires(Robot.Shooter);
+      
+
+
     }
      // Called when the command is initially scheduled.
   @Override
   // variables and mapping out buttons for the controller when it starts
   public void initialize() {
-    
+
+    SmartDashboard.putString("ShootBalls.intialize", "executed");
 
   }
 
   //variables and mapping out buttons called 50 times per second
   @Override
   public void execute() {
-    Shooter.ShootBraindead(.05);
+    SmartDashboard.putString("ShootBalls.execute", "before shootBraindead");
+
+    Shooter.ShootBraindead(1);
+    SmartDashboard.putString("ShootBalls.execute", "after shootBraindead");
     
     
 
@@ -38,6 +44,7 @@ public class ShootBalls extends Command{
   // When the stop button is hit, the motors turn off
   @Override
   public void end() {
+    Shooter.ShootBraindead(0);
 
   }
 
@@ -48,11 +55,14 @@ public class ShootBalls extends Command{
   }
   
   public static void ShootFast(){
+    SmartDashboard.putString("after if", "executed");
     //Shooter.configureShooterPIDValues(kP, kI, kD, kF, CMV, MotionAcceleration, SmoothingStrength);
     //Shooter.setMotionMagic(targetPos, kF);
     
 
   }
+
+  
 
   public static double getInitialVelocity(boolean upper){
     double dH = 0;

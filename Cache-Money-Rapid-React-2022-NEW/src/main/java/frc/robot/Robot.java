@@ -13,6 +13,7 @@ import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
+import frc.robot.command.ShootBalls;
 import frc.robot.command.TankDrive;
 
 
@@ -35,7 +36,7 @@ public class Robot extends TimedRobot {
   public static Climb m_climb = new Climb();
   public static DriveTrain m_drivetrain = new DriveTrain();
   public static Shooter m_shooter = new Shooter();
-
+  
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -45,7 +46,10 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
+    SmartDashboard.putString("robot init", "executed");
+
     Robot.m_oi = new OI();
+
   }
 
   /**
@@ -85,20 +89,26 @@ public class Robot extends TimedRobot {
       case kDefaultAuto:
       default:
         // Put default auto code here
-        TankDrive.test(0.1);
+        ShootBalls.ShootFast();
         break;
     }
   }
 
   /** This function is called once when teleop is enabled. */
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+    SmartDashboard.putString("teleop.intialize", "executed");
+   // Robot.m_oi.rightTrigger.whenPressed(new ShootBalls());
+  }
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
+    SmartDashboard.putString("teleop.periodic", "executed");
+
     Scheduler.getInstance().run();
     TankDrive.move();
-   
+  
+    
   }
 
   /** This function is called once when the robot is disabled. */
