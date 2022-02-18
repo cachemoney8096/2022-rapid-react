@@ -52,7 +52,7 @@ public class TankDrive extends Command{
   
 
   public static void test(double speed){
-    DriveTrain.move(speed, speed);
+    DriveTrain.move( speed, speed);
   }
 
  /* public static void MovementUntilShadowLine(boolean ArmLatch) {

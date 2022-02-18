@@ -20,13 +20,13 @@ public class OI {
         SmartDashboard.putString("oi constructor", "executed");
 
         
-        RightBumpButton.whileHeld(new ShootBalls());
-        
+        BlueButton.whenPressed(new ShootBalls());
     }
 
     public double getDriverRawAxis(int axis){
         return xbox.getRawAxis(axis);
     }
+    
     
     
     

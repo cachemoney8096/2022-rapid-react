@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj.util.Color;
 
 public class RobotMap {
   //Drive Train Motor Id's
-  public static final int  MOTOR_LEFT_1_ID = 10;  
+  public static final int  MOTOR_LEFT_1_ID = 9;  
   public static final int  MOTOR_LEFT_2_ID = 11;
-  public static final int  MOTOR_RIGHT_1_ID = 9;
+  public static final int  MOTOR_RIGHT_1_ID = 10;
   public static final int  MOTOR_RIGHT_2_ID = 8;
   public static final int Gyro_ID= 7; //figure this out at some point
   public static final int  DRIVERCONTROLLER = 0;

@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.estimator.AngleStatistics;
 import edu.wpi.first.wpilibj.I2C;
 import frc.robot.RobotMap;
@@ -10,6 +11,9 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.SparkMaxRelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class DriveTrain extends Subsystem { 
@@ -20,6 +24,11 @@ public class DriveTrain extends Subsystem {
     private static CANSparkMax motorLeft2 = new CANSparkMax(RobotMap.MOTOR_LEFT_2_ID, MotorType.kBrushless);
     private static CANSparkMax motorRight1 = new CANSparkMax(RobotMap.MOTOR_RIGHT_1_ID, MotorType.kBrushless);
     private static CANSparkMax motorRight2 = new CANSparkMax(RobotMap.MOTOR_RIGHT_2_ID, MotorType.kBrushless);
+    private static RelativeEncoder l1= motorLeft1.getEncoder();
+    private static RelativeEncoder l2= motorLeft2.getEncoder();
+    private static RelativeEncoder r1= motorRight1.getEncoder();
+    private static RelativeEncoder r2= motorRight2.getEncoder();
+    //private static SparkMaxPIDController pid = new SparkMaxPIDController(kP, kI, kD);
   //  private static ColorSensorV3 colorsensor = new ColorSensorV3(i2cport);
    // private static ColorMatch colormatcher = new ColorMatch();
  //   private static AnalogGyro AnalogGyro= new AnalogGyro(RobotMap.Gyro_ID);
@@ -36,8 +45,8 @@ public class DriveTrain extends Subsystem {
         motorRight2.set(speed);
     }
     public static void move(double left, double right){
-        setLeftMotors(left);
-        setRightMotors(right);
+        setLeftMotors(-left);
+        setRightMotors(-right);
     }
   /*  public static void turn(double Angle){
         AnalogGyro.initGyro();

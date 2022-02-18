@@ -1,5 +1,6 @@
 package frc.robot.command;
 import frc.robot.Robot;
+import frc.robot.OI;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.command.Command;
@@ -33,8 +34,9 @@ public class ShootBalls extends Command{
   @Override
   public void execute() {
     SmartDashboard.putString("ShootBalls.execute", "before shootBraindead");
-
-    Shooter.ShootBraindead(1);
+  
+    Shooter.ShootBraindead(SpeedAdjustment());
+    
     SmartDashboard.putString("ShootBalls.execute", "after shootBraindead");
     
     
@@ -62,7 +64,17 @@ public class ShootBalls extends Command{
 
   }
 
-  
+  public double SpeedAdjustment(){
+    double adjust= 0.5;
+    if(OI.RightBumpButton.get()){
+        adjust+=.1;
+    }
+    else if(OI.LeftBumpButton.get()){
+        adjust-=.1;
+    }
+        return adjust;
+    
+}
 
   public static double getInitialVelocity(boolean upper){
     double dH = 0;

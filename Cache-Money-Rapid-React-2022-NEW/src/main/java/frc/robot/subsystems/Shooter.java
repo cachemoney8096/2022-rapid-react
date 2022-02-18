@@ -84,6 +84,7 @@ public class Shooter extends Subsystem {
     public static void setVelocity(double targetVel, double kF){
         motor1.set(ControlMode.Velocity, targetVel, DemandType.ArbitraryFeedForward, kF);
         motor2.set(ControlMode.Velocity, targetVel, DemandType.ArbitraryFeedForward, kF);
+        
     }
 
     @Override
