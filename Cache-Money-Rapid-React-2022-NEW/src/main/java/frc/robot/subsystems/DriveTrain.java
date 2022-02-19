@@ -31,7 +31,7 @@ public class DriveTrain extends Subsystem {
     //private static SparkMaxPIDController pid = new SparkMaxPIDController(kP, kI, kD);
   //  private static ColorSensorV3 colorsensor = new ColorSensorV3(i2cport);
    // private static ColorMatch colormatcher = new ColorMatch();
- //   private static AnalogGyro AnalogGyro= new AnalogGyro(RobotMap.Gyro_ID);
+    private static AnalogGyro analogGyro= new AnalogGyro(RobotMap.Gyro_ID);
     
     public static void setLeftMotors(double speed){
         motorLeft1.set(speed);
@@ -48,15 +48,28 @@ public class DriveTrain extends Subsystem {
         setLeftMotors(-left);
         setRightMotors(-right);
     }
-  /*  public static void turn(double Angle){
-        AnalogGyro.initGyro();
-        AnalogGyro.getCenter();
-        while(AnalogGyro.getAngle()<=Angle){
+
+    public static double getGyroAngle(){
+        return analogGyro.getAngle();
+    }
+
+    public static void calibrateGyro(){
+        analogGyro.calibrate();
+    }
+
+    public static void initGyro(){
+        analogGyro.initGyro();
+    }
+
+    public static void turn(double Angle){
+        calibrateGyro();
+        
+        while(analogGyro.getAngle()<=Angle){
             DriveTrain.move(0.3,0);
 
         } 
         DriveTrain.move(0,0);
-    }*/
+    }
 
   /*  public static Color getColor(){
         return colorsensor.getColor();
