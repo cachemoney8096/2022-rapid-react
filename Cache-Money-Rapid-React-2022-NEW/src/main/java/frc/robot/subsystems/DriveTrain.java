@@ -17,7 +17,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.SparkMaxRelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.wpilibj.SPI.Port;
+import edu.wpi.first.wpilibj.SerialPort.Port;
 
 public class DriveTrain extends Subsystem { 
     //I2C Port Setup  
@@ -27,15 +27,12 @@ public class DriveTrain extends Subsystem {
     private static CANSparkMax motorLeft2 = new CANSparkMax(RobotMap.MOTOR_LEFT_2_ID, MotorType.kBrushless);
     private static CANSparkMax motorRight1 = new CANSparkMax(RobotMap.MOTOR_RIGHT_1_ID, MotorType.kBrushless);
     private static CANSparkMax motorRight2 = new CANSparkMax(RobotMap.MOTOR_RIGHT_2_ID, MotorType.kBrushless);
-    private static RelativeEncoder l1= motorLeft1.getEncoder();
-    private static RelativeEncoder l2= motorLeft2.getEncoder();
-    private static RelativeEncoder r1= motorRight1.getEncoder();
-    private static RelativeEncoder r2= motorRight2.getEncoder();
-    //private static SparkMaxPIDController pid = new SparkMaxPIDController(kP, kI, kD);
+    private static SparkMaxPIDController pid = motorLeft1.getPIDController();
   //  private static ColorSensorV3 colorsensor = new ColorSensorV3(i2cport);
    // private static ColorMatch colormatcher = new ColorMatch();
-    private static AHRS gyro = new AHRS(Port.kMXP);
-    
+    private static AHRS gyro = new AHRS(Port.kUSB);
+
+
     public static void setLeftMotors(double speed){
         motorLeft1.set(speed);
         motorLeft2.set(speed);
@@ -51,6 +48,17 @@ public class DriveTrain extends Subsystem {
         setLeftMotors(-left);
         setRightMotors(-right);
     }
+    public static void SetPID(double p, double i, double d, double ff, double izone){
+        pid.setP(p);
+        pid.setI(i);
+        pid.setD(d);
+        pid.setFF(ff);
+        pid.setIZone(izone);
+    }
+
+    public static AHRS getGyro(){
+        return gyro;
+    }
 
     public static double getGyroAngle(){
         return gyro.getAngle();
@@ -60,13 +68,7 @@ public class DriveTrain extends Subsystem {
         return gyro.getFirmwareVersion();
     }
 
-    public static void turn(double Angle){        
-        while(gyro.getAngle()<=Angle){
-            DriveTrain.move(0.3,0);
-
-        } 
-        DriveTrain.move(0,0);
-    }
+    
 
   /*  public static Color getColor(){
         return colorsensor.getColor();
@@ -88,5 +90,6 @@ public class DriveTrain extends Subsystem {
     }
     public static void moveDistance(double d) {
     }
+
 }
     

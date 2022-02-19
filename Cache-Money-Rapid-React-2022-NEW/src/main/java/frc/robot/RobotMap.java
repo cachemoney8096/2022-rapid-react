@@ -87,7 +87,11 @@ public static final int LOWER_HUB_HEIGHT = 0;
 public static final int HEIGHT_TO_SHOOTER = 0;
 public static final double SHOOTER_ANGLE = 0;
 public static final double ACCELERATION_DUE_TO_GRAVITY = 0;
-
+public static final double TURN_kP = 0;
+public static final double TURN_kI = 0;
+public static final double TURN_kD = 0;
+public static final double TURN_kF = 0;
+public static final double setpoint= 0;
 
 
 }
