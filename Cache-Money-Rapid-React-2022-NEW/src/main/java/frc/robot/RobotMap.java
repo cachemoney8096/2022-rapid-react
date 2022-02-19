@@ -8,7 +8,7 @@ public class RobotMap {
   public static final int  MOTOR_LEFT_2_ID = 11;
   public static final int  MOTOR_RIGHT_1_ID = 10;
   public static final int  MOTOR_RIGHT_2_ID = 8;
-  public static final int Gyro_ID= 7; //figure this out at some point
+  public static final int Gyro_ID= 0; //figure this out at some point
   public static final int  DRIVERCONTROLLER = 0;
   public static final int  BUTTONCONTROLLER = 1;
 

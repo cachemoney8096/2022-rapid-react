@@ -7,6 +7,8 @@ import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.AnalogGyro;
+
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
@@ -15,6 +17,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.SparkMaxRelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import edu.wpi.first.wpilibj.SPI.Port;
 
 public class DriveTrain extends Subsystem { 
     //I2C Port Setup  
@@ -31,7 +34,7 @@ public class DriveTrain extends Subsystem {
     //private static SparkMaxPIDController pid = new SparkMaxPIDController(kP, kI, kD);
   //  private static ColorSensorV3 colorsensor = new ColorSensorV3(i2cport);
    // private static ColorMatch colormatcher = new ColorMatch();
-    private static AnalogGyro analogGyro= new AnalogGyro(RobotMap.Gyro_ID);
+    private static AHRS gyro = new AHRS(Port.kMXP);
     
     public static void setLeftMotors(double speed){
         motorLeft1.set(speed);
@@ -50,21 +53,15 @@ public class DriveTrain extends Subsystem {
     }
 
     public static double getGyroAngle(){
-        return analogGyro.getAngle();
+        return gyro.getAngle();
     }
 
-    public static void calibrateGyro(){
-        analogGyro.calibrate();
+    public static String getFirmWare(){
+        return gyro.getFirmwareVersion();
     }
 
-    public static void initGyro(){
-        analogGyro.initGyro();
-    }
-
-    public static void turn(double Angle){
-        calibrateGyro();
-        
-        while(analogGyro.getAngle()<=Angle){
+    public static void turn(double Angle){        
+        while(gyro.getAngle()<=Angle){
             DriveTrain.move(0.3,0);
 
         } 

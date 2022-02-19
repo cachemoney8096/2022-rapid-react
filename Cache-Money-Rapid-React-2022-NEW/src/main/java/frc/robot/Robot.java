@@ -49,8 +49,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto choices", m_chooser);
     SmartDashboard.putString("robot init", "executed");
     CameraServer.startAutomaticCapture();
-    DriveTrain.initGyro();
-    DriveTrain.calibrateGyro();
     Robot.m_oi = new OI();
 
   }
@@ -103,7 +101,8 @@ public class Robot extends TimedRobot {
         System.out.println("#####################");
         break;
         */
-        System.out.print(DriveTrain.getGyroAngle());
+        System.out.println("Firmware Version: " + DriveTrain.getFirmWare());
+        System.out.println("Gyro Angle: " + DriveTrain.getGyroAngle());
 
     }
   }
