@@ -49,7 +49,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto choices", m_chooser);
     SmartDashboard.putString("robot init", "executed");
     CameraServer.startAutomaticCapture();
-    
+    DriveTrain.initGyro();
+    DriveTrain.calibrateGyro();
     Robot.m_oi = new OI();
 
   }
@@ -91,6 +92,7 @@ public class Robot extends TimedRobot {
       case kDefaultAuto:
       default:
         // Put default auto code here
+        /*
         double horizOffset = m_shooter.getHorizontalOffsetAngle();
         double vertOffset = m_shooter.getVerticalOffsetAngle();
         boolean isValidTarget = m_shooter.checkValidTargets();
@@ -100,6 +102,9 @@ public class Robot extends TimedRobot {
         System.out.println("proj distance" + ShootBalls.getShotDistance(true));
         System.out.println("#####################");
         break;
+        */
+        System.out.print(DriveTrain.getGyroAngle());
+
     }
   }
 
