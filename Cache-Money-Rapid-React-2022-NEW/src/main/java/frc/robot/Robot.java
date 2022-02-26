@@ -91,22 +91,24 @@ public class Robot extends TimedRobot {
         break;
       case kDefaultAuto:
       default:
-        // Put default auto code here
-        /*
-        double horizOffset = m_shooter.getHorizontalOffsetAngle();
-        double vertOffset = m_shooter.getVerticalOffsetAngle();
-        boolean isValidTarget = m_shooter.checkValidTargets();
-        System.out.println("horiz"+horizOffset);
-        System.out.println("vert"+vertOffset);
-        System.out.println(isValidTarget);
-        System.out.println("proj distance" + ShootBalls.getShotDistance(true));
-        System.out.println("#####################");
-        break;
-        */
+        if(!DriveTrain.turnCompleted(90)){
+          DriveTrain.PIDturn(90, 2, 0, 0, 0, 0);
+        }
+        
         System.out.println("Firmware Version: " + DriveTrain.getFirmWare());
         System.out.println("Gyro Angle: " + DriveTrain.getGyroAngle());
         TankDrive.PIDTurn(90);
 
+        /* AUTONOMOUS SEQUENCE 
+        1) MOVE BACK
+        2) INTAKE BALL
+        3) SHOOT BALLLS
+        --- THE REST IS OPTIONAL FOR CIR
+        4) TURN W/ GYRO
+        5) MOVE FORWARD
+        6) INTAKE BALL
+        7) TURN W/GYRO
+        8) SHOOT BALL  */
     }
   }
 

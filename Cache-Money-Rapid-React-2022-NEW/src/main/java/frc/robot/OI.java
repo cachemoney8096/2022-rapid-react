@@ -21,6 +21,8 @@ public class OI {
 
         
         BlueButton.whenPressed(new ShootBalls());
+        GreenButton.whileHeld(new IntakeBalls());
+        GreenButton.whileHeld(new IndexBalls());
     }
 
     public double getDriverRawAxis(int axis){

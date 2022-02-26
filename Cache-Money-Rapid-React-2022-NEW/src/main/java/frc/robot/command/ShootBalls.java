@@ -3,6 +3,7 @@ import frc.robot.Robot;
 import frc.robot.OI;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj.command.Command;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
@@ -34,7 +35,8 @@ public class ShootBalls extends Command{
   @Override
   public void execute() {
     SmartDashboard.putString("ShootBalls.execute", "before shootBraindead");
-  
+    Intake.Limit();
+    IndexBalls.BackIndex();
     Shooter.ShootBraindead(SpeedAdjustment());
     
     SmartDashboard.putString("ShootBalls.execute", "after shootBraindead");

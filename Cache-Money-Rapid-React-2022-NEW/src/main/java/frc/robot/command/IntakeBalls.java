@@ -2,10 +2,11 @@ package frc.robot.command;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.command.IntakeBalls;
+import edu.wpi.first.wpilibj.Timer;
+public class IntakeBalls extends Command{
 
-public class IntakeCommands extends Command{
-
-    public IntakeCommands(){
+    public IntakeBalls(){
         requires(Robot.m_intake);
     }
 
@@ -22,6 +23,10 @@ public class IntakeCommands extends Command{
     @Override
     protected void execute() {
         super.execute();
+        Intake.Limit();
+        go();
+    
+
     }
 
     @Override
@@ -29,8 +34,11 @@ public class IntakeCommands extends Command{
         super.end();
     }
     public static void go(){
-   
-   Intake.go(0.5);
+   double currentTime =Timer.getFPGATimestamp();
+   while(currentTime<1){
+   Intake.go(0.5);}
+   FrontIndex();
+
 
   }
 
@@ -40,7 +48,15 @@ public class IntakeCommands extends Command{
    
 
 }
-
+public static void FrontIndex(){
+    double currentTime= Timer.getFPGATimestamp();
+    while(currentTime<1){
+     Intake.FrontIndex(0.25);
+    }
+    Intake.FrontIndex(0);
+    
+ 
+   }
 
     
 }
