@@ -129,7 +129,7 @@ public class AutomatedClimb extends Command {
     public static void RotateArm(double distance, boolean forward){
         int dir_coeff = 0;
         if(forward){dir_coeff=1;} else {dir_coeff=-1;}
-        Climb.setPivotMotionMagic(distance*RobotMap.CLIMB_DISTANCE_CONVERSION_FACTOR*dir_coeff, RobotMap.PIVOT_COEFFICIENT_kF); //TODO fill out the values of kF
+        Climb.setPivotMotionMagic(distance*RobotMap.CLIMB_ROTATION_CONVERSION_FACTOR*dir_coeff, RobotMap.PIVOT_COEFFICIENT_kF); //TODO fill out the values of kF
     }
     
 }

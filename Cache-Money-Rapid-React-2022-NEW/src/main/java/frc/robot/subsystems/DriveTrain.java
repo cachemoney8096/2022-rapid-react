@@ -1,13 +1,12 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.math.controller.PIDController;
+
 import edu.wpi.first.math.estimator.AngleStatistics;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.util.Color;
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 
 import java.io.PrintWriter;
@@ -36,10 +35,10 @@ public class DriveTrain extends Subsystem {
     private static CANSparkMax motorLeft2 = new CANSparkMax(RobotMap.MOTOR_LEFT_2_ID, MotorType.kBrushless);
     private static CANSparkMax motorRight1 = new CANSparkMax(RobotMap.MOTOR_RIGHT_1_ID, MotorType.kBrushless);
     private static CANSparkMax motorRight2 = new CANSparkMax(RobotMap.MOTOR_RIGHT_2_ID, MotorType.kBrushless);
-    private static RelativeEncoder l1= motorLeft1.getEncoder();
-    private static RelativeEncoder l2= motorLeft2.getEncoder();
-    private static RelativeEncoder r1= motorRight1.getEncoder();
-    private static RelativeEncoder r2= motorRight2.getEncoder();
+    private static RelativeEncoder l1 = motorLeft1.getEncoder();
+    private static RelativeEncoder l2 = motorLeft2.getEncoder();
+    private static RelativeEncoder r1 = motorRight1.getEncoder();
+    private static RelativeEncoder r2 = motorRight2.getEncoder();
     private static SparkMaxPIDController pid = motorLeft1.getPIDController();    
   //  private static ColorSensorV3 colorsensor = new ColorSensorV3(i2cport);
    // private static ColorMatch colormatcher = new ColorMatch();
@@ -101,6 +100,16 @@ public class DriveTrain extends Subsystem {
         DriveTrain.move(0,0);
     }
     
+    //returns the velocity of the wheels in feet per second
+    public static double getVelocity(){
+        return l1.getVelocity() * 2 /*radius of wheel in in*/ * (1/12) /*in to ft*/ * 60 /*s*/;
+    }
+    
+    //returns the distance traveled in feet
+    public static double getPosition(){
+        l1.setPositionConversionFactor(4 * Math.PI * (1/12));
+        return l1.getPosition();
+    }
 
     public static void PIDturn(double setpointAngle, double kP, double kD, double kI, double iZone, double kF){
         if(initAngleNeeded){
