@@ -85,6 +85,8 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     switch (m_autoSelected) {
       case kCustomAuto:
+     
+
         // Put custom auto code here
         break;
       case kDefaultAuto:
@@ -95,6 +97,7 @@ public class Robot extends TimedRobot {
         
         System.out.println("Firmware Version: " + DriveTrain.getFirmWare());
         System.out.println("Gyro Angle: " + DriveTrain.getGyroAngle());
+        TankDrive.PIDTurn(90);
 
         /* AUTONOMOUS SEQUENCE 
         1) MOVE BACK

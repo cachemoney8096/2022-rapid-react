@@ -19,6 +19,7 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.SparkMaxRelativeEncoder;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import edu.wpi.first.wpilibj.SerialPort.Port;
 
 public class DriveTrain extends Subsystem { 
     //I2C Port Setup  
@@ -32,7 +33,7 @@ public class DriveTrain extends Subsystem {
     private static RelativeEncoder l2= motorLeft2.getEncoder();
     private static RelativeEncoder r1= motorRight1.getEncoder();
     private static RelativeEncoder r2= motorRight2.getEncoder();
-    
+    private static SparkMaxPIDController pid = motorLeft1.getPIDController();    
   //  private static ColorSensorV3 colorsensor = new ColorSensorV3(i2cport);
    // private static ColorMatch colormatcher = new ColorMatch();
     private static AHRS gyro = new AHRS(Port.kUSB);
@@ -64,6 +65,18 @@ public class DriveTrain extends Subsystem {
         motorLeft1.getPIDController().setReference(0.5, ControlType.kPosition, 0);
         
     }
+    public static void SetPID(double p, double i, double d, double ff, double izone){
+        pid.setP(p);
+        pid.setI(i);
+        pid.setD(d);
+        pid.setFF(ff);
+        pid.setIZone(izone);
+    }
+
+    public static AHRS getGyro(){
+        return gyro;
+    }
+
     public static double getGyroAngle(){
         return gyro.getAngle();
     }
@@ -123,6 +136,7 @@ public class DriveTrain extends Subsystem {
         }
         return false;
     }
+    
 
   /*  public static Color getColor(){
         return colorsensor.getColor();
@@ -144,5 +158,6 @@ public class DriveTrain extends Subsystem {
     }
     public static void moveDistance(double d) {
     }
+
 }
     

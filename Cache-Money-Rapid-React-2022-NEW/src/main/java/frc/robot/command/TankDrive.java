@@ -9,6 +9,8 @@ public class TankDrive extends Command{
   public static boolean arrived = false;
   public static boolean slightForward = false;
   public static boolean slightBackward = false;
+  public static boolean initAngle = false;
+   public static double initGyroAngle = 0.0;
   
   public TankDrive(){
       requires(Robot.m_drivetrain);
@@ -52,6 +54,27 @@ public class TankDrive extends Command{
 
   public static void test(double speed){
     DriveTrain.move( speed, speed);
+  }
+
+  public static void PIDTurn(double angle){        
+    if(!initAngle){
+      initGyroAngle = DriveTrain.getGyroAngle();
+      initAngle = true;
+    }
+    if(angle < 0) {
+      if ((DriveTrain.getGyroAngle() - initGyroAngle) > angle){
+        DriveTrain.move(0.2, -0.2);
+      } else {
+        DriveTrain.move(0.0, 0.0);
+      }
+    }
+    if (angle > 0){
+      if((DriveTrain.getGyroAngle() - initGyroAngle) < angle){
+        DriveTrain.move(-0.2, 0.2);
+      } else {
+        DriveTrain.move(0.0, 0.0);
+      }
+    }
   }
 
  /* public static void MovementUntilShadowLine(boolean ArmLatch) {

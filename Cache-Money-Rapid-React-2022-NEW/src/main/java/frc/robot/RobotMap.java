@@ -82,6 +82,10 @@ public class RobotMap {
   public static final double PIVOT_COEFFICIENT_MOTION_ACCELERATION = 0;
   public static final int PIVOT_COEFFICIENT_SMOOTHING_STRENGTH = 0;
 
+  public static final double TURN_kI = 0;
+  public static final double TURN_kD = 0;
+  public static final double TURN_kF = 0;
+  public static final double setpoint= 0;
 
   //Arm Extension Parameters
   public static final double ARM_EXT_LENGTH_ONE = 0;
