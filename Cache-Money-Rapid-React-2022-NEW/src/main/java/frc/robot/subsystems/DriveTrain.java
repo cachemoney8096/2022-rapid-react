@@ -3,11 +3,14 @@ package frc.robot.subsystems;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.estimator.AngleStatistics;
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.Timer;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.SerialPort.Port;
+
+import java.io.PrintWriter;
 
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
@@ -20,6 +23,10 @@ import com.revrobotics.SparkMaxRelativeEncoder;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.SerialPort.Port;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 public class DriveTrain extends Subsystem { 
     //I2C Port Setup  
@@ -39,6 +46,7 @@ public class DriveTrain extends Subsystem {
     private static AHRS gyro = new AHRS(Port.kUSB);
     public static boolean initAngleNeeded = true;
     public static double initAngle = 0;
+    public static boolean headerWritten = false;
     
     public static void setLeftMotors(double speed){
         motorLeft1.set(speed);
@@ -99,9 +107,14 @@ public class DriveTrain extends Subsystem {
             initAngle = gyro.getAngle();
             initAngleNeeded = false;
         }
+        if(!headerWritten){
+            DriveTrain.writeOutput("Time", "Error");
+        }
 
         double currentAngle = gyro.getAngle() - initAngle;
         double error = setpointAngle - currentAngle;
+
+        DriveTrain.writeOutput(Timer.getFPGATimestamp() + "", error + "");
 
         double p = error * kP;
         double i = 0.0;
@@ -120,7 +133,6 @@ public class DriveTrain extends Subsystem {
             output = -1;
         }
         DriveTrain.move(output, -output);
-        //Make sure to set initAngle back to normal
     }
 
 
@@ -151,6 +163,19 @@ public class DriveTrain extends Subsystem {
         }*/
 
     //}
+    //write output to csv file
+    public static void writeOutput(String colOne, String colTwo){
+        try (PrintWriter writer = new PrintWriter("../outputs/errorGraph.csv")) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(colOne);
+            sb.append(',');
+            sb.append(colTwo);
+            sb.append('\n');
+            writer.write(sb.toString());      
+          } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+          }
+    }
 
     @Override
     protected void initDefaultCommand() {
