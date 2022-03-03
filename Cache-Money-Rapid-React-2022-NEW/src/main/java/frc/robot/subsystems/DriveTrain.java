@@ -119,6 +119,7 @@ public class DriveTrain extends Subsystem {
         } else if(output < -1){
             output = -1;
         }
+       
         DriveTrain.move(output, -output);
         //Make sure to set initAngle back to normal
     }

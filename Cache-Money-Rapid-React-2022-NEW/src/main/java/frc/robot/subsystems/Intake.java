@@ -1,5 +1,4 @@
 package frc.robot.subsystems;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.RobotMap;
@@ -9,8 +8,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public class Intake extends Subsystem {   
     //Motor Variable setup
   public static final int TILT_INTAKE_MOTOR= 0;
-    private static TalonSRX tilt= new TalonSRX(RobotMap.TILT_INTAKE_MOTOR);
-    private static TalonSRX go= new TalonSRX(RobotMap.GO_INTAKE_MOTOR);
+    private static TalonFX tilt= new TalonFX(RobotMap.TILT_INTAKE_MOTOR);
+    private static TalonFX go= new TalonFX(RobotMap.GO_INTAKE_MOTOR);
     private static CANSparkMax IndexMotor1 = new CANSparkMax(RobotMap.FrontIndexMotorLeft, MotorType.kBrushless);
     private static CANSparkMax IndexMotor2 = new CANSparkMax(RobotMap.FrontIndexMotorRight, MotorType.kBrushless);
     private static CANSparkMax IndexMotor3 = new CANSparkMax(RobotMap.BackIndexMotorLeft, MotorType.kBrushless);
