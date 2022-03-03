@@ -32,20 +32,20 @@ public class Shooter extends Subsystem {
 
 
     public static void configureShooterPIDValues(double kP, double kI, double kD, double kF, double CMV, double MotionAcceleration, int SmoothingStrength){
-        motor1.config_kP(0, kP); //TODO Understand what slotIdx means (first parameter)
-        motor1.config_kI(0, kI); //TODO Understand what slotIdx means (first parameter)
-        motor1.config_kD(0, kD); //TODO Understand what slotIdx means (first parameter)
-        motor1.config_kF(0, kF); //TODO Understand what slotIdx means (first parameter)
+        motor1.config_kP(0, kP); //SlotIndex 0 
+        motor1.config_kI(0, kI); 
+        motor1.config_kD(0, kD); 
+        motor1.config_kF(0, kF); 
         motor1.configMotionCruiseVelocity(CMV); //It's in Sensor Units Per 100ms
         motor1.configMotionAcceleration(MotionAcceleration); //It's in Sensor Units Per 100ms
         motor1.configMotionSCurveStrength(SmoothingStrength); //0 for trapezoidal acceleration, higher values for more smoothing
         motor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
 
 
-        motor2.config_kP(0, kP); //TODO Understand what slotIdx means (first parameter)
-        motor2.config_kI(0, kI); //TODO Understand what slotIdx means (first parameter)
-        motor2.config_kD(0, kD); //TODO Understand what slotIdx means (first parameter)
-        motor2.config_kF(0, kF); //TODO Understand what slotIdx means (first parameter)
+        motor2.config_kP(0, kP);
+        motor2.config_kI(0, kI);
+        motor2.config_kD(0, kD); 
+        motor2.config_kF(0, kF); 
         motor2.configMotionCruiseVelocity(CMV); //It's in Sensor Units Per 100ms
         motor2.configMotionAcceleration(MotionAcceleration); //It's in Sensor Units Per 100ms
         motor2.configMotionSCurveStrength(SmoothingStrength); //0 for trapezoidal acceleration, higher values for more smoothing
@@ -90,5 +90,9 @@ public class Shooter extends Subsystem {
     @Override
     protected void initDefaultCommand() {
         
+    }
+
+
+    public static void ShootVel(double d, int i) {
     }
 }

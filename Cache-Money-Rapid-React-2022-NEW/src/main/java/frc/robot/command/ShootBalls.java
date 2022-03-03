@@ -5,11 +5,8 @@ import frc.robot.RobotMap;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj.command.Command;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.TimedRobot;
+
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
@@ -17,7 +14,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ShootBalls extends Command{
 
     public ShootBalls(){
-        requires(Robot.Shooter);
+        requires(Robot.m_shooter);
+        requires(Robot.m_intake);
       
 
 
@@ -35,10 +33,7 @@ public class ShootBalls extends Command{
   @Override
   public void execute() {
     SmartDashboard.putString("ShootBalls.execute", "before shootBraindead");
-    Intake.Limit();
-    IndexBalls.BackIndex();
-    Shooter.ShootBraindead(SpeedAdjustment());
-    
+    Shooter.ShootVel(getInitialVelocity(true), 0);
     SmartDashboard.putString("ShootBalls.execute", "after shootBraindead");
     
     
@@ -103,7 +98,10 @@ public class ShootBalls extends Command{
   }
 
   public static void ShootVel(double targetVel, double kF){
-    Shooter.setVelocity(targetVel, kF);
+    double angularVelocity = targetVel * RobotMap.CONVERT_LINEAR_VELOCITY_TO_ANGULAR_FALCON;
+    Intake.Limit();
+    IndexBalls.BackIndex();
+    Shooter.setVelocity(angularVelocity, kF);
   }
 
   

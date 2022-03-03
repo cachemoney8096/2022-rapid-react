@@ -11,11 +11,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.cameraserver.CameraServer;
 import frc.robot.subsystems.Climb;
+import frc.robot.command.*;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.command.ShootBalls;
 import frc.robot.command.TankDrive;
+
 
 
 /**
@@ -85,19 +87,41 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     switch (m_autoSelected) {
       case kCustomAuto:
-     
-
-        // Put custom auto code here
-        break;
-      case kDefaultAuto:
-      default:
+       DriveTrain.pidMove();
+       Intake.Limit();
+       IntakeBalls.go();
+       IntakeBalls.FrontIndex();
+       IndexBalls.BackIndex();
         if(!DriveTrain.turnCompleted(90)){
-          DriveTrain.PIDturn(90, 2, 0, 0, 0, 0);
+         DriveTrain.PIDturn(90, RobotMap.TURN_kP, RobotMap.TURN_kD, RobotMap.TURN_kI, RobotMap.TURN_IZONE,RobotMap.TURN_kF );
         }
         
         System.out.println("Firmware Version: " + DriveTrain.getFirmWare());
         System.out.println("Gyro Angle: " + DriveTrain.getGyroAngle());
         TankDrive.PIDTurn(90);
+       ShootBalls.ShootVel(RobotMap.Shooter_Vel_Value, RobotMap.Shooter_FF_Value);
+       
+
+        // Put custom auto code here
+        break;
+      case kDefaultAuto:
+      default:
+       DriveTrain.pidMove();
+       Intake.Limit();
+       IntakeBalls.go();
+       IntakeBalls.FrontIndex();
+       IndexBalls.BackIndex();
+        if(!DriveTrain.turnCompleted(90)){
+          DriveTrain.PIDturn(90, RobotMap.TURN_kP, RobotMap.TURN_kD, RobotMap.TURN_kI, RobotMap.TURN_IZONE,RobotMap.TURN_kF );
+        }
+        
+        System.out.println("Firmware Version: " + DriveTrain.getFirmWare());
+        System.out.println("Gyro Angle: " + DriveTrain.getGyroAngle());
+        TankDrive.PIDTurn(90);
+       ShootBalls.ShootVel(RobotMap.Shooter_Vel_Value, RobotMap.Shooter_FF_Value);
+
+       
+      
 
         /* AUTONOMOUS SEQUENCE 
         1) MOVE BACK
@@ -116,7 +140,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     SmartDashboard.putString("teleop.intialize", "executed");
-   // Robot.m_oi.rightTrigger.whenPressed(new ShootBalls());
+   
   }
   /** This function is called periodically during operator control. */
   @Override
