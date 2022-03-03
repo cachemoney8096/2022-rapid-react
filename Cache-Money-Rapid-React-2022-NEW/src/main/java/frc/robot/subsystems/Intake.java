@@ -14,6 +14,7 @@ public class Intake extends Subsystem {
     private static CANSparkMax IndexMotor2 = new CANSparkMax(RobotMap.FrontIndexMotorRight, MotorType.kBrushless);
     private static CANSparkMax IndexMotor3 = new CANSparkMax(RobotMap.BackIndexMotorLeft, MotorType.kBrushless);
     private static CANSparkMax IndexMotor4 = new CANSparkMax(RobotMap.BackIndexMotorRight, MotorType.kBrushless);
+    
     public static void tilt(double speed){
         tilt.set(ControlMode.PercentOutput, speed);
  

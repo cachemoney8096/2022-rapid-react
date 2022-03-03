@@ -5,6 +5,9 @@ import frc.robot.Robot;
 import frc.robot.command.IntakeBalls;
 import edu.wpi.first.wpilibj.Timer;
 public class IntakeBalls extends Command{
+    
+    public static boolean initTimeNeeded = true;
+    public static double initTime = 0;
 
     public IntakeBalls(){
         requires(Robot.m_intake);
@@ -17,46 +20,41 @@ public class IntakeBalls extends Command{
     
     @Override
     protected boolean isFinished() {
-        return false;
+        if(initTimeNeeded){
+            initTime = Timer.getFPGATimestamp();
+            initTimeNeeded = false;
+        }
+        if(Timer.getFPGATimestamp() - initTime < 1){
+            return false;
+        }
+        return true;
     }
 
     @Override
     protected void execute() {
-        super.execute();
         Intake.Limit();
         go();
-    
-
     }
 
     @Override
     protected void end() {
-        super.end();
+        Intake.FrontIndex(0);
+        Intake.go(0.0);
+        initTimeNeeded = true;
     }
+
     public static void go(){
-   double currentTime =Timer.getFPGATimestamp();
-   while(currentTime<1){
-   Intake.go(0.5);}
-   FrontIndex();
-
-
-  }
-
-  public static void tilt(){
-    
-   Intake.tilt(0.5);
-   
-
-}
-public static void FrontIndex(){
-    double currentTime= Timer.getFPGATimestamp();
-    while(currentTime<1){
-     Intake.FrontIndex(0.25);
+        Intake.go(0.5);
+        Intake.FrontIndex(0.25);
     }
-    Intake.FrontIndex(0);
-    
- 
-   }
+
+    public static void tilt(){
+        Intake.tilt(0.5);
+    }
+
+    public static void FrontIndex(double run){
+        Intake.FrontIndex(run);
+    }
 
     
 }

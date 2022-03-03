@@ -6,6 +6,13 @@ import frc.robot.Robot;
 
 public class IndexBalls extends Command{
 
+    public static boolean initTimeNeeded = true;
+    public static double initTime = 0;
+
+    public static boolean binitTimeNeeded = true;
+    public static double binitTime = 0;
+    public static boolean bindexDone = false;
+
     public IndexBalls(){
         requires(Robot.m_intake);
     }
@@ -17,53 +24,44 @@ public class IndexBalls extends Command{
     
     @Override
     protected boolean isFinished() {
-        return false;
+        if(initTimeNeeded){
+            initTime = Timer.getFPGATimestamp();
+            initTimeNeeded = false;
+        }
+        if(Timer.getFPGATimestamp() - initTime < 1){
+            return false;
+        }
+        return true;
     }
 
     @Override
     protected void execute() {
-        super.execute();
         Intake.Limit();
-        FrontIndex();
-        
-
+        Intake.FrontIndex(0.25);
+        Intake.BackIndex(0.25);
     }
 
     @Override
     protected void end() {
-        super.end();
+        Intake.FrontIndex(0);
+        Intake.BackIndex(0);
+        initTimeNeeded = true;
     }
-    public static void go(){
-   
-   Intake.go(0.5);
 
-
-  }
-
-  public static void tilt(){
-   double currentTime=Timer.getFPGATimestamp(); 
-   while(currentTime<1)
-   Intake.tilt(0.5);
-   
-
-}
-
-public static void FrontIndex(){
-   double currentTime= Timer.getFPGATimestamp();
-   while(currentTime<1){
-    Intake.FrontIndex(0.25);
-   }
-   Intake.FrontIndex(0);
-   
-
-  }
-public static void BackIndex(){
-    double currentTime= Timer.getFPGATimestamp();
-    while(currentTime<1){
-     Intake.BackIndex(0.25);
+    public static void BackIndex(){
+        if(binitTimeNeeded){
+            binitTime = Timer.getFPGATimestamp();
+            binitTimeNeeded = false;
+        }
+        if(Timer.getFPGATimestamp() - binitTime < 1){
+            Intake.BackIndex(0.25);
+        } else {
+            Intake.BackIndex(0.0);
+            bindexDone = true;
+        }
     }
-    Intake.BackIndex(0);
- 
-   }
-    
+
+    public static boolean BackIndexDone(){
+        return bindexDone;
+    }
 }

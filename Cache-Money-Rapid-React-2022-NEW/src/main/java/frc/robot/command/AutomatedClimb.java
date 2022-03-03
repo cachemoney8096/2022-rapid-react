@@ -23,7 +23,7 @@ public class AutomatedClimb extends Command {
     //Rotate Arm
     //Latch Onto Bar
     //Retract Arm
-    public AutomatedClimb(){
+    public AutomatedClimb(boolean upperRung){
         requires(Robot.m_climb);
         requires(Robot.m_drivetrain);
         Climb.configureExtensionPIDValues(RobotMap.EXTENSION_COEFFICIENT_kP, RobotMap.EXTENSION_COEFFICIENT_kI, RobotMap.EXTENSION_COEFFICIENT_kD, RobotMap.EXTENSION_COEFFICIENT_kF, RobotMap.EXTENSION_COEFFICIENT_CMV, RobotMap.EXTENSION_COEFFICIENT_MOTION_ACCELERATION, RobotMap.EXTENSION_COEFFICIENT_SMOOTHING_STRENGTH); //TODO Fill out PID Parameters

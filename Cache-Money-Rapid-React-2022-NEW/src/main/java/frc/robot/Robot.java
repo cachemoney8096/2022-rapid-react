@@ -87,7 +87,7 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     switch (m_autoSelected) {
       case kCustomAuto:
-       DriveTrain.pidMove();
+       /*DriveTrain.pidMove();
        Intake.Limit();
        IntakeBalls.go();
        IntakeBalls.FrontIndex();
@@ -103,9 +103,22 @@ public class Robot extends TimedRobot {
        
 
         // Put custom auto code here
-        break;
+        break;*/
       case kDefaultAuto:
       default:
+      //Alternate Between PID Move and PID Turn to see if it works
+        DriveTrain.PIDMove(5, 2.5, 0.005, 0.0); //STEP ONE
+        //DriveTrain.PIDturn(90, 2.5, 0.005, 0.0, 0.0, 0.0); //STEP TWO
+        /*STEP THREE:
+        if(DriveTrain.distanceCompleted(5)){
+          DriveTrain.PIDturn(90, 2.5, 0.005, 0, 0, 0);
+        }
+        if(DriveTrain.turnCompleted(90)){
+          DriveTrain.PIDMove(1, 2.5, 0.005, 0.0);
+        }
+        */
+      /*
+      COMPLETED AUTONOMOUS SEQUENCE
        DriveTrain.pidMove();
        Intake.Limit();
        IntakeBalls.go();
@@ -119,7 +132,7 @@ public class Robot extends TimedRobot {
         System.out.println("Gyro Angle: " + DriveTrain.getGyroAngle());
         TankDrive.PIDTurn(90);
        ShootBalls.ShootVel(RobotMap.Shooter_Vel_Value, RobotMap.Shooter_FF_Value);
-
+        */
        
       
 

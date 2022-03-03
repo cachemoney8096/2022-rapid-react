@@ -11,6 +11,8 @@ public class RobotMap {
   public static final double DriveTrain_P_Value= 2.95;
   public static final double DriveTrain_I_Value= 0.0001;
   public static final double DriveTrain_D_Value= 0.005;
+  public static final double DRIVE_WHEEL_DIAMETER = 4;
+
  
   //Shooter Motor IDs
   public static final int  SHOOTER_MOTOR_1_ID = 25;
@@ -125,5 +127,6 @@ public class RobotMap {
   public static final double EXT_WHEEL_RADIUS = 0.0; //TODO TO FILL OUT
   public static final double CLIMB_DISTANCE_CONVERSION_FACTOR = 2048/(2*Math.PI*EXT_WHEEL_RADIUS);
   public static final double CLIMB_ROTATION_CONVERSION_FACTOR = 2048/360;
+
 
 }
