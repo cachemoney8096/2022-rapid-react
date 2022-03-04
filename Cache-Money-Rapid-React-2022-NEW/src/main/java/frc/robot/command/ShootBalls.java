@@ -4,39 +4,43 @@ import frc.robot.OI;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Intake;
-import edu.wpi.first.wpilibj.command.Command;
-
-
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Command; 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 
 public class ShootBalls extends Command{
-
-    public ShootBalls(){
-        requires(Robot.m_shooter);
-        requires(Robot.m_intake);
-      
-
-
-    }
-     // Called when the command is initially scheduled.
+  public static boolean TwoBalls = false;
+  public static boolean[] shotprogression = new boolean[RobotMap.SHOT_PROGRESSION_LENGTH];
+  public static boolean startTimeNeeded = true;
+  public static double startTime = 0.0;
+  public ShootBalls(boolean twoballs){
+    requires(Robot.m_shooter);
+    requires(Robot.m_intake);
+    TwoBalls = twoballs;
+  }
+  // Called when the command is initially scheduled.
   @Override
   // variables and mapping out buttons for the controller when it starts
   public void initialize() {
-
     SmartDashboard.putString("ShootBalls.intialize", "executed");
-
   }
 
   //variables and mapping out buttons called 50 times per second
   @Override
   public void execute() {
-    SmartDashboard.putString("ShootBalls.execute", "before shootBraindead");
-    Shooter.ShootVel(getInitialVelocity(true), 0);
-    SmartDashboard.putString("ShootBalls.execute", "after shootBraindead");
-    
-    
+    if(TwoBalls){
+      if(!shotprogression[0]){
+        ShootBalls.ShootTime(RobotMap.SHOT_TIME, 0);
+      } else if(!shotprogression[1]){
+        ShootBalls.RestTime(RobotMap.SHOT_REST_TIME, 1);
+      } else if(!shotprogression[2]){
+        ShootBalls.ShootTime(RobotMap.SHOT_TIME, 2);
+      }
+    } else {
+      ShootBalls.ShootTime(RobotMap.SHOT_TIME, 0);
+    }
 
     
   }
@@ -44,21 +48,16 @@ public class ShootBalls extends Command{
   @Override
   public void end() {
     Shooter.ShootBraindead(0);
-
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
-  }
-  
-  public static void ShootFast(){
-    SmartDashboard.putString("after if", "executed");
-    //Shooter.configureShooterPIDValues(kP, kI, kD, kF, CMV, MotionAcceleration, SmoothingStrength);
-    //Shooter.setMotionMagic(targetPos, kF);
-    
-
+    if(TwoBalls){
+      return shotprogression[RobotMap.SHOT_PROGRESSION_LENGTH - 1];
+    } else {
+      return shotprogression[0];
+    }
   }
 
   public double SpeedAdjustment(){
@@ -102,6 +101,36 @@ public class ShootBalls extends Command{
     Intake.Limit();
     IndexBalls.BackIndex();
     Shooter.setVelocity(angularVelocity, kF);
+  }
+
+  public static void ShootTime(double shotlength, int arrayIndex){
+    if(startTimeNeeded){
+      startTime = Timer.getFPGATimestamp();
+      startTimeNeeded = false;
+    }
+    if(Timer.getFPGATimestamp() - startTime < shotlength){
+      ShootBalls.ShootVel(getInitialVelocity(true), 0);
+    } else {
+      shotprogression[arrayIndex] = true;
+      Shooter.ShootBraindead(0.0);
+      startTimeNeeded = true;
+      startTime = 0.0;
+    }
+  }
+
+  public static void RestTime(double restlength, int arrayIndex){
+    if(startTimeNeeded){
+      startTime = Timer.getFPGATimestamp();
+      startTimeNeeded = false;
+    }
+    if(Timer.getFPGATimestamp() - startTime < restlength){
+      Shooter.ShootBraindead(0.0);
+    } else {
+      shotprogression[arrayIndex] = true;
+      Shooter.ShootBraindead(0.0);
+      startTimeNeeded = true;
+      startTime = 0.0;
+    }
   }
 
   

@@ -17,8 +17,8 @@ public class RobotMap {
   //Shooter Motor IDs
   public static final int  SHOOTER_MOTOR_1_ID = 25;
   public static final int  SHOOTER_MOTOR_2_ID = 26;
-  public static final int Shooter_Vel_Value= 0; //TODO: FIgure out this
-  public static final int Shooter_FF_Value= 0;  //TODO: FIgure out this, lucky for us, one size fits all
+  public static final int Shooter_Vel_Value= 0; 
+  public static final int Shooter_FF_Value= 0;  
  
 
   //Intake Motor IDs
@@ -67,7 +67,7 @@ public class RobotMap {
 
 
   //Climb Extension PID Parameters
-  public static final double EXTENSION_COEFFICIENT_kP = 0;//TODO: PID for climb values
+  public static final double EXTENSION_COEFFICIENT_kP = 0;
   public static final double EXTENSION_COEFFICIENT_kI = 0;
   public static final double EXTENSION_COEFFICIENT_kD = 0;
   public static final double EXTENSION_COEFFICIENT_kF = 0;
@@ -76,7 +76,7 @@ public class RobotMap {
   public static final int EXTENSION_COEFFICIENT_SMOOTHING_STRENGTH = 0;
 
   //Climb Pivot PID Parameters
-  public static final double PIVOT_COEFFICIENT_kP = 0;// TODO: PID for pivot
+  public static final double PIVOT_COEFFICIENT_kP = 0;
   public static final double PIVOT_COEFFICIENT_kI = 0;
   public static final double PIVOT_COEFFICIENT_kD = 0;
   public static final double PIVOT_COEFFICIENT_kF = 0;
@@ -119,14 +119,17 @@ public class RobotMap {
   public static final double SHOOTER_ANGLE = 0;
   public static final double ACCELERATION_DUE_TO_GRAVITY = 9.803;
   public static final double CLEARENCE_SETPOINT = 0.01;
-
+  public static final int SHOT_PROGRESSION_LENGTH = 3;
+  public static final double SHOT_TIME = 0.5;
+  public static final double SHOT_REST_TIME = 0.5;
 
   //Conversion Factors
   public static final double CONVERT_ANGULAR_VELOCITY_TO_LINEAR_FALCON = 20*Math.PI*0.050038/2048;
   public static final double CONVERT_LINEAR_VELOCITY_TO_ANGULAR_FALCON = 1/CONVERT_ANGULAR_VELOCITY_TO_LINEAR_FALCON;
-  public static final double EXT_WHEEL_RADIUS = 0.0; //TODO TO FILL OUT
-  public static final double CLIMB_DISTANCE_CONVERSION_FACTOR = 2048/(2*Math.PI*EXT_WHEEL_RADIUS);
+  public static final double EXT_WHEEL_DIAMETER = 2.5; 
+  public static final double CLIMB_DISTANCE_CONVERSION_FACTOR = 2048/(2*Math.PI*EXT_WHEEL_DIAMETER);
   public static final double CLIMB_ROTATION_CONVERSION_FACTOR = 2048/360;
+
 
 
 }

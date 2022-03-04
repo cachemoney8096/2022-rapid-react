@@ -4,7 +4,6 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.Robot; 
 import edu.wpi.first.wpilibj.command.Command;
 
-
 public class TankDrive extends Command{
 
   public static boolean arrived = false;
@@ -52,11 +51,6 @@ public class TankDrive extends Command{
     double left = speed - turn;
     DriveTrain.move(left,right);
   }
-  
-
-  public static void test(double speed){
-    DriveTrain.move( speed, speed);
-  }
 
   public static void PIDTurn(double angle){        
     if(!initAngle){
@@ -83,14 +77,14 @@ public class TankDrive extends Command{
     if(!ArmLatch){
       if(!arrived){
         if(!DriveTrain.colorMatchCheck(RobotMap.SHADOW_RUNG_COLOR)){
-          DriveTrain.move(0.2, 0.2); //TODO Test to see if these values are correct
+          DriveTrain.move(0.2, 0.2); 
         } else {
           DriveTrain.move(0.0, 0.0);
           arrived = true;
         }
       } else {
         if(!slightForward){
-          DriveTrain.moveDistance(1.0); //TODO Add Encoder-Based Method in Java TODO Test to see if this is correct
+          DriveTrain.moveDistance(1.0); 
         } else {
           DriveTrain.move(0.0, 0.0);
           slightForward = true;
@@ -102,7 +96,7 @@ public class TankDrive extends Command{
         arrived = false;
       }
       if(!slightBackward){
-        DriveTrain.moveDistance(1.0); //TODO Add Encoder-Based Method in Java TODO Test to see if this is correct
+        DriveTrain.moveDistance(1.0);
       } else {
         slightBackward = true;
       }
@@ -114,6 +108,14 @@ public class TankDrive extends Command{
       return true;
     }
     return false;
+  }
+
+  public static void PrintVars(){
+    System.out.println("slightForward: " + slightForward);
+    System.out.println("arrived: " + arrived);
+    System.out.println("slightBackward: " + slightBackward);
+    System.out.println("initAngle: " + initAngle);
+    System.out.println("initGyroAngle: " + initGyroAngle);
   }
   
 }

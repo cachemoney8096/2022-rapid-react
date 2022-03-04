@@ -5,15 +5,18 @@ import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.TimedRobot;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+
+/*
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.TimedRobot;
+*/
 
 public class Shooter extends Subsystem {   
     //Motor Variable setup
@@ -21,7 +24,7 @@ public class Shooter extends Subsystem {
     private static TalonFX motor2= new TalonFX(RobotMap.SHOOTER_MOTOR_2_ID);
     
     public static void SmartDashBoard(){
-    SmartDashboard.putNumber("kP", 0.00015);//TODO Figure out how to use this
+    SmartDashboard.putNumber("kP", 0.00015);
     SmartDashboard.putNumber("kI", 0.0000001);
     SmartDashboard.putNumber("kD", 0);
     SmartDashboard.putNumber("kF", 0.00018);
@@ -92,7 +95,4 @@ public class Shooter extends Subsystem {
         
     }
 
-
-    public static void ShootVel(double d, int i) {
-    }
 }

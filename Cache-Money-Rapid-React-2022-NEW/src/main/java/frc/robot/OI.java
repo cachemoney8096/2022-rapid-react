@@ -19,10 +19,10 @@ public class OI {
     public OI(){
         SmartDashboard.putString("oi constructor", "executed");
 
-        RedButton.whenPressed(new ShootBalls());
-        BlueButton.whenPressed(new ShootBalls());
-        YellowButton.whenPressed(new ShootBalls());
-        GreenButton.whenPressed(new ShootBalls());
+        RedButton.whenPressed(new ShootBalls(true));
+        BlueButton.whenPressed(new ShootBalls(true));
+        YellowButton.whenPressed(new ShootBalls(true));
+        GreenButton.whenPressed(new ShootBalls(true));
 
         RightBumpButton.whileHeld(new IntakeBalls());
         LeftBumpButton.whileHeld(new IndexBalls());

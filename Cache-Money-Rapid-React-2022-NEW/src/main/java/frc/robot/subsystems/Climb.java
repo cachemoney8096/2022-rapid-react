@@ -55,19 +55,19 @@ public class Climb extends Subsystem {
     }
 
     public static void configureExtensionPIDValues(double kP, double kI, double kD, double kF, double CMV, double MotionAcceleration, int SmoothingStrength){
-        leftExtension.config_kP(0, kP); //TODO Understand what slotIdx means (first parameter)
-        leftExtension.config_kI(0, kI); //TODO Understand what slotIdx means (first parameter)
-        leftExtension.config_kD(0, kD); //TODO Understand what slotIdx means (first parameter)
-        leftExtension.config_kF(0, kF); //TODO Understand what slotIdx means (first parameter)
+        leftExtension.config_kP(0, kP); 
+        leftExtension.config_kI(0, kI); 
+        leftExtension.config_kD(0, kD); 
+        leftExtension.config_kF(0, kF); 
         leftExtension.configMotionCruiseVelocity(CMV); //It's in Sensor Units Per 100ms
         leftExtension.configMotionAcceleration(MotionAcceleration); //It's in Sensor Units Per 100ms
         leftExtension.configMotionSCurveStrength(SmoothingStrength); //0 for trapezoidal acceleration, higher values for more smoothing
         leftExtension.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
 
-        rightExtension.config_kP(0, kP); //TODO Understand what slotIdx means (first parameter)
-        rightExtension.config_kI(0, kI); //TODO Understand what slotIdx means (first parameter)
-        rightExtension.config_kD(0, kD); //TODO Understand what slotIdx means (first parameter)
-        rightExtension.config_kF(0, kF); //TODO Understand what slotIdx means (first parameter)
+        rightExtension.config_kP(0, kP); 
+        rightExtension.config_kI(0, kI); 
+        rightExtension.config_kD(0, kD); 
+        rightExtension.config_kF(0, kF); 
         rightExtension.configMotionCruiseVelocity(CMV); //It's in Sensor Units Per 100ms
         rightExtension.configMotionAcceleration(MotionAcceleration); //It's in Sensor Units Per 100ms
         rightExtension.configMotionSCurveStrength(SmoothingStrength); //0 for trapezoidal acceleration, higher values for more smoothing
@@ -75,19 +75,19 @@ public class Climb extends Subsystem {
     }
 
     public static void configurePivotPIDValues(double kP, double kI, double kD, double kF, double CMV, double MotionAcceleration, int SmoothingStrength){
-        leftPivot.config_kP(0, kP); //TODO Understand what slotIdx means (first parameter)
-        leftPivot.config_kI(0, kI); //TODO Understand what slotIdx means (first parameter)
-        leftPivot.config_kD(0, kD); //TODO Understand what slotIdx means (first parameter)
-        leftPivot.config_kF(0, kF); //TODO Understand what slotIdx means (first parameter)
+        leftPivot.config_kP(0, kP); 
+        leftPivot.config_kI(0, kI); 
+        leftPivot.config_kD(0, kD); 
+        leftPivot.config_kF(0, kF); 
         leftPivot.configMotionCruiseVelocity(CMV); //It's in Sensor Units Per 100ms
         leftPivot.configMotionAcceleration(MotionAcceleration); //It's in Sensor Units Per 100ms
         leftPivot.configMotionSCurveStrength(SmoothingStrength); //0 for trapezoidal acceleration, higher values for more smoothing
         leftPivot.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
 
-        rightPivot.config_kP(0, kP); //TODO Understand what slotIdx means (first parameter)
-        rightPivot.config_kI(0, kI); //TODO Understand what slotIdx means (first parameter)
-        rightPivot.config_kD(0, kD); //TODO Understand what slotIdx means (first parameter)
-        rightPivot.config_kF(0, kF); //TODO Understand what slotIdx means (first parameter)
+        rightPivot.config_kP(0, kP); 
+        rightPivot.config_kI(0, kI); 
+        rightPivot.config_kD(0, kD); 
+        rightPivot.config_kF(0, kF); 
         rightPivot.configMotionCruiseVelocity(CMV); //It's in Sensor Units Per 100ms
         rightPivot.configMotionAcceleration(MotionAcceleration); //It's in Sensor Units Per 100ms
         rightPivot.configMotionSCurveStrength(SmoothingStrength); //0 for trapezoidal acceleration, higher values for more smoothing

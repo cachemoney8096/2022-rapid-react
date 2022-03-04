@@ -11,11 +11,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.cameraserver.CameraServer;
 import frc.robot.subsystems.Climb;
-import frc.robot.command.*;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
-import frc.robot.command.ShootBalls;
 import frc.robot.command.TankDrive;
 
 
@@ -159,11 +157,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     SmartDashboard.putString("teleop.periodic", "executed");
-
     Scheduler.getInstance().run();
     TankDrive.move();
-  
-    
   }
 
   /** This function is called once when the robot is disabled. */

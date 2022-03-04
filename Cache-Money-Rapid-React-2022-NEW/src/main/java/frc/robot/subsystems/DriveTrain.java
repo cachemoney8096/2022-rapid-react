@@ -1,31 +1,28 @@
 package frc.robot.subsystems;
 
 
-import edu.wpi.first.math.estimator.AngleStatistics;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.SerialPort.Port;
-
-import java.io.PrintWriter;
-
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.ControlType;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.File;
+/*
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
+import edu.wpi.first.wpilibj.util.Color;
 import com.revrobotics.ColorSensorV3;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.SparkMaxRelativeEncoder;
-import com.revrobotics.CANSparkMax.ControlType;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.wpilibj.SerialPort.Port;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+*/
 
 public class DriveTrain extends Subsystem { 
     //I2C Port Setup  
@@ -46,6 +43,9 @@ public class DriveTrain extends Subsystem {
     public static boolean initPosNeeded = true;
     public static double initPos = 0;
     public static boolean posHeaderWritten = false;
+
+    public static double currentPos = 0;
+    public static double currentAngle = 0;
 
     public static void setLeftMotors(double speed){
         motorLeft1.set(speed);
@@ -79,7 +79,7 @@ public class DriveTrain extends Subsystem {
             DriveTrain.writeAngleOutput("Time", "Error");
         }
 
-        double currentPos = DriveTrain.getPosition() - initPos;
+        currentPos = DriveTrain.getPosition() - initPos;
         double error = distanceFT - currentPos;
 
         DriveTrain.writePositionOutput(Timer.getFPGATimestamp() + "", error + "");
@@ -122,11 +122,22 @@ public class DriveTrain extends Subsystem {
         double vel = motorLeft1.getEncoder().getVelocity() * (RobotMap.DRIVE_WHEEL_DIAMETER/2) * (1/12) * 60;
         return vel;
     }
+
+    public static I2C.Port getI2CPort(){
+        return i2cport;
+    }
     
     //returns the distance traveled in feet
     public static double getPosition(){
         motorLeft1.getEncoder().setPositionConversionFactor(RobotMap.DRIVE_WHEEL_DIAMETER * Math.PI * (1/12));
         return motorLeft1.getEncoder().getPosition();
+    }
+
+    public static void printVelocity(){
+        System.out.println(getVelocity() + " feet/second");
+    }
+    public static void printPosition(){
+        System.out.println(getPosition() + " feet");
     }
 
     public static void PIDturn(double setpointAngle, double kP, double kD, double kI, double iZone, double kF){
@@ -138,7 +149,7 @@ public class DriveTrain extends Subsystem {
             DriveTrain.writeAngleOutput("Time", "Error");
         }
 
-        double currentAngle = gyro.getAngle() - initAngle;
+        currentAngle = gyro.getAngle() - initAngle;
         double error = setpointAngle - currentAngle;
 
         DriveTrain.writeAngleOutput(Timer.getFPGATimestamp() + "", error + "");
