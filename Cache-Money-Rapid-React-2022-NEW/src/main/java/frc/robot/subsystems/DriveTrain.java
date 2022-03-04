@@ -159,9 +159,7 @@ public class DriveTrain extends Subsystem {
         if(Math.abs(error) <= iZone || iZone == 0.0) {
             i = error * kI;
         } 
-
         double d = gyro.getRate()*kD;
-
         double f = setpointAngle * kF;
 
         double output = p + i + d + f;
