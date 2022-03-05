@@ -185,7 +185,7 @@ public class DriveTrain extends Subsystem {
     }
 
     public static void writeAngleOutput(String colOne, String colTwo){
-        try (PrintWriter writer = new PrintWriter("../outputs/AngleErrorGraph.csv")) {
+        try (PrintWriter writer = new PrintWriter("AngleErrorGraph.csv")) {
             StringBuilder sb = new StringBuilder();
             sb.append(colOne);
             sb.append(',');
@@ -198,7 +198,7 @@ public class DriveTrain extends Subsystem {
     }
 
     public static void writePositionOutput(String colOne, String colTwo){
-        try (PrintWriter writer = new PrintWriter("../outputs/DistanceErrorGraph.csv")) {
+        try (PrintWriter writer = new PrintWriter("DistanceErrorGraph.csv")) {
             StringBuilder sb = new StringBuilder();
             sb.append(colOne);
             sb.append(',');

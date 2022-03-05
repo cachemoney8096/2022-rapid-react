@@ -85,6 +85,7 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     switch (m_autoSelected) {
       case kCustomAuto:
+      //THIS IS A SECONDARY CASE, for the Defualt auto scroll down
        /*DriveTrain.pidMove();
        Intake.Limit();
        IntakeBalls.go();
@@ -114,6 +115,14 @@ public class Robot extends TimedRobot {
         if(DriveTrain.turnCompleted(90)){
           DriveTrain.PIDMove(1, 2.5, 0.005, 0.0);
         }
+        //INTAKE TEST
+        if(DriveTrain.distanceCompleted(1)){
+        Intake.Limit();
+        IntakeBalls.go();
+        IntakeBalls.FrontIndex();
+        IndexBalls.BackIndex();
+        }
+        
         */
       /*
       COMPLETED AUTONOMOUS SEQUENCE
@@ -128,7 +137,7 @@ public class Robot extends TimedRobot {
         
         System.out.println("Firmware Version: " + DriveTrain.getFirmWare());
         System.out.println("Gyro Angle: " + DriveTrain.getGyroAngle());
-        TankDrive.PIDTurn(90);
+        
        ShootBalls.ShootVel(RobotMap.Shooter_Vel_Value, RobotMap.Shooter_FF_Value);
         */
        
