@@ -96,7 +96,7 @@ public class Robot extends TimedRobot {
         
         System.out.println("Firmware Version: " + DriveTrain.getFirmWare());
         System.out.println("Gyro Angle: " + DriveTrain.getGyroAngle());
-        TankDrive.PIDTurn(90);
+        
        ShootBalls.ShootVel(RobotMap.Shooter_Vel_Value, RobotMap.Shooter_FF_Value);
        
 

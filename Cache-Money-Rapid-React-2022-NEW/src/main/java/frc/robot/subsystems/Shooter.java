@@ -9,7 +9,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.DemandType;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+//import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 /*
 import com.revrobotics.CANSparkMax;
@@ -23,18 +23,10 @@ public class Shooter extends Subsystem {
     private static TalonFX motor1= new TalonFX(RobotMap.SHOOTER_MOTOR_1_ID);
     private static TalonFX motor2= new TalonFX(RobotMap.SHOOTER_MOTOR_2_ID);
     
-    public static void SmartDashBoard(){
-    SmartDashboard.putNumber("kP", 0.00015);
-    SmartDashboard.putNumber("kI", 0.0000001);
-    SmartDashboard.putNumber("kD", 0);
-    SmartDashboard.putNumber("kF", 0.00018);
-    SmartDashboard.putNumber("IZone", 250);
-    SmartDashboard.putNumber("IMax", 0);
-    SmartDashboard.putNumber("Command Speed", 6800);
-    }
+   
 
 
-    public static void configureShooterPIDValues(double kP, double kI, double kD, double kF, double CMV, double MotionAcceleration, int SmoothingStrength){
+    /*public static void configureShooterPIDValues(double kP, double kI, double kD, double kF, double CMV, double MotionAcceleration, int SmoothingStrength){
         motor1.config_kP(0, kP); //SlotIndex 0 
         motor1.config_kI(0, kI); 
         motor1.config_kD(0, kD); 
@@ -53,7 +45,7 @@ public class Shooter extends Subsystem {
         motor2.configMotionAcceleration(MotionAcceleration); //It's in Sensor Units Per 100ms
         motor2.configMotionSCurveStrength(SmoothingStrength); //0 for trapezoidal acceleration, higher values for more smoothing
         motor2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-    }
+    }*/
 
     public static double getHorizontalOffsetAngle(){
         return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
@@ -79,10 +71,10 @@ public class Shooter extends Subsystem {
         return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
     }
 
-    public static void setMotionMagic(double targetPos, double kF){
+   /* public static void setMotionMagic(double targetPos, double kF){
         motor1.set(ControlMode.MotionMagic, targetPos, DemandType.ArbitraryFeedForward, kF);
         motor2.set(ControlMode.MotionMagic, targetPos, DemandType.ArbitraryFeedForward, kF);
-    }
+    }*/
 
     public static void setVelocity(double targetVel, double kF){
         motor1.set(ControlMode.Velocity, targetVel, DemandType.ArbitraryFeedForward, kF);

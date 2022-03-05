@@ -70,7 +70,7 @@ public class AutomatedClimb extends Command {
         } 
     }
 
-    public static void TranscendentRung(){
+    public static void TranscendentRung(){  
         if(!auto[0]){
             //  TankDrive.MovementUntilShadowLine(false);
               if(TankDrive.ClimbMovementFinished()){
