@@ -29,11 +29,11 @@ public class Intake extends Subsystem {
         IndexMotor4.setSmartCurrentLimit(20);
     }
     public static void FrontIndex(double speed){
-        IndexMotor1.set(speed);
+        IndexMotor1.set(-speed);
         IndexMotor2.set(speed);
     }
     public static void BackIndex(double speed){
-        IndexMotor3.set(speed);
+        IndexMotor3.set(-speed);
         IndexMotor4.set(speed);
     }
     

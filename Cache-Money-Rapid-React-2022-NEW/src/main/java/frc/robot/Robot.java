@@ -50,7 +50,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putString("robot init", "executed");
     CameraServer.startAutomaticCapture();
     Robot.m_oi = new OI();
-
   }
 
   /**
@@ -106,7 +105,8 @@ public class Robot extends TimedRobot {
       case kDefaultAuto:
       default:
       //Alternate Between PID Move and PID Turn to see if it works
-        DriveTrain.PIDMove(5, 2.5, 0.005, 0.0); //STEP ONE
+        //DriveTrain.move(0.2, 0.2);
+        //DriveTrain.PIDMove(5, 2.5, 0.005, 0.0); //STEP ONE
         //DriveTrain.PIDturn(90, 2.5, 0.005, 0.0, 0.0, 0.0); //STEP TWO
         /*STEP THREE:
         if(DriveTrain.distanceCompleted(5)){

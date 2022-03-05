@@ -54,8 +54,6 @@ public class DriveTrain extends Subsystem {
     public static ArrayList<String> angleColOne = new ArrayList<String>();
     public static ArrayList<String> angleColTwo = new ArrayList<String>();
 
-
-
     public static void setLeftMotors(double speed){
         motorLeft1.set(speed);
         motorLeft2.set(speed);
@@ -64,22 +62,20 @@ public class DriveTrain extends Subsystem {
         motorRight1.set(-speed);
         motorRight2.set(-speed);
     }
-    public static void setRight2(double speed){
-        motorRight2.set(speed);
-    }
+
     public static void move(double left, double right){
-        setLeftMotors(-left);
-        setRightMotors(-right);
+        setLeftMotors(left);
+        setRightMotors(right);
     }
     public static void PIDMove(double distanceFT, double kP, double kD, double kI){
-        motorRight1.follow(motorLeft1);
-        motorRight2.follow(motorLeft1);
-        motorLeft2.follow(motorLeft1);
         motorLeft1.getPIDController().setP(RobotMap.DriveTrain_P_Value);
         motorLeft1.getPIDController().setI(RobotMap.DriveTrain_I_Value);
         motorLeft1.getPIDController().setD(RobotMap.DriveTrain_D_Value);
         double rotations = distanceFT/(Math.PI*RobotMap.DRIVE_WHEEL_DIAMETER);
         motorLeft1.getPIDController().setReference(rotations, ControlType.kPosition, 0);
+        motorRight1.follow(motorLeft1);
+        motorRight2.follow(motorLeft1);
+        motorLeft2.follow(motorLeft1);
         if(initPosNeeded){
             initPos = DriveTrain.getPosition();
             initPosNeeded = false;

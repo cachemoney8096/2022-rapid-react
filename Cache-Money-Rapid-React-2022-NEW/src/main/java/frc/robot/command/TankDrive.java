@@ -44,8 +44,10 @@ public class TankDrive extends Command{
       return 21;
   }
   public static void move(){
-    double speed= Robot.m_oi.getDriverRawAxis(RobotMap.LEFT_STICK_Y);
-    double turn= Robot.m_oi.getDriverRawAxis(RobotMap.RIGHT_STICK_X);
+    System.out.println("Left Stick: " + Robot.m_oi.getDriverRawAxis(RobotMap.LEFT_STICK_Y));
+    System.out.println("Right Stick: " + Robot.m_oi.getDriverRawAxis(RobotMap.RIGHT_STICK_X));
+    double speed= -Robot.m_oi.getDriverRawAxis(RobotMap.LEFT_STICK_Y);
+    double turn= -Robot.m_oi.getDriverRawAxis(RobotMap.RIGHT_STICK_X);
     //The Left is pos the right is neg
     double right = speed + turn;
     double left = speed - turn;
