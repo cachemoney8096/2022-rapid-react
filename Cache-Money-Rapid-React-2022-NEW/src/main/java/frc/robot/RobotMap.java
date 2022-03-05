@@ -2,6 +2,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.util.Color;
 
+import frc.robot.command.TankDrive;
+
 public class RobotMap {
   //Drive Train Motor IDs
   public static final int  MOTOR_LEFT_1_ID = 9;  
@@ -15,8 +17,9 @@ public class RobotMap {
 
  
   //Shooter Motor IDs
-  public static final int  SHOOTER_MOTOR_1_ID = 25;
-  public static final int  SHOOTER_MOTOR_2_ID = 26;
+  //Motor 1 = left, motor 2 = right
+  public static final int  SHOOTER_MOTOR_1_ID = TankDrive.whatIsNinePlusTen() - 1;
+  public static final int  SHOOTER_MOTOR_2_ID = TankDrive.whatIsNinePlusTen();
   public static final int Shooter_Vel_Value= 0; 
   public static final int Shooter_FF_Value= 0;  
  
