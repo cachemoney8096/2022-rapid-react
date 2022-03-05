@@ -30,6 +30,7 @@
       "/LiveWindow/DriveTrain": "Subsystem",
       "/LiveWindow/Intake": "Subsystem",
       "/LiveWindow/Shooter": "Subsystem",
+      "/LiveWindow/Ungrouped/navX-Sensor[2]": "Gyro",
       "/SmartDashboard/Auto choices": "String Chooser"
     }
   }

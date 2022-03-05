@@ -13,6 +13,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.io.File;
 /*
 import com.revrobotics.ColorMatch;
@@ -47,6 +48,14 @@ public class DriveTrain extends Subsystem {
     public static double currentPos = 0;
     public static double currentAngle = 0;
 
+    public static ArrayList<String> posColOne = new ArrayList<String>();
+    public static ArrayList<String> posColTwo = new ArrayList<String>();
+
+    public static ArrayList<String> angleColOne = new ArrayList<String>();
+    public static ArrayList<String> angleColTwo = new ArrayList<String>();
+
+
+
     public static void setLeftMotors(double speed){
         motorLeft1.set(speed);
         motorLeft2.set(speed);
@@ -76,7 +85,8 @@ public class DriveTrain extends Subsystem {
             initPosNeeded = false;
         }
         if(!posHeaderWritten){
-            DriveTrain.writeAngleOutput("Time", "Error");
+            DriveTrain.writePositionOutput("Time", "Error");
+            posHeaderWritten = true;
         }
 
         currentPos = DriveTrain.getPosition() - initPos;
@@ -147,6 +157,7 @@ public class DriveTrain extends Subsystem {
         }
         if(!angleHeaderWritten){
             DriveTrain.writeAngleOutput("Time", "Error");
+            angleHeaderWritten = true;
         }
 
         currentAngle = gyro.getAngle() - initAngle;
@@ -185,25 +196,41 @@ public class DriveTrain extends Subsystem {
     }
 
     public static void writeAngleOutput(String colOne, String colTwo){
-        try (PrintWriter writer = new PrintWriter("AngleErrorGraph.csv")) {
+        angleColOne.add(colOne);
+        angleColTwo.add(colTwo);
+    }
+
+    public static void writePositionOutput(String colOne, String colTwo){
+        posColOne.add(colOne);
+        posColTwo.add(colTwo);
+    }  
+    
+    public static void writePositionToCSV(){
+        try (PrintWriter writer = new PrintWriter("DistanceErrorGraph.csv")) {
+            System.out.println("We're good");
             StringBuilder sb = new StringBuilder();
-            sb.append(colOne);
-            sb.append(',');
-            sb.append(colTwo);
-            sb.append('\n');
+            for(int i = 0; i < posColOne.size(); i++){
+                sb.append(posColOne.get(i));
+                sb.append(',');
+                sb.append(posColTwo.get(i));
+                sb.append("\n");
+            }
             writer.write(sb.toString());      
           } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
           }
-    }
+    }    
 
-    public static void writePositionOutput(String colOne, String colTwo){
-        try (PrintWriter writer = new PrintWriter("DistanceErrorGraph.csv")) {
+    public static void writeAngleToCSV(){
+        try (PrintWriter writer = new PrintWriter("AngleErrorGraph.csv")) {
+            System.out.println("We're good");
             StringBuilder sb = new StringBuilder();
-            sb.append(colOne);
-            sb.append(',');
-            sb.append(colTwo);
-            sb.append('\n');
+            for(int i = 0; i < angleColOne.size(); i++){
+                sb.append(angleColOne.get(i));
+                sb.append(',');
+                sb.append(angleColTwo.get(i));
+                sb.append("\n");
+            }
             writer.write(sb.toString());      
           } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
