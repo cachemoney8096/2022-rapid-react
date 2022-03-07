@@ -14,6 +14,7 @@ import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Tester;
 import frc.robot.command.TankDrive;
 
 
@@ -33,10 +34,11 @@ public class Robot extends TimedRobot {
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
   //Initializing Subsystems
-  public static Subsystem m_intake= new Intake();
+  public static Intake m_intake= new Intake();
   public static Climb m_climb = new Climb();
   public static DriveTrain m_drivetrain = new DriveTrain();
   public static Shooter m_shooter = new Shooter();
+  public static Tester m_tester = new Tester();
   
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -100,13 +102,17 @@ public class Robot extends TimedRobot {
        ShootBalls.ShootVel(RobotMap.Shooter_Vel_Value, RobotMap.Shooter_FF_Value);
        
 
-        // Put custom auto code here
+         // Put custom auto code here
         break;*/
       case kDefaultAuto:
       default:
       //Alternate Between PID Move and PID Turn to see if it works
-        //DriveTrain.move(0.2, 0.2);
-        //DriveTrain.PIDMove(5, 2.5, 0.005, 0.0); //STEP ONE
+        //Tester.setTestMotor(0.1);
+        //Tester.setTestMotor(0.02);
+        //Tester.printPosition();
+        DriveTrain.move(0.2, 0.2);
+        //DriveTrain.PIDMove(1200, 0.05, 0.0, 0.0); //STEP ONE
+        //System.out.println(DriveTrain.getPosition());
         //DriveTrain.PIDturn(90, 2.5, 0.005, 0.0, 0.0, 0.0); //STEP TWO
         /*STEP THREE:
         if(DriveTrain.distanceCompleted(5)){

@@ -73,9 +73,10 @@ public class DriveTrain extends Subsystem {
         motorLeft1.getPIDController().setD(RobotMap.DriveTrain_D_Value);
         double rotations = distanceFT/(Math.PI*RobotMap.DRIVE_WHEEL_DIAMETER);
         motorLeft1.getPIDController().setReference(rotations, ControlType.kPosition, 0);
-        motorRight1.follow(motorLeft1);
-        motorRight2.follow(motorLeft1);
+        motorRight1.follow(motorLeft1, true);
+        motorRight2.follow(motorLeft1, true);
         motorLeft2.follow(motorLeft1);
+        System.out.println(DriveTrain.getPosition());
         if(initPosNeeded){
             initPos = DriveTrain.getPosition();
             initPosNeeded = false;
@@ -135,8 +136,7 @@ public class DriveTrain extends Subsystem {
     
     //returns the distance traveled in feet
     public static double getPosition(){
-        motorLeft1.getEncoder().setPositionConversionFactor(RobotMap.DRIVE_WHEEL_DIAMETER * Math.PI * (1/12));
-        return motorLeft1.getEncoder().getPosition();
+        return motorLeft1.getEncoder().getPosition() * RobotMap.DRIVE_WHEEL_DIAMETER * Math.PI * (1/12);
     }
 
     public static void printVelocity(){

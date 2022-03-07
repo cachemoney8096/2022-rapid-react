@@ -13,6 +13,7 @@ public class IndexBalls extends Command{
     public static double binitTime = 0;
     public static boolean bindexDone = false;
 
+
     public IndexBalls(){
         requires(Robot.m_intake);
     }

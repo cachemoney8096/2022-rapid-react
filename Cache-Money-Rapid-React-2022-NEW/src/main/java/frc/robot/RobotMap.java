@@ -133,6 +133,9 @@ public class RobotMap {
   public static final double CLIMB_DISTANCE_CONVERSION_FACTOR = 2048/(2*Math.PI*EXT_WHEEL_DIAMETER);
   public static final double CLIMB_ROTATION_CONVERSION_FACTOR = 2048/360;
 
+  //Test Motor
+  public static final int MOTOR_TEST_ID = 25;
+
 
 
 }
