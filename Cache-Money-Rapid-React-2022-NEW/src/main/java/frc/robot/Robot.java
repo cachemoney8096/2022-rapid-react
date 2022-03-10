@@ -35,6 +35,7 @@ public class Robot extends TimedRobot {
 
   //Initializing Subsystems
   public static Intake m_intake= new Intake();
+  public static Intake m_index = new Intake();
   public static Climb m_climb = new Climb();
   public static DriveTrain m_drivetrain = new DriveTrain();
   public static Shooter m_shooter = new Shooter();
@@ -79,6 +80,7 @@ public class Robot extends TimedRobot {
     m_autoSelected = m_chooser.getSelected();
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
     System.out.println("Auto selected: " + m_autoSelected);
+    DriveTrain.setPosition(0);
   }
 
   /** This function is called periodically during autonomous. */
@@ -110,8 +112,8 @@ public class Robot extends TimedRobot {
         //Tester.setTestMotor(0.1);
         //Tester.setTestMotor(0.02);
         //Tester.printPosition();
-        DriveTrain.move(0.2, 0.2);
-        //DriveTrain.PIDMove(1200, 0.05, 0.0, 0.0); //STEP ONE
+        //DriveTrain.move(0.2, 0.2);
+        DriveTrain.PIDMove(-10, 0.005, 0.0, 0.0); //STEP ONE
         //System.out.println(DriveTrain.getPosition());
         //DriveTrain.PIDturn(90, 2.5, 0.005, 0.0, 0.0, 0.0); //STEP TWO
         /*STEP THREE:

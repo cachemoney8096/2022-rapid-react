@@ -61,9 +61,10 @@ public class Shooter extends Subsystem {
         }
         return false;
     }
+    
     public static void ShootBraindead(double speed){
-        motor1.set(ControlMode.PercentOutput, -speed);
-        motor2.set(ControlMode.PercentOutput, speed);
+        motor1.set(ControlMode.PercentOutput, speed);
+        motor2.set(ControlMode.PercentOutput, -speed);
         SmartDashboard.putString("ShootBraindead(speed)", "executed");
     }
 

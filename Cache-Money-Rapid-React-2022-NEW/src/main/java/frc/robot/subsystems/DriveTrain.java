@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import java.io.FileNotFoundException;
@@ -54,8 +53,11 @@ public class DriveTrain extends Subsystem {
     public static ArrayList<String> angleColOne = new ArrayList<String>();
     public static ArrayList<String> angleColTwo = new ArrayList<String>();
 
+    public static boolean currentRotationsNeeded = true;
+    public static double currentRotations = 0;
+
     public static void setLeftMotors(double speed){
-        motorLeft1.set(speed);
+        motorLeft1.set(speed); 
         motorLeft2.set(speed);
     }
     public static void setRightMotors(double speed){
@@ -67,18 +69,26 @@ public class DriveTrain extends Subsystem {
         setLeftMotors(left);
         setRightMotors(right);
     }
-    public static void PIDMove(double distanceFT, double kP, double kD, double kI){
+    public static void PIDMove(double distanceIN, double kP, double kD, double kI){
+        /*if(currentRotationsNeeded){
+            currentRotations = DriveTrain.getPosition();
+            currentRotationsNeeded = false;
+        }*/
         motorLeft1.getPIDController().setP(RobotMap.DriveTrain_P_Value);
         motorLeft1.getPIDController().setI(RobotMap.DriveTrain_I_Value);
         motorLeft1.getPIDController().setD(RobotMap.DriveTrain_D_Value);
-        double rotations = distanceFT/(Math.PI*RobotMap.DRIVE_WHEEL_DIAMETER);
-        motorLeft1.getPIDController().setReference(rotations, ControlType.kPosition, 0);
+        motorLeft1.getPIDController().setOutputRange(-0.5, 0.5);
+        double rotations = distanceIN/Math.PI/RobotMap.DRIVE_WHEEL_DIAMETER*8.45;
+        double reference = rotations*12.5;
+        motorLeft1.getPIDController().setReference(reference, CANSparkMax.ControlType.kPosition, 0);
         motorRight1.follow(motorLeft1, true);
         motorRight2.follow(motorLeft1, true);
         motorLeft2.follow(motorLeft1);
-        System.out.println(DriveTrain.getPosition());
+        System.out.println("Encoder Value: " + DriveTrain.getPosition());
+
+
         if(initPosNeeded){
-            initPos = DriveTrain.getPosition();
+            initPos = DriveTrain.getPosition()/8.45*Math.PI*RobotMap.DRIVE_WHEEL_DIAMETER;
             initPosNeeded = false;
         }
         if(!posHeaderWritten){
@@ -86,8 +96,8 @@ public class DriveTrain extends Subsystem {
             posHeaderWritten = true;
         }
 
-        currentPos = DriveTrain.getPosition() - initPos;
-        double error = distanceFT - currentPos;
+        currentPos = DriveTrain.getPosition()/8.45*Math.PI*RobotMap.DRIVE_WHEEL_DIAMETER - initPos;
+        double error = distanceIN - currentPos;
 
         DriveTrain.writePositionOutput(Timer.getFPGATimestamp() + "", error + "");
     }  
@@ -134,9 +144,14 @@ public class DriveTrain extends Subsystem {
         return i2cport;
     }
     
+    public static void setPosition(double position){
+        motorLeft1.getEncoder().setPosition(position);
+    }
+
     //returns the distance traveled in feet
     public static double getPosition(){
-        return motorLeft1.getEncoder().getPosition() * RobotMap.DRIVE_WHEEL_DIAMETER * Math.PI * (1/12);
+        //* RobotMap.DRIVE_WHEEL_DIAMETER * Math.PI * (1/12)
+        return motorLeft1.getEncoder().getPosition();
     }
 
     public static void printVelocity(){

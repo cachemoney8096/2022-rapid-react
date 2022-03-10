@@ -15,7 +15,7 @@ public class IndexBalls extends Command{
 
 
     public IndexBalls(){
-        requires(Robot.m_intake);
+        requires(Robot.m_index);
     }
 
     @Override

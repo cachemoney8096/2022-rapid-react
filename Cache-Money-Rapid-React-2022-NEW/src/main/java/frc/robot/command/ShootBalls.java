@@ -17,7 +17,7 @@ public class ShootBalls extends Command{
   public static double startTime = 0.0;
   public ShootBalls(boolean twoballs){
     requires(Robot.m_shooter);
-    requires(Robot.m_intake);
+    //requires(Robot.m_intake);
     TwoBalls = twoballs;
   }
   // Called when the command is initially scheduled.
@@ -39,7 +39,7 @@ public class ShootBalls extends Command{
         ShootBalls.ShootTime(RobotMap.SHOT_TIME, 2);
       }
     } else {
-      ShootBalls.ShootTime(RobotMap.SHOT_TIME, 0);
+      Shooter.ShootBraindead(0.6);
     }
 
     
@@ -98,7 +98,7 @@ public class ShootBalls extends Command{
 
   public static void ShootVel(double targetVel, double kF){
     double angularVelocity = targetVel * RobotMap.CONVERT_LINEAR_VELOCITY_TO_ANGULAR_FALCON;
-    Intake.Limit();
+    //Intake.Limit();
     IndexBalls.BackIndex();
     Shooter.setVelocity(angularVelocity, kF);
   }

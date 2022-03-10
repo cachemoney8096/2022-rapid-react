@@ -22,7 +22,7 @@ public class OI {
         RedButton.whenPressed(new ShootBalls(true));
         BlueButton.whenPressed(new ShootBalls(true));
         YellowButton.whenPressed(new ShootBalls(true));
-        GreenButton.whenPressed(new ShootBalls(true));
+        GreenButton.whenPressed(new ShootBalls(false));
 
         RightBumpButton.whileHeld(new IntakeBalls());
         LeftBumpButton.whileHeld(new IndexBalls());
