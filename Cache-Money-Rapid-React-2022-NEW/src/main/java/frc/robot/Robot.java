@@ -113,7 +113,7 @@ public class Robot extends TimedRobot {
         //Tester.setTestMotor(0.02);
         //Tester.printPosition();
         //DriveTrain.move(0.2, 0.2);
-        DriveTrain.PIDMove(-10, 0.005, 0.0, 0.0); //STEP ONE
+        DriveTrain.PIDMove(10, 0.005, 0.0, 0.0); //STEP ONE
         //System.out.println(DriveTrain.getPosition());
         //DriveTrain.PIDturn(90, 2.5, 0.005, 0.0, 0.0, 0.0); //STEP TWO
         /*STEP THREE:
