@@ -1,7 +1,6 @@
 package frc.robot.command;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.command.IntakeBalls;
 import edu.wpi.first.wpilibj.Timer;
@@ -48,11 +47,16 @@ public class Tilt extends Command {
 
     public static void tiltTrig(){
         double valTrig = Robot.m_oi.getDriverRawAxis(2);
-        double speed = valTrig * 0.5;
+        double speed = valTrig * 0.3;
+        if(speed < 0.1){
+            speed = 0;
+        } else if(speed < 0.2 && speed > 0.1){
+            speed = 0.2;
+        }
         if(Robot.m_oi.bluePressed()){
-            Intake.tilt(speed);
-        } else {
             Intake.tilt(-speed);
+        } else {
+            Intake.tilt(speed);
         }
     } 
 
