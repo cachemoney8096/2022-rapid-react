@@ -19,7 +19,7 @@ public class OI {
    
     public OI(){
         SmartDashboard.putString("oi constructor", "executed");
-        YellowButton.whileHeld(new ShootBalls(false));
+        YellowButton.whileHeld(new IndexBalls());
         //BLUE BUTTON HAS BEEN DECOMMISSIONED
         RedButton.whenPressed(new ShootBalls(true));       
         GreenButton.whenPressed(new ShootBalls(false));
@@ -34,6 +34,10 @@ public class OI {
 
     public boolean bluePressed(){
         return BlueButton.get();
+    }
+
+    public boolean yellowPressed(){
+        return YellowButton.get();
     }
 
     public double getDriverRawAxis(int axis){

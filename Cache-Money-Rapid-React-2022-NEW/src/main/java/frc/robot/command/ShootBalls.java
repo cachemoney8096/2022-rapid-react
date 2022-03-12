@@ -105,7 +105,10 @@ public class ShootBalls extends Command{
 
   public static void shootTrig(){
     double trigVal = Robot.m_oi.getDriverRawAxis(3);
-    double speed = trigVal *0.4 + 0.6;
+    double speed = trigVal *0.6;
+    if(speed < 0.6 && speed > 0.2){
+      speed = 0.6;
+    }
     Shooter.ShootBraindead(speed);
   }
 

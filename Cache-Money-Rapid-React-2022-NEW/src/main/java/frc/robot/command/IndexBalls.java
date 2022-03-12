@@ -13,7 +13,6 @@ public class IndexBalls extends Command{
     public static double binitTime = 0;
     public static boolean bindexDone = false;
 
-
     public IndexBalls(){
         requires(Robot.m_index);
     }
@@ -38,8 +37,13 @@ public class IndexBalls extends Command{
     @Override
     protected void execute() {
         Intake.Limit();
-        Intake.FrontIndex(0.25);
-        Intake.BackIndex(0.25);
+        if(Robot.m_oi.yellowPressed()){
+            Intake.FrontIndex(-0.25);
+            Intake.BackIndex(-0.25);
+        } else {
+            Intake.FrontIndex(0.25);
+            Intake.BackIndex(0.25);
+        }
     }
 
     @Override
@@ -48,7 +52,7 @@ public class IndexBalls extends Command{
         Intake.BackIndex(0);
         initTimeNeeded = true;
     }
-
+    
     public static void BackIndex(){
         if(binitTimeNeeded){
             binitTime = Timer.getFPGATimestamp();
