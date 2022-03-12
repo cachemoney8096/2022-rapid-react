@@ -81,6 +81,7 @@ public class Robot extends TimedRobot {
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
     System.out.println("Auto selected: " + m_autoSelected);
     DriveTrain.setPosition(0);
+    DriveTrain.resetGyro();
   }
 
   /** This function is called periodically during autonomous. */
@@ -113,9 +114,9 @@ public class Robot extends TimedRobot {
         //Tester.setTestMotor(0.02);
         //Tester.printPosition();
         //DriveTrain.move(0.2, 0.2);
-        DriveTrain.PIDMove(10, 0.005, 0.0, 0.0); //STEP ONE
-        //System.out.println(DriveTrain.getPosition());
-        //DriveTrain.PIDturn(90, 2.5, 0.005, 0.0, 0.0, 0.0); //STEP TWO
+        //DriveTrain.PIDMove(-60, 0.005, 0.0, 0.0); //STEP ONE
+        System.out.println(DriveTrain.getPosition());
+        DriveTrain.PIDturn(90, 0.05, 0, 0.0, 0.0, 0.0); //STEP TWO
         /*STEP THREE:
         if(DriveTrain.distanceCompleted(5)){
           DriveTrain.PIDturn(90, 2.5, 0.005, 0, 0, 0);

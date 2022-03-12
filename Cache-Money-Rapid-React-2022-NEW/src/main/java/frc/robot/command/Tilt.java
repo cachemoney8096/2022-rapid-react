@@ -4,12 +4,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.command.IntakeBalls;
 import edu.wpi.first.wpilibj.Timer;
-public class IntakeBalls extends Command{
-    
+public class Tilt extends Command {
     public static boolean initTimeNeeded = true;
     public static double initTime = 0;
 
-    public IntakeBalls(){
+    public Tilt(){
         requires(Robot.m_intake);
     }
 
@@ -44,7 +43,7 @@ public class IntakeBalls extends Command{
     }
 
     public static void go(){
-        Intake.go(0.85);
+        Intake.go(0.9);
         Intake.FrontIndex(0.25);
     }
 
@@ -56,5 +55,4 @@ public class IntakeBalls extends Command{
         Intake.FrontIndex(run);
     }
 
-    
 }

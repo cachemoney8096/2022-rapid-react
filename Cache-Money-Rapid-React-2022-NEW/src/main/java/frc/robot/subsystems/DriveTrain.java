@@ -177,21 +177,36 @@ public class DriveTrain extends Subsystem {
         DriveTrain.writeAngleOutput(Timer.getFPGATimestamp() + "", error + "");
 
         double p = error * kP;
-        double i = 0.0;
+        /*double i = 0.0;
         if(Math.abs(error) <= iZone || iZone == 0.0) {
             i = error * kI;
         } 
         double d = gyro.getRate()*kD;
-        double f = setpointAngle * kF;
+        double f = setpointAngle * kF; */
 
-        double output = p + i + d + f;
-        if(output > 1){
-            output = 1;
-        } else if(output < -1){
-            output = -1;
+        double output = p; //+ i + d + f;
+        System.out.println("Output: " + output);
+        if(output > 0.5){
+            output = 0.5;
+        } else if(output < -0.5){
+            output = -0.5;
         }
+        System.out.println("Gyro Angle: " + gyro.getAngle());
+        System.out.println("Error: " +  error);
+        System.out.println("kP: " + p);
        
-        DriveTrain.move(output, -output);
+        DriveTrain.turnMove(output);
+    }
+
+    public static void turnMove(double output){
+        motorRight1.follow(motorLeft1, false);
+        motorRight2.follow(motorLeft1, false);
+        motorLeft2.follow(motorLeft1, false);
+        motorLeft1.set(output);        
+    }
+
+    public static void resetGyro(){
+        gyro.reset();
     }
 
     public static boolean turnCompleted(double setpointAngle){ 
