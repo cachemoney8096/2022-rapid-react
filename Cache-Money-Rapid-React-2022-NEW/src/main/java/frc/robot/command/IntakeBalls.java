@@ -1,16 +1,20 @@
 package frc.robot.command;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj.command.Command;
+
+
 import frc.robot.Robot;
 import frc.robot.command.IntakeBalls;
 import edu.wpi.first.wpilibj.Timer;
+//import edu.wpi.first.wpilibj.GenericHID.Hand;
 public class IntakeBalls extends Command{
     
     public static boolean initTimeNeeded = true;
     public static double initTime = 0;
-
+    
     public IntakeBalls(){
         requires(Robot.m_intake);
+        
     }
 
     @Override
@@ -47,6 +51,13 @@ public class IntakeBalls extends Command{
         Intake.go(0.85);
         Intake.FrontIndex(0.25);
     }
+    public static void goTrigger(){
+     //Hand hand= new Hand();
+       // double power= -Robot.m_oi.getTriggerAxis(Hand);
+        Intake.go(0.85);
+        Intake.FrontIndex(0.25);
+    }
+
 
     public static void tilt(){
         Intake.tilt(0.5);

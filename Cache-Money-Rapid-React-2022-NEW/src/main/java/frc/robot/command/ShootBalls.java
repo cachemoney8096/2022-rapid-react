@@ -103,6 +103,12 @@ public class ShootBalls extends Command{
     Shooter.setVelocity(angularVelocity, kF);
   }
 
+  public static void shootTrig(){
+    double trigVal = Robot.m_oi.getDriverRawAxis(3);
+    double speed = trigVal *0.4 + 0.6;
+    Shooter.ShootBraindead(speed);
+  }
+
   public static void ShootTime(double shotlength, int arrayIndex){
     if(startTimeNeeded){
       startTime = Timer.getFPGATimestamp();

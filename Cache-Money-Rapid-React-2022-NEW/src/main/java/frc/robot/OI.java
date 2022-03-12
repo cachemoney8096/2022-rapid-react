@@ -16,12 +16,12 @@ public class OI {
     public static Button RightBumpButton = new JoystickButton(xbox,RobotMap.BUTTON_RIGHTBUMP);
     public static Button BackButton = new JoystickButton(xbox,RobotMap.BUTTON_BACK);
     public static Button StartButton = new JoystickButton(xbox,RobotMap.BUTTON_START);
+   
     public OI(){
         SmartDashboard.putString("oi constructor", "executed");
-
-        RedButton.whenPressed(new ShootBalls(true));
-        BlueButton.whenPressed(new ShootBalls(true));
-        YellowButton.whenPressed(new ShootBalls(true));
+        YellowButton.whileHeld(new ShootBalls(false));
+        //BLUE BUTTON HAS BEEN DECOMMISSIONED
+        RedButton.whenPressed(new ShootBalls(true));       
         GreenButton.whenPressed(new ShootBalls(false));
 
         RightBumpButton.whileHeld(new IntakeBalls());
@@ -29,6 +29,11 @@ public class OI {
 
         StartButton.whenPressed(new AutomatedClimb(false));
         BackButton.whileHeld(new AutomatedClimb(true));
+        
+    }
+
+    public boolean bluePressed(){
+        return BlueButton.get();
     }
 
     public double getDriverRawAxis(int axis){
