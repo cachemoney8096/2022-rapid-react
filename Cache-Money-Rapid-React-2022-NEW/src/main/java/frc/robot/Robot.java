@@ -14,7 +14,6 @@ import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Tester;
 import frc.robot.command.ShootBalls;
 import frc.robot.command.TankDrive;
 import frc.robot.command.Tilt;
@@ -41,7 +40,8 @@ public class Robot extends TimedRobot {
   public static Climb m_climb = new Climb();
   public static DriveTrain m_drivetrain = new DriveTrain();
   public static Shooter m_shooter = new Shooter();
-  public static Tester m_tester = new Tester();
+
+  public static boolean[] AutoSequence = new boolean[RobotMap.CLIMB_PROCESS_LENGTH];
   
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -112,20 +112,30 @@ public class Robot extends TimedRobot {
       case kDefaultAuto:
       default:
       //Alternate Between PID Move and PID Turn to see if it works
-        //Tester.setTestMotor(0.1);
-        //Tester.setTestMotor(0.02);
-        //Tester.printPosition();
-        //DriveTrain.move(0.2, 0.2);
-        //DriveTrain.PIDMove(-60, 0.005, 0.0, 0.0); //STEP ONE
-        System.out.println(DriveTrain.getPosition());
-        DriveTrain.PIDturn(90, 0.05, 0, 0.0, 0.0, 0.0); //STEP TWO
-        /*STEP THREE:
-        if(DriveTrain.distanceCompleted(5)){
-          DriveTrain.PIDturn(90, 2.5, 0.005, 0, 0, 0);
+        /*if(!AutoSequence[0]){
+          if(DriveTrain.distanceCompleted()){
+            AutoSequence[0] = true;
+          } else {
+            DriveTrain.PIDMove(60, 0.005, 0.0, 0.0);
+          }
+        } else if(!AutoSequence[1]){
+          if(DriveTrain.turnCompleted()){
+            AutoSequence[1] = true;
+          } else {
+            DriveTrain.PIDturn(90, 0.05, 0.5, 0.0, 0.0, 0.0);
+          }
+        } else if(!AutoSequence[2]){
+          if(DriveTrain.distanceCompleted()){
+            AutoSequence[2] = true;
+          } else {
+            DriveTrain.PIDMove(60, 0.005, 0.0, 0.0);
+          }
         }
-        if(DriveTrain.turnCompleted(90)){
-          DriveTrain.PIDMove(1, 2.5, 0.005, 0.0);
-        }
+        Intake.Bounce()*/
+        DriveTrain.PIDMove(-60, 0.005, 0.0, 0.0); //STEP ONE
+        DriveTrain.PIDturn(-90, 0.05, 0.5, 0.0, 0.0, 0.0); //STEP TWO
+
+        /*
         //INTAKE TEST
         if(DriveTrain.distanceCompleted(1)){
         Intake.Limit();
@@ -151,8 +161,6 @@ public class Robot extends TimedRobot {
         
        ShootBalls.ShootVel(RobotMap.Shooter_Vel_Value, RobotMap.Shooter_FF_Value);
         */
-       
-      
 
         /* AUTONOMOUS SEQUENCE 
         1) MOVE BACK

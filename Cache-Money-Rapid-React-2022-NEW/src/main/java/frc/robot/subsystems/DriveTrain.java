@@ -56,6 +56,8 @@ public class DriveTrain extends Subsystem {
     public static boolean currentRotationsNeeded = true;
     public static double currentRotations = 0;
 
+    public static boolean turnDone = false;
+
     public static void setLeftMotors(double speed){
         motorLeft1.set(speed); 
         motorLeft2.set(speed);
@@ -69,6 +71,14 @@ public class DriveTrain extends Subsystem {
         setLeftMotors(left);
         setRightMotors(right);
     }
+
+    public static void turnMove(double output){
+        motorRight1.follow(motorLeft1, false);
+        motorRight2.follow(motorLeft1, false);
+        motorLeft2.follow(motorLeft1, false);
+        motorLeft1.set(output);        
+    }
+
     public static void PIDMove(double distanceIN, double kP, double kD, double kI){
         /*if(currentRotationsNeeded){
             currentRotations = DriveTrain.getPosition();
@@ -86,7 +96,6 @@ public class DriveTrain extends Subsystem {
         motorLeft2.follow(motorLeft1);
         System.out.println("Encoder Value: " + DriveTrain.getPosition());
 
-
         if(initPosNeeded){
             initPos = DriveTrain.getPosition()/8.45*Math.PI*RobotMap.DRIVE_WHEEL_DIAMETER;
             initPosNeeded = false;
@@ -102,65 +111,6 @@ public class DriveTrain extends Subsystem {
         DriveTrain.writePositionOutput(Timer.getFPGATimestamp() + "", error + "");
     }  
 
-    public static boolean distanceCompleted(double distanceFT){ 
-        if(initPosNeeded){
-            return true;
-        }
-        if(Math.abs(DriveTrain.getPosition() - initPos - distanceFT) < RobotMap.CLEARENCE_SETPOINT){
-            initPosNeeded = true;
-            initPos = 0;
-            return true;
-        }
-        return false;
-    }
-
-    public static AHRS getGyro(){
-        return gyro;
-    }
-
-    public static double getGyroAngle(){
-        return gyro.getAngle();
-    }
-
-    public static String getFirmWare(){
-        return gyro.getFirmwareVersion();
-    }
-
-    public static void turn(double angle){        
-        while(gyro.getAngle()<=angle){
-            DriveTrain.move(0.3,0);
-
-        } 
-        DriveTrain.move(0,0);
-    }
-    
-    //returns the velocity of the wheels in feet per second
-    public static double getVelocity(){
-        double vel = motorLeft1.getEncoder().getVelocity() * (RobotMap.DRIVE_WHEEL_DIAMETER/2) * (1/12) * 60;
-        return vel;
-    }
-
-    public static I2C.Port getI2CPort(){
-        return i2cport;
-    }
-    
-    public static void setPosition(double position){
-        motorLeft1.getEncoder().setPosition(position);
-    }
-
-    //returns the distance traveled in feet
-    public static double getPosition(){
-        //* RobotMap.DRIVE_WHEEL_DIAMETER * Math.PI * (1/12)
-        return motorLeft1.getEncoder().getPosition();
-    }
-
-    public static void printVelocity(){
-        System.out.println(getVelocity() + " feet/second");
-    }
-    public static void printPosition(){
-        System.out.println(getPosition() + " feet");
-    }
-
     public static void PIDturn(double setpointAngle, double kP, double kD, double kI, double iZone, double kF){
         if(initAngleNeeded){
             initAngle = gyro.getAngle();
@@ -172,54 +122,92 @@ public class DriveTrain extends Subsystem {
         }
 
         currentAngle = gyro.getAngle() - initAngle;
-        double error = setpointAngle - currentAngle;
+        double error = (setpointAngle - currentAngle);
 
         DriveTrain.writeAngleOutput(Timer.getFPGATimestamp() + "", error + "");
-
+  
         double p = error * kP;
+        double d = -1*setpointAngle/Math.abs(setpointAngle)*gyro.getRate()*kD;
         /*double i = 0.0;
         if(Math.abs(error) <= iZone || iZone == 0.0) {
             i = error * kI;
         } 
-        double d = gyro.getRate()*kD;
         double f = setpointAngle * kF; */
 
-        double output = p; //+ i + d + f;
-        System.out.println("Output: " + output);
+        double output = p + d; //+ i + d + f;
+        System.out.println("Initial Output: " + output);
         if(output > 0.5){
             output = 0.5;
         } else if(output < -0.5){
             output = -0.5;
         }
+        double n = output;
+        output = (error/setpointAngle)*n;
+        if(Math.abs(error) < 0.05 || turnDone){
+            output = 0;
+            turnDone = true;
+        } else if (Math.abs(output) < 0.07) {
+            output = output/Math.abs(output)*0.07;
+        }
         System.out.println("Gyro Angle: " + gyro.getAngle());
+        System.out.println("Gyro Rate: " + gyro.getRate());
         System.out.println("Error: " +  error);
         System.out.println("kP: " + p);
+        System.out.println("kD: " + d);
+        System.out.println("Final Output: " + output);
+
        
         DriveTrain.turnMove(output);
     }
 
-    public static void turnMove(double output){
-        motorRight1.follow(motorLeft1, false);
-        motorRight2.follow(motorLeft1, false);
-        motorLeft2.follow(motorLeft1, false);
-        motorLeft1.set(output);        
+    public static boolean distanceCompleted(){ 
+        if(DriveTrain.getVelocity() < 0.001 && DriveTrain.getPosition() > 1.0){
+            DriveTrain.setPosition(0);
+            DriveTrain.resetGyro();
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean turnCompleted(){ 
+        if(gyro.getRate() < 0.001 && gyro.getAngle() > 2.0){
+            DriveTrain.setPosition(0);
+            DriveTrain.resetGyro();
+            return true;
+        }
+        return false;
+    }
+
+    public static void setPosition(double position){
+        motorLeft1.getEncoder().setPosition(position);
     }
 
     public static void resetGyro(){
         gyro.reset();
     }
 
-    public static boolean turnCompleted(double setpointAngle){ 
-        if(initAngleNeeded){
-            return true;
-        }
-        if(Math.abs(gyro.getAngle() - initAngle - setpointAngle) < RobotMap.CLEARENCE_SETPOINT){
-            initAngleNeeded = true;
-            initAngle = 0;
-            return true;
-        }
-        return false;
+    public static double getPosition(){
+        //* RobotMap.DRIVE_WHEEL_DIAMETER * Math.PI * (1/12)
+        return motorLeft1.getEncoder().getPosition();
     }
+
+    //returns the velocity of the wheels in feet per second
+    public static double getVelocity(){
+        return motorLeft1.getEncoder().getVelocity();
+    }
+
+    public static double getGyroAngle(){
+        return gyro.getAngle();
+    }
+
+    public static I2C.Port getI2CPort(){
+        return i2cport;
+    }
+
+    public static AHRS getGyro(){
+        return gyro;
+    }
+
 
     public static void writeAngleOutput(String colOne, String colTwo){
         angleColOne.add(colOne);
@@ -276,6 +264,17 @@ public class DriveTrain extends Subsystem {
         }*/
 
     //}
+
+    /*Work With Mr. Gupta:
+        double p = error/setpointAngle * kP;
+        double d = -(gyro.getRate())*kD;
+        /*double i = 0.0;
+        if(Math.abs(error) <= iZone || iZone == 0.0) {
+            i = error * kI;
+        } 
+        double f = setpointAngle * kF;
+
+        double output = p + d; */ //*/
 
     @Override
     protected void initDefaultCommand() {

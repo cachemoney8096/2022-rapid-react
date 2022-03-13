@@ -21,7 +21,7 @@ public class OI {
         SmartDashboard.putString("oi constructor", "executed");
         YellowButton.whileHeld(new IndexBalls());
         //BLUE BUTTON HAS BEEN DECOMMISSIONED
-        RedButton.whenPressed(new ShootBalls(true));       
+        RedButton.whenPressed(new Tilt(true));       
         GreenButton.whenPressed(new ShootBalls(false));
 
         RightBumpButton.whileHeld(new IntakeBalls());

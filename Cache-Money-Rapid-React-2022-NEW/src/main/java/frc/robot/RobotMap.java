@@ -25,7 +25,8 @@ public class RobotMap {
  
 
   //Intake Motor IDs
-  public static final int TILT_INTAKE_MOTOR= 7;
+  public static final int LEFT_TILT_INTAKE_MOTOR= 7;
+  public static final int RIGHT_TILT_INTAKE_MOTOR = 6;
   public static final int GO_INTAKE_MOTOR= 14;  
 
 
@@ -38,8 +39,8 @@ public class RobotMap {
 
 
   //Climb Motor IDs
-  public static final int LEFT_EXT_MOTOR = 5;
-  public static final int RIGHT_EXT_MOTOR = 6;
+  public static final int LEFT_EXT_MOTOR = 15;
+  public static final int RIGHT_EXT_MOTOR = 16;
   public static final int RIGHT_PIVOT_MOTOR = 12;
   public static final int LEFT_PIVOT_MOTOR = 13;
 

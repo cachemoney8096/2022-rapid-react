@@ -8,7 +8,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public class Intake extends Subsystem {   
     //Motor Variable setup
   public static final int TILT_INTAKE_MOTOR= 0;
-    private static TalonFX tilt= new TalonFX(RobotMap.TILT_INTAKE_MOTOR);
+    private static TalonFX leftTilt= new TalonFX(RobotMap.LEFT_TILT_INTAKE_MOTOR);
+    private static TalonFX rightTilt = new TalonFX(RobotMap.RIGHT_TILT_INTAKE_MOTOR);
     private static TalonFX go= new TalonFX(RobotMap.GO_INTAKE_MOTOR);
     private static CANSparkMax IndexMotor1 = new CANSparkMax(RobotMap.FrontIndexMotorLeft, MotorType.kBrushless);
     private static CANSparkMax IndexMotor2 = new CANSparkMax(RobotMap.FrontIndexMotorRight, MotorType.kBrushless);
@@ -16,7 +17,8 @@ public class Intake extends Subsystem {
     private static CANSparkMax IndexMotor4 = new CANSparkMax(RobotMap.BackIndexMotorRight, MotorType.kBrushless);
     
     public static void tilt(double speed){
-        tilt.set(ControlMode.PercentOutput, -speed);
+        leftTilt.set(ControlMode.PercentOutput, -speed); 
+        rightTilt.set(ControlMode.PercentOutput, speed);
  
     }
     public static void go(double speed){
