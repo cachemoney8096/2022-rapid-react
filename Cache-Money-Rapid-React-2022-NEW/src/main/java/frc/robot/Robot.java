@@ -41,7 +41,7 @@ public class Robot extends TimedRobot {
   public static DriveTrain m_drivetrain = new DriveTrain();
   public static Shooter m_shooter = new Shooter();
 
-  public static boolean[] AutoSequence = new boolean[RobotMap.CLIMB_PROCESS_LENGTH];
+  public static boolean[] AutoSequence = new boolean[3];
   
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -131,7 +131,8 @@ public class Robot extends TimedRobot {
             DriveTrain.PIDMove(60, 0.005, 0.0, 0.0);
           }
         }
-        Intake.Bounce()*/
+        Intake.Bounce()
+        */
         DriveTrain.PIDMove(-60, 0.005, 0.0, 0.0); //STEP ONE
         DriveTrain.PIDturn(-90, 0.05, 0.5, 0.0, 0.0, 0.0); //STEP TWO
 
