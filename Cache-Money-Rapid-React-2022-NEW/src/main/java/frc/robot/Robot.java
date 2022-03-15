@@ -10,10 +10,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.cameraserver.CameraServer;
+import frc.robot.subsystems.AutoTimer;
 import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
+import frc.robot.command.IndexBalls;
 import frc.robot.command.ShootBalls;
 import frc.robot.command.TankDrive;
 import frc.robot.command.Tilt;
@@ -31,6 +33,7 @@ public class Robot extends TimedRobot {
   private static final String kCustomAuto = "My Auto";
   public static final Subsystem Shooter = new Shooter();
   private String m_autoSelected;
+  public static boolean ballRight = true;
   public static OI m_oi;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
@@ -40,8 +43,9 @@ public class Robot extends TimedRobot {
   public static Climb m_climb = new Climb();
   public static DriveTrain m_drivetrain = new DriveTrain();
   public static Shooter m_shooter = new Shooter();
+  public static AutoTimer m_autotimer = new AutoTimer();
 
-  public static boolean[] AutoSequence = new boolean[3];
+  public static boolean[] AutoSequence = new boolean[RobotMap.AUTONOMOUS_LENGTH];
   
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -49,10 +53,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-    m_chooser.addOption("My Auto", kCustomAuto);
-    SmartDashboard.putData("Auto choices", m_chooser);
-    SmartDashboard.putString("robot init", "executed");
     CameraServer.startAutomaticCapture();
     Robot.m_oi = new OI();
   }
@@ -79,9 +79,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autoSelected = m_chooser.getSelected();
-    // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-    System.out.println("Auto selected: " + m_autoSelected);
+   
     DriveTrain.setPosition(0);
     DriveTrain.resetGyro();
   }
@@ -91,50 +89,434 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     switch (m_autoSelected) {
       case kCustomAuto:
-      //THIS IS A SECONDARY CASE, for the Defualt auto scroll down
-       /*DriveTrain.pidMove();
-       Intake.Limit();
-       IntakeBalls.go();
-       IntakeBalls.FrontIndex();
-       IndexBalls.BackIndex();
-        if(!DriveTrain.turnCompleted(90)){
-         DriveTrain.PIDturn(90, RobotMap.TURN_kP, RobotMap.TURN_kD, RobotMap.TURN_kI, RobotMap.TURN_IZONE,RobotMap.TURN_kF );
-        }
-        
-        System.out.println("Firmware Version: " + DriveTrain.getFirmWare());
-        System.out.println("Gyro Angle: " + DriveTrain.getGyroAngle());
-        
-       ShootBalls.ShootVel(RobotMap.Shooter_Vel_Value, RobotMap.Shooter_FF_Value);
-       
-
-         // Put custom auto code here
-        break;*/
+          if(!AutoSequence[0]){
+            if(AutoTimer.timePassed(1.0)){
+              AutoSequence[0] = true;
+            } else {
+              Shooter.ShootBraindead(0.5);
+            }
+          } else if(!AutoSequence[1]){
+            if(AutoTimer.timePassed(1.0)){
+              AutoSequence[1] = true;
+              Intake.BackIndex(0.0);
+              
+              Shooter.ShootBraindead(0.0);
+            } else {
+              Intake.Limit();
+              Intake.BackIndex(0.4);
+            }
+          } else if(!AutoSequence[2]){
+            if(AutoTimer.timePassed(0.3)){
+              AutoSequence[2] = true;
+              Intake.tilt(0.0);
+            } else {
+              Intake.tilt(0.25);
+            }
+          } else if(!AutoSequence[3]){
+            if(DriveTrain.distanceCompleted()){
+              AutoSequence[3] = true;
+            } else {
+              DriveTrain.PIDMove(-0, 0.005, 0.0, 0.0);
+            }
+          } else if(!AutoSequence[4]){
+            if(DriveTrain.turnCompleted()){
+              AutoSequence[4] = true;
+            } else {
+              DriveTrain.PIDturn(-90, 0.05, 0.5, 0, 0, 0);
+            }
+          } else if(!AutoSequence[5]){
+            if(DriveTrain.distanceCompleted()){
+              AutoSequence[5] = true;
+            } else {
+              DriveTrain.PIDMove(0, 0.005, 0.0, 0.0);
+            }
+          } else if(!AutoSequence[6]){
+            if(AutoTimer.timePassed(0.3)){
+              AutoSequence[6] = true;
+              Intake.tilt(0.0);
+            } else {
+              Intake.go(0.75);
+              Intake.tilt(-0.3);
+            }
+          } else if(!AutoSequence[7]){
+            if(AutoTimer.timePassed(0.3)){
+              AutoSequence[7] = true;
+              Intake.go(0.0);
+              Intake.BackIndex(0.0);
+            } else {
+              Intake.go(0.75);
+              Intake.BackIndex(0.4);
+            }
+          } else if(!AutoSequence[8]){
+            if(AutoTimer.timePassed(0.3)){
+              AutoSequence[8] = true;
+              Intake.tilt(0.0);
+            } else {
+              Intake.tilt(-0.3);
+            }
+          } else if(!AutoSequence[9]){
+            if(DriveTrain.turnCompleted()){
+              AutoSequence[9] = true;
+            } else {
+              DriveTrain.PIDturn(90, 0.05, 0.5, 0, 0, 0);
+            }
+          } else if(!AutoSequence[10]){
+            if(DriveTrain.distanceCompleted()){
+              AutoSequence[10] = true;
+            } else {
+              DriveTrain.PIDMove(60, 0.005, 0.0, 0.0);
+            }
+          } else if(!AutoSequence[11]){
+            if(AutoTimer.timePassed(1.0)){
+              AutoSequence[11] = true;
+            } else {
+              DriveTrain.move(0.2,0.2);
+            }
+          } else if(!AutoSequence[12]){
+            if(AutoTimer.timePassed(1.0)){
+              AutoSequence[12] = true;
+              Intake.tilt(0.0);
+            } else {
+              Intake.tilt(-0.3);
+              Shooter.ShootBraindead(0.5);
+            }
+          } else if(!AutoSequence[13]){
+            if(AutoTimer.timePassed(1.0)){
+              AutoSequence[13] = true;
+            } else {
+              Intake.Limit();
+              Intake.BackIndex(0.4);
+            }
+          } else if(!AutoSequence[14]){
+            if(AutoTimer.timePassed(0.3)){
+              AutoSequence[14] = true;
+            } else {
+              Shooter.ShootBraindead(0.0);
+            }
+          }
       case kDefaultAuto:
+        if(!AutoSequence[0]){
+            if(AutoTimer.timePassed(1.0)){
+              AutoSequence[0] = true;
+            } else {
+              Shooter.ShootBraindead(0.5);
+            }
+          } else if(!AutoSequence[1]){
+            if(AutoTimer.timePassed(1.0)){
+              AutoSequence[1] = true;
+              Intake.BackIndex(0.0);
+              
+              Shooter.ShootBraindead(0.0);
+            } else {
+              Intake.Limit();
+              Intake.BackIndex(0.4);
+            }
+          } else if(!AutoSequence[2]){
+            if(AutoTimer.timePassed(0.3)){
+              AutoSequence[2] = true;
+              Intake.tilt(0.0);
+            } else {
+              Intake.tilt(0.25);
+            }
+          } else if(!AutoSequence[3]){
+            if(DriveTrain.distanceCompleted()){
+              AutoSequence[3] = true;
+            } else {
+              DriveTrain.PIDMove(-0, 0.005, 0.0, 0.0);
+            }
+          } else if(!AutoSequence[4]){
+            if(DriveTrain.turnCompleted()){
+              AutoSequence[4] = true;
+            } else {
+              DriveTrain.PIDturn(90, 0.05, 0.5, 0, 0, 0);
+            }
+          } else if(!AutoSequence[5]){
+            if(DriveTrain.distanceCompleted()){
+              AutoSequence[5] = true;
+            } else {
+              DriveTrain.PIDMove(0, 0.005, 0.0, 0.0);
+            }
+          } else if(!AutoSequence[6]){
+            if(AutoTimer.timePassed(0.3)){
+              AutoSequence[6] = true;
+              Intake.tilt(0.0);
+            } else {
+              Intake.go(0.75);
+              Intake.tilt(-0.3);
+            }
+          } else if(!AutoSequence[7]){
+            if(AutoTimer.timePassed(0.3)){
+              AutoSequence[7] = true;
+              Intake.go(0.0);
+              Intake.BackIndex(0.0);
+            } else {
+              Intake.go(0.75);
+              Intake.BackIndex(0.4);
+            }
+          } else if(!AutoSequence[8]){
+            if(AutoTimer.timePassed(0.3)){
+              AutoSequence[8] = true;
+              Intake.tilt(0.0);
+            } else {
+              Intake.tilt(-0.3);
+            }
+          } else if(!AutoSequence[9]){
+            if(DriveTrain.turnCompleted()){
+              AutoSequence[9] = true;
+            } else {
+              DriveTrain.PIDturn(-90, 0.05, 0.5, 0, 0, 0);
+            }
+          } else if(!AutoSequence[10]){
+            if(DriveTrain.distanceCompleted()){
+              AutoSequence[10] = true;
+            } else {
+              DriveTrain.PIDMove(60, 0.005, 0.0, 0.0);
+            }
+          } else if(!AutoSequence[11]){
+            if(AutoTimer.timePassed(1.0)){
+              AutoSequence[11] = true;
+            } else {
+              DriveTrain.move(0.2,0.2);
+            }
+          } else if(!AutoSequence[12]){
+            if(AutoTimer.timePassed(1.0)){
+              AutoSequence[12] = true;
+              Intake.tilt(0.0);
+            } else {
+              Intake.tilt(-0.3);
+              Shooter.ShootBraindead(0.5);
+            }
+          } else if(!AutoSequence[13]){
+            if(AutoTimer.timePassed(1.0)){
+              AutoSequence[13] = true;
+            } else {
+              Intake.Limit();
+              Intake.BackIndex(0.4);
+            }
+          } else if(!AutoSequence[14]){
+            if(AutoTimer.timePassed(0.3)){
+              AutoSequence[14] = true;
+            } else {
+              Shooter.ShootBraindead(0.0);
+            }
+          }
       default:
-      //Alternate Between PID Move and PID Turn to see if it works
-        /*if(!AutoSequence[0]){
-          if(DriveTrain.distanceCompleted()){
-            AutoSequence[0] = true;
-          } else {
-            DriveTrain.PIDMove(60, 0.005, 0.0, 0.0);
+        if(ballRight){
+          if(!AutoSequence[0]){
+            if(AutoTimer.timePassed(1.0)){
+              AutoSequence[0] = true;
+            } else {
+              Shooter.ShootBraindead(0.5);
+            }
+          } else if(!AutoSequence[1]){
+            if(AutoTimer.timePassed(1.0)){
+              AutoSequence[1] = true;
+              Intake.BackIndex(0.0);
+              
+              Shooter.ShootBraindead(0.0);
+            } else {
+              Intake.Limit();
+              Intake.BackIndex(0.4);
+            }
+          } else if(!AutoSequence[2]){
+            if(AutoTimer.timePassed(0.3)){
+              AutoSequence[2] = true;
+              Intake.tilt(0.0);
+            } else {
+              Intake.tilt(0.25);
+            }
+          } else if(!AutoSequence[3]){
+            if(DriveTrain.distanceCompleted()){
+              AutoSequence[3] = true;
+            } else {
+              DriveTrain.PIDMove(-0, 0.005, 0.0, 0.0);
+            }
+          } else if(!AutoSequence[4]){
+            if(DriveTrain.turnCompleted()){
+              AutoSequence[4] = true;
+            } else {
+              DriveTrain.PIDturn(90, 0.05, 0.5, 0, 0, 0);
+            }
+          } else if(!AutoSequence[5]){
+            if(DriveTrain.distanceCompleted()){
+              AutoSequence[5] = true;
+            } else {
+              DriveTrain.PIDMove(0, 0.005, 0.0, 0.0);
+            }
+          } else if(!AutoSequence[6]){
+            if(AutoTimer.timePassed(0.3)){
+              AutoSequence[6] = true;
+              Intake.tilt(0.0);
+            } else {
+              Intake.go(0.75);
+              Intake.tilt(-0.3);
+            }
+          } else if(!AutoSequence[7]){
+            if(AutoTimer.timePassed(0.3)){
+              AutoSequence[7] = true;
+              Intake.go(0.0);
+              Intake.BackIndex(0.0);
+            } else {
+              Intake.go(0.75);
+              Intake.BackIndex(0.4);
+            }
+          } else if(!AutoSequence[8]){
+            if(AutoTimer.timePassed(0.3)){
+              AutoSequence[8] = true;
+              Intake.tilt(0.0);
+            } else {
+              Intake.tilt(-0.3);
+            }
+          } else if(!AutoSequence[9]){
+            if(DriveTrain.turnCompleted()){
+              AutoSequence[9] = true;
+            } else {
+              DriveTrain.PIDturn(-90, 0.05, 0.5, 0, 0, 0);
+            }
+          } else if(!AutoSequence[10]){
+            if(DriveTrain.distanceCompleted()){
+              AutoSequence[10] = true;
+            } else {
+              DriveTrain.PIDMove(60, 0.005, 0.0, 0.0);
+            }
+          } else if(!AutoSequence[11]){
+            if(AutoTimer.timePassed(1.0)){
+              AutoSequence[11] = true;
+            } else {
+              DriveTrain.move(0.2,0.2);
+            }
+          } else if(!AutoSequence[12]){
+            if(AutoTimer.timePassed(1.0)){
+              AutoSequence[12] = true;
+              Intake.tilt(0.0);
+            } else {
+              Intake.tilt(-0.3);
+              Shooter.ShootBraindead(0.5);
+            }
+          } else if(!AutoSequence[13]){
+            if(AutoTimer.timePassed(1.0)){
+              AutoSequence[13] = true;
+            } else {
+              Intake.Limit();
+              Intake.BackIndex(0.4);
+            }
+          } else if(!AutoSequence[14]){
+            if(AutoTimer.timePassed(0.3)){
+              AutoSequence[14] = true;
+            } else {
+              Shooter.ShootBraindead(0.0);
+            }
           }
-        } else if(!AutoSequence[1]){
-          if(DriveTrain.turnCompleted()){
-            AutoSequence[1] = true;
-          } else {
-            DriveTrain.PIDturn(90, 0.05, 0.5, 0.0, 0.0, 0.0);
-          }
-        } else if(!AutoSequence[2]){
-          if(DriveTrain.distanceCompleted()){
-            AutoSequence[2] = true;
-          } else {
-            DriveTrain.PIDMove(60, 0.005, 0.0, 0.0);
+        } else {
+          if(!AutoSequence[0]){
+            if(AutoTimer.timePassed(1.0)){
+              AutoSequence[0] = true;
+            } else {
+              Shooter.ShootBraindead(0.5);
+            }
+          } else if(!AutoSequence[1]){
+            if(AutoTimer.timePassed(1.0)){
+              AutoSequence[1] = true;
+              Intake.BackIndex(0.0);
+              
+              Shooter.ShootBraindead(0.0);
+            } else {
+              Intake.Limit();
+              Intake.BackIndex(0.4);
+            }
+          } else if(!AutoSequence[2]){
+            if(AutoTimer.timePassed(0.3)){
+              AutoSequence[2] = true;
+              Intake.tilt(0.0);
+            } else {
+              Intake.tilt(0.25);
+            }
+          } else if(!AutoSequence[3]){
+            if(DriveTrain.distanceCompleted()){
+              AutoSequence[3] = true;
+            } else {
+              DriveTrain.PIDMove(-0, 0.005, 0.0, 0.0);
+            }
+          } else if(!AutoSequence[4]){
+            if(DriveTrain.turnCompleted()){
+              AutoSequence[4] = true;
+            } else {
+              DriveTrain.PIDturn(-90, 0.05, 0.5, 0, 0, 0);
+            }
+          } else if(!AutoSequence[5]){
+            if(DriveTrain.distanceCompleted()){
+              AutoSequence[5] = true;
+            } else {
+              DriveTrain.PIDMove(0, 0.005, 0.0, 0.0);
+            }
+          } else if(!AutoSequence[6]){
+            if(AutoTimer.timePassed(0.3)){
+              AutoSequence[6] = true;
+              Intake.tilt(0.0);
+            } else {
+              Intake.go(0.75);
+              Intake.tilt(-0.3);
+            }
+          } else if(!AutoSequence[7]){
+            if(AutoTimer.timePassed(0.3)){
+              AutoSequence[7] = true;
+              Intake.go(0.0);
+              Intake.BackIndex(0.0);
+            } else {
+              Intake.go(0.75);
+              Intake.BackIndex(0.4);
+            }
+          } else if(!AutoSequence[8]){
+            if(AutoTimer.timePassed(0.3)){
+              AutoSequence[8] = true;
+              Intake.tilt(0.0);
+            } else {
+              Intake.tilt(-0.3);
+            }
+          } else if(!AutoSequence[9]){
+            if(DriveTrain.turnCompleted()){
+              AutoSequence[9] = true;
+            } else {
+              DriveTrain.PIDturn(90, 0.05, 0.5, 0, 0, 0);
+            }
+          } else if(!AutoSequence[10]){
+            if(DriveTrain.distanceCompleted()){
+              AutoSequence[10] = true;
+            } else {
+              DriveTrain.PIDMove(60, 0.005, 0.0, 0.0);
+            }
+          } else if(!AutoSequence[11]){
+            if(AutoTimer.timePassed(1.0)){
+              AutoSequence[11] = true;
+            } else {
+              DriveTrain.move(0.2,0.2);
+            }
+          } else if(!AutoSequence[12]){
+            if(AutoTimer.timePassed(1.0)){
+              AutoSequence[12] = true;
+              Intake.tilt(0.0);
+            } else {
+              Intake.tilt(-0.3);
+              Shooter.ShootBraindead(0.5);
+            }
+          } else if(!AutoSequence[13]){
+            if(AutoTimer.timePassed(1.0)){
+              AutoSequence[13] = true;
+            } else {
+              Intake.Limit();
+              Intake.BackIndex(0.4);
+            }
+          } else if(!AutoSequence[14]){
+            if(AutoTimer.timePassed(0.3)){
+              AutoSequence[14] = true;
+            } else {
+              Shooter.ShootBraindead(0.0);
+            }
           }
         }
-        Intake.Bounce()
-        */
-        DriveTrain.PIDMove(-60, 0.005, 0.0, 0.0); //STEP ONE
-        DriveTrain.PIDturn(-90, 0.05, 0.5, 0.0, 0.0, 0.0); //STEP TWO
+
+       // DriveTrain.PIDMove(-60, 0.005, 0.0, 0.0); //STEP ONE
+      //  DriveTrain.PIDturn(-90, 0.05, 0.5, 0.0, 0.0, 0.0); //STEP TWO
 
         /*
         //INTAKE TEST
@@ -145,22 +527,6 @@ public class Robot extends TimedRobot {
         IndexBalls.BackIndex();
         }
         
-        */
-      /*
-      COMPLETED AUTONOMOUS SEQUENCE
-       DriveTrain.pidMove();
-       Intake.Limit();
-       IntakeBalls.go();
-       IntakeBalls.FrontIndex();
-       IndexBalls.BackIndex();
-        if(!DriveTrain.turnCompleted(90)){
-          DriveTrain.PIDturn(90, RobotMap.TURN_kP, RobotMap.TURN_kD, RobotMap.TURN_kI, RobotMap.TURN_IZONE,RobotMap.TURN_kF );
-        }
-        
-        System.out.println("Firmware Version: " + DriveTrain.getFirmWare());
-        System.out.println("Gyro Angle: " + DriveTrain.getGyroAngle());
-        
-       ShootBalls.ShootVel(RobotMap.Shooter_Vel_Value, RobotMap.Shooter_FF_Value);
         */
 
         /* AUTONOMOUS SEQUENCE 

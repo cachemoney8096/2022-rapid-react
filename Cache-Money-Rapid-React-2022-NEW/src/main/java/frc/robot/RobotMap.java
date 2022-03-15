@@ -139,6 +139,7 @@ public class RobotMap {
 
   //Test Motor
   public static final int MOTOR_TEST_ID = 25;
+  public static final int AUTONOMOUS_LENGTH = 15;
   
 
 
