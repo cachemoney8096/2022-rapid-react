@@ -23,6 +23,7 @@ public class Shooter extends Subsystem {
     private static TalonFX motor1= new TalonFX(RobotMap.SHOOTER_MOTOR_1_ID);
     private static TalonFX motor2= new TalonFX(RobotMap.SHOOTER_MOTOR_2_ID);
     
+    
    
 
 
