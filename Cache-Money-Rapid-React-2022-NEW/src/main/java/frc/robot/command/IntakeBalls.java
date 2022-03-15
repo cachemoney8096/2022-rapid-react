@@ -51,12 +51,7 @@ public class IntakeBalls extends Command{
         Intake.go(0.85);
         Intake.FrontIndex(0.25);
     }
-    public static void goTrigger(){
-     //Hand hand= new Hand();
-       // double power= -Robot.m_oi.getTriggerAxis(Hand);
-        Intake.go(0.85);
-        Intake.FrontIndex(0.25);
-    }
+    
 
 
     public static void tilt(){

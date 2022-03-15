@@ -37,6 +37,8 @@ public class Intake extends Subsystem {
     public static void BackIndex(double speed){
         IndexMotor3.set(-speed);
         IndexMotor4.set(speed);
+        System.out.println(IndexMotor3.getEncoder().getVelocity());
+        System.out.println(IndexMotor4.getEncoder().getVelocity());
     }
     
     @Override

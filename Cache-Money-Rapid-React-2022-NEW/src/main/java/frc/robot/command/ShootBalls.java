@@ -30,7 +30,9 @@ public class ShootBalls extends Command{
   //variables and mapping out buttons called 50 times per second
   @Override
   public void execute() {
-    if(TwoBalls){
+    
+
+    /*if(TwoBalls){
       if(!shotprogression[0]){
         ShootBalls.ShootTime(RobotMap.SHOT_TIME, 0);
       } else if(!shotprogression[1]){
@@ -40,7 +42,7 @@ public class ShootBalls extends Command{
       }
     } else {
       Shooter.ShootBraindead(0.6);
-    }
+    }*/
 
     
   }
@@ -104,10 +106,10 @@ public class ShootBalls extends Command{
   }
 
   public static void shootTrig(){
-    double trigVal = Robot.m_oi.getDriverRawAxis(3);
-    double speed = trigVal *0.6;
-    if(speed < 0.6 && speed > 0.2){
-      speed = 0.6;
+    double trigVal = Robot.m_oi.getDriverRawAxisJoystick(3);
+    double speed = trigVal *0.5;
+    if(speed < 0.5 && speed > 0.2){
+      speed = 0.5;
     }
     Shooter.ShootBraindead(speed);
   }

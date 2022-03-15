@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Robot;
 
-public class IndexBalls extends Command{
+public class IndexSingle extends Command{
 
     public static boolean initTimeNeeded = true;
     public static double initTime = 0;
@@ -13,7 +13,7 @@ public class IndexBalls extends Command{
     public static double binitTime = 0;
     public static boolean bindexDone = false;
 
-    public IndexBalls(){
+    public IndexSingle(){
         requires(Robot.m_index);
     }
 
@@ -37,11 +37,9 @@ public class IndexBalls extends Command{
     @Override
     protected void execute() {
         Intake.Limit();
-        if(Robot.m_oi.yellowPressed()){
-            Intake.FrontIndex(-0.4);
-            Intake.BackIndex(-0.4);
-        } else {
+        if(Robot.m_oi.rightBumpPressed()){
             Intake.FrontIndex(0.4);
+        } else {
             Intake.BackIndex(0.4);
         }
     }

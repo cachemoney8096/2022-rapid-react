@@ -127,7 +127,7 @@ public class DriveTrain extends Subsystem {
         DriveTrain.writeAngleOutput(Timer.getFPGATimestamp() + "", error + "");
   
         double p = error * kP;
-        double d = -1*setpointAngle/Math.abs(setpointAngle)*gyro.getRate()*kD;
+        double d = -1*error/Math.abs(error)*Math.abs(gyro.getRate())*kD;
         /*double i = 0.0;
         if(Math.abs(error) <= iZone || iZone == 0.0) {
             i = error * kI;

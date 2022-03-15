@@ -10,38 +10,53 @@ public class OI {
     public static Joystick joystick = new Joystick(RobotMap.BUTTONCONTROLLER);
     public static Button BlueButton = new JoystickButton(xbox,RobotMap.BUTTON_BLUE);
     public static Button RedButton = new JoystickButton(xbox,RobotMap.BUTTON_RED);
-    public static Button GreenButton = new JoystickButton(xbox,RobotMap.BUTTON_GREEN);
-    public static Button YellowButton = new JoystickButton(xbox,RobotMap.BUTTON_YELLOW);
+    public static Button GreenButton = new JoystickButton(joystick,RobotMap.BUTTON_GREEN);
+    public static Button YellowButton = new JoystickButton(joystick,RobotMap.BUTTON_YELLOW);
     public static Button LeftBumpButton = new JoystickButton(xbox,RobotMap.BUTTON_LEFTBUMP);
     public static Button RightBumpButton = new JoystickButton(xbox,RobotMap.BUTTON_RIGHTBUMP);
-    public static Button BackButton = new JoystickButton(xbox,RobotMap.BUTTON_BACK);
-    public static Button StartButton = new JoystickButton(xbox,RobotMap.BUTTON_START);
+    public static Button BackButton = new JoystickButton(joystick,RobotMap.BUTTON_BACK);
+    public static Button StartButton = new JoystickButton(joystick,RobotMap.BUTTON_START);
+    public static Button joystickLeftBumpButton = new JoystickButton(joystick, RobotMap.BUTTON_LEFTBUMP);
+    public static Button joystickRightBumpButton = new JoystickButton(joystick, RobotMap.BUTTON_RIGHTBUMP);
    
     public OI(){
         SmartDashboard.putString("oi constructor", "executed");
         YellowButton.whileHeld(new IndexBalls());
-        //BLUE BUTTON HAS BEEN DECOMMISSIONED
-        RedButton.whenPressed(new Tilt(true));       
-        GreenButton.whenPressed(new ShootBalls(false));
+        //BLUE, GREEN, AND RED BUTTONS HAVE BEEN DECOMISSIONED
+       // RedButton.whenPressed(new Tilt(true));       
+       // GreenButton.whenPressed(new ShootBalls(false));
 
         RightBumpButton.whileHeld(new IntakeBalls());
         LeftBumpButton.whileHeld(new IndexBalls());
 
-        StartButton.whenPressed(new AutomatedClimb(false));
-        BackButton.whileHeld(new AutomatedClimb(true));
+        StartButton.whileHeld(new AutomatedClimb());
+        BackButton.whileHeld(new AutomatedClimb());
         
+        joystickLeftBumpButton.whileHeld(new IndexSingle());
+        joystickRightBumpButton.whileHeld(new IndexSingle());
     }
 
     public boolean bluePressed(){
         return BlueButton.get();
     }
-
+    // blue used for tilt, yellow used for index backwards
     public boolean yellowPressed(){
         return YellowButton.get();
     }
 
-    public double getDriverRawAxis(int axis){
+    public boolean startPressed(){
+        return StartButton.get();
+    }
+
+    public boolean rightBumpPressed(){
+        return joystickRightBumpButton.get();
+    }
+
+    public double getDriverRawAxisXbox(int axis){
         return xbox.getRawAxis(axis);
+    }
+    public double getDriverRawAxisJoystick(int axis){
+        return joystick.getRawAxis(axis);
     }
     
     

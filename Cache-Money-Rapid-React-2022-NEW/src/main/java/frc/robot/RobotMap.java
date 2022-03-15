@@ -22,7 +22,7 @@ public class RobotMap {
   public static final int  SHOOTER_MOTOR_2_ID = TankDrive.whatIsNinePlusTen();
   public static final int Shooter_Vel_Value= 0; 
   public static final int Shooter_FF_Value= 0;  
- 
+  public static final int BraindeadShootValue = 0;
 
   //Intake Motor IDs
   public static final int LEFT_TILT_INTAKE_MOTOR= 7;
@@ -139,6 +139,7 @@ public class RobotMap {
 
   //Test Motor
   public static final int MOTOR_TEST_ID = 25;
+  
 
 
 
