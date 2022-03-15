@@ -88,434 +88,18 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     switch (m_autoSelected) {
       case kCustomAuto:
-          if(!AutoSequence[0]){
-            if(AutoTimer.timePassed(1.0)){
-              AutoSequence[0] = true;
-            } else {
-              Shooter.ShootBraindead(0.5);
-            }
-          } else if(!AutoSequence[1]){
-            if(AutoTimer.timePassed(1.0)){
-              AutoSequence[1] = true;
-              Intake.BackIndex(0.0);
-              
-              Shooter.ShootBraindead(0.0);
-            } else {
-              Intake.Limit();
-              Intake.BackIndex(0.4);
-            }
-          } else if(!AutoSequence[2]){
-            if(AutoTimer.timePassed(0.3)){
-              AutoSequence[2] = true;
-              Intake.tilt(0.0);
-            } else {
-              Intake.tilt(0.25);
-            }
-          } else if(!AutoSequence[3]){
-            if(DriveTrain.distanceCompleted()){
-              AutoSequence[3] = true;
-            } else {
-              DriveTrain.PIDMove(-0, 0.005, 0.0, 0.0);
-            }
-          } else if(!AutoSequence[4]){
-            if(DriveTrain.turnCompleted()){
-              AutoSequence[4] = true;
-            } else {
-              DriveTrain.PIDturn(-90, 0.05, 0.5, 0, 0, 0);
-            }
-          } else if(!AutoSequence[5]){
-            if(DriveTrain.distanceCompleted()){
-              AutoSequence[5] = true;
-            } else {
-              DriveTrain.PIDMove(0, 0.005, 0.0, 0.0);
-            }
-          } else if(!AutoSequence[6]){
-            if(AutoTimer.timePassed(0.3)){
-              AutoSequence[6] = true;
-              Intake.tilt(0.0);
-            } else {
-              Intake.go(0.75);
-              Intake.tilt(-0.3);
-            }
-          } else if(!AutoSequence[7]){
-            if(AutoTimer.timePassed(0.3)){
-              AutoSequence[7] = true;
-              Intake.go(0.0);
-              Intake.BackIndex(0.0);
-            } else {
-              Intake.go(0.75);
-              Intake.BackIndex(0.4);
-            }
-          } else if(!AutoSequence[8]){
-            if(AutoTimer.timePassed(0.3)){
-              AutoSequence[8] = true;
-              Intake.tilt(0.0);
-            } else {
-              Intake.tilt(-0.3);
-            }
-          } else if(!AutoSequence[9]){
-            if(DriveTrain.turnCompleted()){
-              AutoSequence[9] = true;
-            } else {
-              DriveTrain.PIDturn(90, 0.05, 0.5, 0, 0, 0);
-            }
-          } else if(!AutoSequence[10]){
-            if(DriveTrain.distanceCompleted()){
-              AutoSequence[10] = true;
-            } else {
-              DriveTrain.PIDMove(60, 0.005, 0.0, 0.0);
-            }
-          } else if(!AutoSequence[11]){
-            if(AutoTimer.timePassed(1.0)){
-              AutoSequence[11] = true;
-            } else {
-              DriveTrain.move(0.2,0.2);
-            }
-          } else if(!AutoSequence[12]){
-            if(AutoTimer.timePassed(1.0)){
-              AutoSequence[12] = true;
-              Intake.tilt(0.0);
-            } else {
-              Intake.tilt(-0.3);
-              Shooter.ShootBraindead(0.5);
-            }
-          } else if(!AutoSequence[13]){
-            if(AutoTimer.timePassed(1.0)){
-              AutoSequence[13] = true;
-            } else {
-              Intake.Limit();
-              Intake.BackIndex(0.4);
-            }
-          } else if(!AutoSequence[14]){
-            if(AutoTimer.timePassed(0.3)){
-              AutoSequence[14] = true;
-            } else {
-              Shooter.ShootBraindead(0.0);
-            }
-          }
+        CompetitionAutoSequece(false);
       case kDefaultAuto:
-        if(!AutoSequence[0]){
-            if(AutoTimer.timePassed(1.0)){
-              AutoSequence[0] = true;
-            } else {
-              Shooter.ShootBraindead(0.5);
-            }
-          } else if(!AutoSequence[1]){
-            if(AutoTimer.timePassed(1.0)){
-              AutoSequence[1] = true;
-              Intake.BackIndex(0.0);
-              
-              Shooter.ShootBraindead(0.0);
-            } else {
-              Intake.Limit();
-              Intake.BackIndex(0.4);
-            }
-          } else if(!AutoSequence[2]){
-            if(AutoTimer.timePassed(0.3)){
-              AutoSequence[2] = true;
-              Intake.tilt(0.0);
-            } else {
-              Intake.tilt(0.25);
-            }
-          } else if(!AutoSequence[3]){
-            if(DriveTrain.distanceCompleted()){
-              AutoSequence[3] = true;
-            } else {
-              DriveTrain.PIDMove(-0, 0.005, 0.0, 0.0);
-            }
-          } else if(!AutoSequence[4]){
-            if(DriveTrain.turnCompleted()){
-              AutoSequence[4] = true;
-            } else {
-              DriveTrain.PIDturn(90, 0.05, 0.5, 0, 0, 0);
-            }
-          } else if(!AutoSequence[5]){
-            if(DriveTrain.distanceCompleted()){
-              AutoSequence[5] = true;
-            } else {
-              DriveTrain.PIDMove(0, 0.005, 0.0, 0.0);
-            }
-          } else if(!AutoSequence[6]){
-            if(AutoTimer.timePassed(0.3)){
-              AutoSequence[6] = true;
-              Intake.tilt(0.0);
-            } else {
-              Intake.go(0.75);
-              Intake.tilt(-0.3);
-            }
-          } else if(!AutoSequence[7]){
-            if(AutoTimer.timePassed(0.3)){
-              AutoSequence[7] = true;
-              Intake.go(0.0);
-              Intake.BackIndex(0.0);
-            } else {
-              Intake.go(0.75);
-              Intake.BackIndex(0.4);
-            }
-          } else if(!AutoSequence[8]){
-            if(AutoTimer.timePassed(0.3)){
-              AutoSequence[8] = true;
-              Intake.tilt(0.0);
-            } else {
-              Intake.tilt(-0.3);
-            }
-          } else if(!AutoSequence[9]){
-            if(DriveTrain.turnCompleted()){
-              AutoSequence[9] = true;
-            } else {
-              DriveTrain.PIDturn(-90, 0.05, 0.5, 0, 0, 0);
-            }
-          } else if(!AutoSequence[10]){
-            if(DriveTrain.distanceCompleted()){
-              AutoSequence[10] = true;
-            } else {
-              DriveTrain.PIDMove(60, 0.005, 0.0, 0.0);
-            }
-          } else if(!AutoSequence[11]){
-            if(AutoTimer.timePassed(1.0)){
-              AutoSequence[11] = true;
-            } else {
-              DriveTrain.move(0.2,0.2);
-            }
-          } else if(!AutoSequence[12]){
-            if(AutoTimer.timePassed(1.0)){
-              AutoSequence[12] = true;
-              Intake.tilt(0.0);
-            } else {
-              Intake.tilt(-0.3);
-              Shooter.ShootBraindead(0.5);
-            }
-          } else if(!AutoSequence[13]){
-            if(AutoTimer.timePassed(1.0)){
-              AutoSequence[13] = true;
-            } else {
-              Intake.Limit();
-              Intake.BackIndex(0.4);
-            }
-          } else if(!AutoSequence[14]){
-            if(AutoTimer.timePassed(0.3)){
-              AutoSequence[14] = true;
-            } else {
-              Shooter.ShootBraindead(0.0);
-            }
-          }
+        CompetitionAutoSequece(true);
       default:
         if(ballRight){
-          if(!AutoSequence[0]){
-            if(AutoTimer.timePassed(1.0)){
-              AutoSequence[0] = true;
-            } else {
-              Shooter.ShootBraindead(0.5);
-            }
-          } else if(!AutoSequence[1]){
-            if(AutoTimer.timePassed(1.0)){
-              AutoSequence[1] = true;
-              Intake.BackIndex(0.0);
-              
-              Shooter.ShootBraindead(0.0);
-            } else {
-              Intake.Limit();
-              Intake.BackIndex(0.4);
-            }
-          } else if(!AutoSequence[2]){
-            if(AutoTimer.timePassed(0.3)){
-              AutoSequence[2] = true;
-              Intake.tilt(0.0);
-            } else {
-              Intake.tilt(0.25);
-            }
-          } else if(!AutoSequence[3]){
-            if(DriveTrain.distanceCompleted()){
-              AutoSequence[3] = true;
-            } else {
-              DriveTrain.PIDMove(-0, 0.005, 0.0, 0.0);
-            }
-          } else if(!AutoSequence[4]){
-            if(DriveTrain.turnCompleted()){
-              AutoSequence[4] = true;
-            } else {
-              DriveTrain.PIDturn(90, 0.05, 0.5, 0, 0, 0);
-            }
-          } else if(!AutoSequence[5]){
-            if(DriveTrain.distanceCompleted()){
-              AutoSequence[5] = true;
-            } else {
-              DriveTrain.PIDMove(0, 0.005, 0.0, 0.0);
-            }
-          } else if(!AutoSequence[6]){
-            if(AutoTimer.timePassed(0.3)){
-              AutoSequence[6] = true;
-              Intake.tilt(0.0);
-            } else {
-              Intake.go(0.75);
-              Intake.tilt(-0.3);
-            }
-          } else if(!AutoSequence[7]){
-            if(AutoTimer.timePassed(0.3)){
-              AutoSequence[7] = true;
-              Intake.go(0.0);
-              Intake.BackIndex(0.0);
-            } else {
-              Intake.go(0.75);
-              Intake.BackIndex(0.4);
-            }
-          } else if(!AutoSequence[8]){
-            if(AutoTimer.timePassed(0.3)){
-              AutoSequence[8] = true;
-              Intake.tilt(0.0);
-            } else {
-              Intake.tilt(-0.3);
-            }
-          } else if(!AutoSequence[9]){
-            if(DriveTrain.turnCompleted()){
-              AutoSequence[9] = true;
-            } else {
-              DriveTrain.PIDturn(-90, 0.05, 0.5, 0, 0, 0);
-            }
-          } else if(!AutoSequence[10]){
-            if(DriveTrain.distanceCompleted()){
-              AutoSequence[10] = true;
-            } else {
-              DriveTrain.PIDMove(60, 0.005, 0.0, 0.0);
-            }
-          } else if(!AutoSequence[11]){
-            if(AutoTimer.timePassed(1.0)){
-              AutoSequence[11] = true;
-            } else {
-              DriveTrain.move(0.2,0.2);
-            }
-          } else if(!AutoSequence[12]){
-            if(AutoTimer.timePassed(1.0)){
-              AutoSequence[12] = true;
-              Intake.tilt(0.0);
-            } else {
-              Intake.tilt(-0.3);
-              Shooter.ShootBraindead(0.5);
-            }
-          } else if(!AutoSequence[13]){
-            if(AutoTimer.timePassed(1.0)){
-              AutoSequence[13] = true;
-            } else {
-              Intake.Limit();
-              Intake.BackIndex(0.4);
-            }
-          } else if(!AutoSequence[14]){
-            if(AutoTimer.timePassed(0.3)){
-              AutoSequence[14] = true;
-            } else {
-              Shooter.ShootBraindead(0.0);
-            }
-          }
+          CompetitionAutoSequece(true);
         } else {
-          if(!AutoSequence[0]){
-            if(AutoTimer.timePassed(1.0)){
-              AutoSequence[0] = true;
-            } else {
-              Shooter.ShootBraindead(0.5);
-            }
-          } else if(!AutoSequence[1]){
-            if(AutoTimer.timePassed(1.0)){
-              AutoSequence[1] = true;
-              Intake.BackIndex(0.0);
-              
-              Shooter.ShootBraindead(0.0);
-            } else {
-              Intake.Limit();
-              Intake.BackIndex(0.4);
-            }
-          } else if(!AutoSequence[2]){
-            if(AutoTimer.timePassed(0.3)){
-              AutoSequence[2] = true;
-              Intake.tilt(0.0);
-            } else {
-              Intake.tilt(0.25);
-            }
-          } else if(!AutoSequence[3]){
-            if(DriveTrain.distanceCompleted()){
-              AutoSequence[3] = true;
-            } else {
-              DriveTrain.PIDMove(-0, 0.005, 0.0, 0.0);
-            }
-          } else if(!AutoSequence[4]){
-            if(DriveTrain.turnCompleted()){
-              AutoSequence[4] = true;
-            } else {
-              DriveTrain.PIDturn(-90, 0.05, 0.5, 0, 0, 0);
-            }
-          } else if(!AutoSequence[5]){
-            if(DriveTrain.distanceCompleted()){
-              AutoSequence[5] = true;
-            } else {
-              DriveTrain.PIDMove(0, 0.005, 0.0, 0.0);
-            }
-          } else if(!AutoSequence[6]){
-            if(AutoTimer.timePassed(0.3)){
-              AutoSequence[6] = true;
-              Intake.tilt(0.0);
-            } else {
-              Intake.go(0.75);
-              Intake.tilt(-0.3);
-            }
-          } else if(!AutoSequence[7]){
-            if(AutoTimer.timePassed(0.3)){
-              AutoSequence[7] = true;
-              Intake.go(0.0);
-              Intake.BackIndex(0.0);
-            } else {
-              Intake.go(0.75);
-              Intake.BackIndex(0.4);
-            }
-          } else if(!AutoSequence[8]){
-            if(AutoTimer.timePassed(0.3)){
-              AutoSequence[8] = true;
-              Intake.tilt(0.0);
-            } else {
-              Intake.tilt(-0.3);
-            }
-          } else if(!AutoSequence[9]){
-            if(DriveTrain.turnCompleted()){
-              AutoSequence[9] = true;
-            } else {
-              DriveTrain.PIDturn(90, 0.05, 0.5, 0, 0, 0);
-            }
-          } else if(!AutoSequence[10]){
-            if(DriveTrain.distanceCompleted()){
-              AutoSequence[10] = true;
-            } else {
-              DriveTrain.PIDMove(60, 0.005, 0.0, 0.0);
-            }
-          } else if(!AutoSequence[11]){
-            if(AutoTimer.timePassed(1.0)){
-              AutoSequence[11] = true;
-            } else {
-              DriveTrain.move(0.2,0.2);
-            }
-          } else if(!AutoSequence[12]){
-            if(AutoTimer.timePassed(1.0)){
-              AutoSequence[12] = true;
-              Intake.tilt(0.0);
-            } else {
-              Intake.tilt(-0.3);
-              Shooter.ShootBraindead(0.5);
-            }
-          } else if(!AutoSequence[13]){
-            if(AutoTimer.timePassed(1.0)){
-              AutoSequence[13] = true;
-            } else {
-              Intake.Limit();
-              Intake.BackIndex(0.4);
-            }
-          } else if(!AutoSequence[14]){
-            if(AutoTimer.timePassed(0.3)){
-              AutoSequence[14] = true;
-            } else {
-              Shooter.ShootBraindead(0.0);
-            }
-          }
+          CompetitionAutoSequece(false);
         }
 
-       // DriveTrain.PIDMove(-60, 0.005, 0.0, 0.0); //STEP ONE
-      //  DriveTrain.PIDturn(-90, 0.05, 0.5, 0.0, 0.0, 0.0); //STEP TWO
+        // DriveTrain.PIDMove(-60, 0.005, 0.0, 0.0); //STEP ONE
+        // DriveTrain.PIDturn(-90, 0.05, 0.5, 0.0, 0.0, 0.0); //STEP TWO
 
         /*
         //INTAKE TEST
@@ -525,11 +109,9 @@ public class Robot extends TimedRobot {
         IntakeBalls.FrontIndex();
         IndexBalls.BackIndex();
         }
-        
-        */
 
         /* AUTONOMOUS SEQUENCE 
-        1) MOVE BACK
+        1) Shoot
         2) INTAKE BALL
         3) SHOOT BALLLS
         --- THE REST IS OPTIONAL FOR CIR
@@ -538,6 +120,122 @@ public class Robot extends TimedRobot {
         6) INTAKE BALL
         7) TURN W/GYRO
         8) SHOOT BALL  */
+    }
+  }
+
+  public static void CompetitionAutoSequece(boolean turnRight){
+    if(!AutoSequence[0]){
+      if(AutoTimer.timePassed(1.0)){
+        AutoSequence[0] = true;
+      } else {
+        Shooter.ShootBraindead(0.5);
+      }
+    } else if(!AutoSequence[1]){
+      if(AutoTimer.timePassed(1.0)){
+        AutoSequence[1] = true;
+        Intake.BackIndex(0.0);
+        
+        Shooter.ShootBraindead(0.0);
+      } else {
+        Intake.Limit();
+        Intake.BackIndex(0.4);
+      }
+    } else if(!AutoSequence[2]){
+      if(AutoTimer.timePassed(0.3)){
+        AutoSequence[2] = true;
+        Intake.tilt(0.0);
+      } else {
+        Intake.tilt(0.25);
+      }
+    } else if(!AutoSequence[3]){
+      if(DriveTrain.distanceCompleted()){
+        AutoSequence[3] = true;
+      } else {
+        DriveTrain.PIDMove(-116.17, 0.005, 0.0, 0.0);
+      }
+    } else if(!AutoSequence[4]){
+      if(DriveTrain.turnCompleted()){
+        AutoSequence[4] = true;
+      } else {
+        int kDir = 1;
+        if(!turnRight){
+          kDir = -1;
+        }
+        DriveTrain.PIDturn(kDir*90, 0.05, 0.5, 0, 0, 0);
+      }
+    } else if(!AutoSequence[5]){
+      if(DriveTrain.distanceCompleted()){
+        AutoSequence[5] = true;
+      } else {
+        DriveTrain.PIDMove(0, 0.005, 0.0, 0.0);
+      }
+    } else if(!AutoSequence[6]){
+      if(AutoTimer.timePassed(0.3)){
+        AutoSequence[6] = true;
+        Intake.tilt(0.0);
+      } else {
+        Intake.go(0.75);
+        Intake.tilt(-0.3);
+      }
+    } else if(!AutoSequence[7]){
+      if(AutoTimer.timePassed(0.3)){
+        AutoSequence[7] = true;
+        Intake.go(0.0);
+        Intake.BackIndex(0.0);
+      } else {
+        Intake.go(0.75);
+        Intake.BackIndex(0.4);
+      }
+    } else if(!AutoSequence[8]){
+      if(AutoTimer.timePassed(0.3)){
+        AutoSequence[8] = true;
+        Intake.tilt(0.0);
+      } else {
+        Intake.tilt(-0.3);
+      }
+    } else if(!AutoSequence[9]){
+      if(DriveTrain.turnCompleted()){
+        AutoSequence[9] = true;
+      } else {
+        int kDir = -1;
+        if(!turnRight){
+          kDir = 1;
+        }
+        DriveTrain.PIDturn(90*kDir, 0.05, 0.5, 0, 0, 0);
+      }
+    } else if(!AutoSequence[10]){
+      if(DriveTrain.distanceCompleted()){
+        AutoSequence[10] = true;
+      } else {
+        DriveTrain.PIDMove(116.17, 0.005, 0.0, 0.0);
+      }
+    } else if(!AutoSequence[11]){
+      if(AutoTimer.timePassed(1.0)){
+        AutoSequence[11] = true;
+      } else {
+        DriveTrain.move(0.2,0.2);
+      }
+    } else if(!AutoSequence[12]){
+      if(AutoTimer.timePassed(1.0)){
+        AutoSequence[12] = true;
+        Intake.tilt(0.0);
+      } else {
+        Intake.tilt(-0.3);
+        Shooter.ShootBraindead(0.5);
+      }
+    } else if(!AutoSequence[13]){
+      if(AutoTimer.timePassed(1.0)){
+        AutoSequence[13] = true;
+      } else {
+        Intake.Limit();
+        Intake.BackIndex(0.4);
+      }
+    } else if(!AutoSequence[14]){
+      if(AutoTimer.timePassed(0.3)){
+        AutoSequence[14] = true;
+      } else {
+        Shooter.ShootBraindead(0.0);
+      }
     }
   }
 
