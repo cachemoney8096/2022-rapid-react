@@ -22,6 +22,13 @@ public class Climb extends Subsystem {
         leftExtension.set(speed);
         rightExtension.set(speed);   
     }
+    public static void setExtensionLeft(double speed){
+        leftExtension.set(speed);
+          
+    }
+    public static void setExtensionRight(double speed){
+        rightExtension.set(speed);   
+    }
     public static void setPivotMotorSpeed(double speed){
         leftPivot.set(ControlMode.PercentOutput, speed);
         rightPivot.set(ControlMode.PercentOutput, speed);

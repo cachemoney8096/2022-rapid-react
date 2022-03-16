@@ -2,7 +2,7 @@ package frc.robot.command;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.command.IntakeBalls;
+
 import edu.wpi.first.wpilibj.Timer;
 public class Tilt extends Command {
     public static boolean initTimeNeeded = true;

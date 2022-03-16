@@ -175,8 +175,9 @@ public class DriveTrain extends Subsystem {
             DriveTrain.resetGyro();
             turnDone = false;
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     public static void setPosition(double position){

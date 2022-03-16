@@ -9,7 +9,7 @@ public class OI {
     public static Joystick xbox = new Joystick(RobotMap.DRIVERCONTROLLER);
     public static Joystick joystick = new Joystick(RobotMap.BUTTONCONTROLLER);
     public static Button BlueButton = new JoystickButton(xbox,RobotMap.BUTTON_BLUE);
-    public static Button RedButton = new JoystickButton(xbox,RobotMap.BUTTON_RED);
+    public static Button RedButton = new JoystickButton(joystick,RobotMap.BUTTON_RED);
     public static Button GreenButton = new JoystickButton(joystick,RobotMap.BUTTON_GREEN);
     public static Button YellowButton = new JoystickButton(joystick,RobotMap.BUTTON_YELLOW);
     public static Button LeftBumpButton = new JoystickButton(xbox,RobotMap.BUTTON_LEFTBUMP);
@@ -23,8 +23,7 @@ public class OI {
         SmartDashboard.putString("oi constructor", "executed");
         YellowButton.whileHeld(new IndexBalls());
         //BLUE, GREEN, AND RED BUTTONS HAVE BEEN DECOMISSIONED
-       // RedButton.whenPressed(new Tilt(true));       
-       // GreenButton.whenPressed(new ShootBalls(false));
+
 
         RightBumpButton.whileHeld(new IntakeBalls());
         LeftBumpButton.whileHeld(new IndexBalls());
@@ -42,6 +41,12 @@ public class OI {
     // blue used for tilt, yellow used for index backwards
     public boolean yellowPressed(){
         return YellowButton.get();
+    }
+    public boolean greenPressed(){
+        return GreenButton.get();
+    }
+    public boolean redPressed(){
+        return RedButton.get();
     }
 
     public boolean startPressed(){

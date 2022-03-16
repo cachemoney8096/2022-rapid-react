@@ -3,7 +3,7 @@ import frc.robot.Robot;
 import frc.robot.OI;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Intake;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command; 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
