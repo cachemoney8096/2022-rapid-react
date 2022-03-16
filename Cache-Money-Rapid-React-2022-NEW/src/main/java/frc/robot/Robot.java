@@ -259,7 +259,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     SmartDashboard.putString("teleop.intialize", "executed");
-   
+    DriveTrain.resetMotors();
   }
   /** This function is called periodically during operator control. */
   @Override

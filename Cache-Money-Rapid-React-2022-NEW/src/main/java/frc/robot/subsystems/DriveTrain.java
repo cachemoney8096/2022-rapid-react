@@ -187,6 +187,13 @@ public class DriveTrain extends Subsystem {
         gyro.reset();
     }
 
+    public static void resetMotors(){
+        motorLeft1.restoreFactoryDefaults();
+        motorLeft2.restoreFactoryDefaults();
+        motorRight1.restoreFactoryDefaults();
+        motorRight2.restoreFactoryDefaults();
+    }
+
     public static double getPosition(){
         //* RobotMap.DRIVE_WHEEL_DIAMETER * Math.PI * (1/12)
         return motorLeft1.getEncoder().getPosition();
