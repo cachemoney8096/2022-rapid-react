@@ -170,7 +170,7 @@ public class DriveTrain extends Subsystem {
     }
 
     public static boolean turnCompleted(){ 
-        if(gyro.getRate() < 0.01 && Math.abs(gyro.getAngle()) > 87.0){
+        if(turnDone){
             DriveTrain.setPosition(0);
             DriveTrain.resetGyro();
             turnDone = false;
