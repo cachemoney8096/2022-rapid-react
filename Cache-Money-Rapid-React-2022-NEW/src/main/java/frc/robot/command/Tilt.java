@@ -47,11 +47,11 @@ public class Tilt extends Command {
 
     public static void tiltTrig(){
         double valTrig = Robot.m_oi.getDriverRawAxisXbox(2);
-        double speed = valTrig * 0.3;
-        if(speed < 0.1){
+        double speed = valTrig * 0.2;
+        if(speed < 0.06){
             speed = 0;
-        } else if(speed < 0.2 && speed > 0.1){
-            speed = 0.2;
+        } else if(speed < 0.12 && speed > 0.06){
+            speed = 0.12;
         }
         if(Robot.m_oi.bluePressed()){
             Intake.tilt(-speed);

@@ -14,13 +14,13 @@ import frc.robot.RobotMap;
 public class Climb extends Subsystem {   
     //Motor Variable setup
     private static CANSparkMax leftExtension = new CANSparkMax(RobotMap.LEFT_EXT_MOTOR, MotorType.kBrushless);
-    //private static CANSparkMax rightExtension = new CANSparkMax(RobotMap.RIGHT_EXT_MOTOR, MotorType.kBrushless);
+    private static CANSparkMax rightExtension = new CANSparkMax(RobotMap.RIGHT_EXT_MOTOR, MotorType.kBrushless);
     private static TalonFX leftPivot = new TalonFX(RobotMap.LEFT_PIVOT_MOTOR);
     private static TalonFX rightPivot= new TalonFX(RobotMap.RIGHT_PIVOT_MOTOR);
 
     public static void setExtensionSpeed(double speed){
         leftExtension.set(speed);
-        //rightExtension.set(speed);   
+        rightExtension.set(speed);   
     }
     public static void setPivotMotorSpeed(double speed){
         leftPivot.set(ControlMode.PercentOutput, speed);

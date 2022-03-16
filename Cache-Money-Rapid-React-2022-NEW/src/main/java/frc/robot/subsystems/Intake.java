@@ -21,6 +21,13 @@ public class Intake extends Subsystem {
         rightTilt.set(ControlMode.PercentOutput, speed);
  
     }
+
+    public static void tiltPID(double position, double kP, double kD, double kF){
+        leftTilt.config_kP(0, kP);
+        leftTilt.config_kD(0, kD);
+        leftTilt.config_kF(0, kF);
+        leftTilt.set(ControlMode.Position, position);
+    }
     public static void go(double speed){
         go.set(ControlMode.PercentOutput, speed);
     }

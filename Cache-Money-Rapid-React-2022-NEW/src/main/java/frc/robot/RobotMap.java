@@ -142,7 +142,7 @@ public class RobotMap {
 
   //AUTONOMOUS VALUES
   public static final int AUTONOMOUS_LENGTH = 15;
-  public static final double SHOT_CHARGE_TIME = 0.5;
+  public static final double SHOT_CHARGE_TIME = 1.0;
   public static final double AUTO_SHOT_STRENGTH = 0.5;
   public static final double AUTO_SHOT_TIME = 1.0;
   public static final double TILT_UP_TIME = 0.3;

@@ -52,6 +52,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+    m_chooser.addOption("My Auto", kCustomAuto);
+    SmartDashboard.putData("Auto choices", m_chooser);
+    SmartDashboard.putString("robot init", "executed");
     CameraServer.startAutomaticCapture();
     Robot.m_oi = new OI();
   }
@@ -78,7 +82,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-   
+    m_autoSelected = m_chooser.getSelected();
+    // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
+    System.out.println("Auto selected: " + m_autoSelected);
     DriveTrain.setPosition(0);
     DriveTrain.resetGyro();
   }
@@ -88,18 +94,21 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     switch (m_autoSelected) {
       case kCustomAuto:
-        CompetitionAutoSequece(false);
+        //CompetitionAutoSequece(false);
+        DriveTrain.PIDturn(-90, 0.05, 0.5, 0.0, 0.0, 0.0); //STEP TWO
       case kDefaultAuto:
-        CompetitionAutoSequece(true);
+        //CompetitionAutoSequece(true);
+        DriveTrain.PIDturn(-90, 0.05, 0.5, 0.0, 0.0, 0.0); //STEP TWO
       default:
+        /*
         if(ballRight){
           CompetitionAutoSequece(true);
         } else {
           CompetitionAutoSequece(false);
-        }
+        }*/
 
         // DriveTrain.PIDMove(-60, 0.005, 0.0, 0.0); //STEP ONE
-        // DriveTrain.PIDturn(-90, 0.05, 0.5, 0.0, 0.0, 0.0); //STEP TWO
+        DriveTrain.PIDturn(-90, 0.05, 0.5, 0.0, 0.0, 0.0); //STEP TWO
 
         /*
         //INTAKE TEST
@@ -129,6 +138,7 @@ public class Robot extends TimedRobot {
         AutoSequence[0] = true;
       } else {
         Shooter.ShootBraindead(RobotMap.AUTO_SHOT_STRENGTH);
+        Intake.tilt(-RobotMap.TILT_POWER);
       }
     } else if(!AutoSequence[1]){
       if(AutoTimer.timePassed(RobotMap.AUTO_SHOT_TIME)){
@@ -150,7 +160,7 @@ public class Robot extends TimedRobot {
       if(DriveTrain.distanceCompleted()){
         AutoSequence[3] = true;
       } else {
-        DriveTrain.PIDMove(-116.17, 0.005, 0.0, 0.0);
+        DriveTrain.PIDMove(-60, 0.005, 0.0, 0.0);
       }
     } else if(!AutoSequence[4]){
       if(DriveTrain.turnCompleted()){
@@ -236,6 +246,13 @@ public class Robot extends TimedRobot {
         Shooter.ShootBraindead(0.0);
       }
     }
+    int yuh = 0;
+    while (AutoSequence[yuh] == true){
+      yuh++;
+    }
+    System.out.println("Auto Sequence: " + yuh);
+    System.out.println("Velocity: " + DriveTrain.getGyroRate());
+    System.out.println("Position: " + DriveTrain.getGyroAngle());
   }
 
   /** This function is called once when teleop is enabled. */

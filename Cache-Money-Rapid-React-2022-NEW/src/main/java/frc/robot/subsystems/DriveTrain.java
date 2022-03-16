@@ -143,7 +143,7 @@ public class DriveTrain extends Subsystem {
         }
         double n = output;
         output = (error/setpointAngle)*n;
-        if(Math.abs(error) < 0.05 || turnDone){
+        if(Math.abs(error) < 0.005 || turnDone){
             output = 0;
             turnDone = true;
         } else if (Math.abs(output) < 0.07) {
@@ -161,7 +161,7 @@ public class DriveTrain extends Subsystem {
     }
 
     public static boolean distanceCompleted(){ 
-        if(DriveTrain.getVelocity() < 0.001 && DriveTrain.getPosition() > 1.0){
+        if(DriveTrain.getVelocity() < 0.01 && Math.abs(DriveTrain.getPosition()) > 20.0){
             DriveTrain.setPosition(0);
             DriveTrain.resetGyro();
             return true;
@@ -170,9 +170,10 @@ public class DriveTrain extends Subsystem {
     }
 
     public static boolean turnCompleted(){ 
-        if(gyro.getRate() < 0.001 && gyro.getAngle() > 2.0){
+        if(gyro.getRate() < 0.01 && Math.abs(gyro.getAngle()) > 87.0){
             DriveTrain.setPosition(0);
             DriveTrain.resetGyro();
+            turnDone = false;
             return true;
         }
         return false;
@@ -198,6 +199,10 @@ public class DriveTrain extends Subsystem {
 
     public static double getGyroAngle(){
         return gyro.getAngle();
+    }
+
+    public static double getGyroRate(){
+        return gyro.getRate();
     }
 
     public static I2C.Port getI2CPort(){
