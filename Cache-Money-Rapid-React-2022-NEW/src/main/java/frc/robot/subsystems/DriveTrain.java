@@ -134,7 +134,7 @@ public class DriveTrain extends Subsystem {
         } 
         double f = setpointAngle * kF; */
 
-        double output = p + d; //+ i + d + f;
+        double output = p; // + d; //+ i + d + f;
         System.out.println("Initial Output: " + output);
         if(output > 0.5){
             output = 0.5;
@@ -142,7 +142,7 @@ public class DriveTrain extends Subsystem {
             output = -0.5;
         }
         double n = output;
-        output = (error/setpointAngle)*n;
+        output = Math.abs(error/setpointAngle)*n;
         if(Math.abs(error) < 0.005 || turnDone){
             output = 0;
             turnDone = true;

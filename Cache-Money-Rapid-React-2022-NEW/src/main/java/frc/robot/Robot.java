@@ -159,6 +159,7 @@ public class Robot extends TimedRobot {
     } else if(!AutoSequence[3]){
       if(DriveTrain.distanceCompleted()){
         AutoSequence[3] = true;
+        DriveTrain.resetGyro();
       } else {
         DriveTrain.PIDMove(-60, 0.005, 0.0, 0.0);
       }
@@ -199,6 +200,7 @@ public class Robot extends TimedRobot {
       if(AutoTimer.timePassed(RobotMap.TILT_UP_TIME)){
         AutoSequence[8] = true;
         Intake.tilt(0.0);
+        DriveTrain.resetGyro();
       } else {
         Intake.tilt(RobotMap.TILT_UP_POWER);
       }
