@@ -12,27 +12,34 @@ public class OI {
     public static Button RedButton = new JoystickButton(joystick,RobotMap.BUTTON_RED);
     public static Button GreenButton = new JoystickButton(joystick,RobotMap.BUTTON_GREEN);
     public static Button YellowButton = new JoystickButton(joystick,RobotMap.BUTTON_YELLOW);
+    public static Button BlueJoystickButton = new JoystickButton(joystick, RobotMap.BUTTON_BLUE);
     public static Button LeftBumpButton = new JoystickButton(xbox,RobotMap.BUTTON_LEFTBUMP);
     public static Button RightBumpButton = new JoystickButton(xbox,RobotMap.BUTTON_RIGHTBUMP);
     public static Button BackButton = new JoystickButton(joystick,RobotMap.BUTTON_BACK);
     public static Button StartButton = new JoystickButton(joystick,RobotMap.BUTTON_START);
     public static Button joystickLeftBumpButton = new JoystickButton(joystick, RobotMap.BUTTON_LEFTBUMP);
     public static Button joystickRightBumpButton = new JoystickButton(joystick, RobotMap.BUTTON_RIGHTBUMP);
-   
-    public OI(){
+    public static Button joystickLeftStickButton = new JoystickButton(joystick, RobotMap.BUTTON_LEFTSTICK);
+    public static Button joystickRightStickButton = new JoystickButton(joystick, RobotMap.BUTTON_RIGHTSTICK);
+
+
+    public OI(){ 
         SmartDashboard.putString("oi constructor", "executed");
         YellowButton.whileHeld(new IndexBalls());
         //BLUE, GREEN, AND RED BUTTONS HAVE BEEN DECOMISSIONED
 
 
         RightBumpButton.whileHeld(new IntakeBalls());
-        LeftBumpButton.whileHeld(new IndexBalls());
+        //LeftBumpButton.whileHeld(new IndexBalls());
 
         StartButton.whileHeld(new AutomatedClimb());
         BackButton.whileHeld(new AutomatedClimb());
         
         joystickLeftBumpButton.whileHeld(new IndexSingle());
         joystickRightBumpButton.whileHeld(new IndexSingle());
+
+        joystickLeftStickButton.whenPressed(new SpeedAdjustment());
+        joystickRightStickButton.whenPressed(new SpeedAdjustment());
     }
 
     public boolean bluePressed(){
@@ -47,6 +54,14 @@ public class OI {
     }
     public boolean redPressed(){
         return RedButton.get();
+    }
+
+    public boolean leftBumpPressed(){
+        return LeftBumpButton.get();
+    }
+
+    public boolean leftStickPressed(){
+        return joystickLeftStickButton.get();
     }
 
     public boolean startPressed(){

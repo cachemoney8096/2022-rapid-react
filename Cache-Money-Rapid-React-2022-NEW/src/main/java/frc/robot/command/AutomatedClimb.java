@@ -56,17 +56,17 @@ public class AutomatedClimb extends Command {
         */
         if(Robot.m_oi.startPressed()){
             if(Robot.m_oi.redPressed()){
-                Climb.setExtensionLeft(0.3);
-            }else if(Robot.m_oi.greenPressed()){
                 Climb.setExtensionRight(0.3);
+            }else if(Robot.m_oi.greenPressed()){
+                Climb.setExtensionLeft(-0.3);
             } else {
                 Climb.setExtensionSpeed(0.3);
             }
         } else {
             if(Robot.m_oi.redPressed()){
-                Climb.setExtensionLeft(-0.3);
+                Climb.setExtensionRight(0.3);
             } else if(Robot.m_oi.greenPressed()){
-                Climb.setExtensionRight(-0.3);
+                Climb.setExtensionLeft(-0.3);
             } else {
                 Climb.setExtensionSpeed(-0.3);
             }

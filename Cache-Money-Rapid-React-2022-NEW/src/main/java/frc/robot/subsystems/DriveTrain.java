@@ -28,10 +28,10 @@ public class DriveTrain extends Subsystem {
     //I2C Port Setup  
     private static I2C.Port i2cport = I2C.Port.kOnboard;
     //Motor Variable setup
-    private static CANSparkMax motorLeft1 = new CANSparkMax(RobotMap.MOTOR_LEFT_1_ID, MotorType.kBrushless);
-    private static CANSparkMax motorLeft2 = new CANSparkMax(RobotMap.MOTOR_LEFT_2_ID, MotorType.kBrushless);
-    private static CANSparkMax motorRight1 = new CANSparkMax(RobotMap.MOTOR_RIGHT_1_ID, MotorType.kBrushless);
-    private static CANSparkMax motorRight2 = new CANSparkMax(RobotMap.MOTOR_RIGHT_2_ID, MotorType.kBrushless);
+    public static CANSparkMax motorLeft1 = new CANSparkMax(RobotMap.MOTOR_LEFT_1_ID, MotorType.kBrushless);
+    public static CANSparkMax motorLeft2 = new CANSparkMax(RobotMap.MOTOR_LEFT_2_ID, MotorType.kBrushless);
+    public static CANSparkMax motorRight1 = new CANSparkMax(RobotMap.MOTOR_RIGHT_1_ID, MotorType.kBrushless);
+    public static CANSparkMax motorRight2 = new CANSparkMax(RobotMap.MOTOR_RIGHT_2_ID, MotorType.kBrushless);
   //  private static ColorSensorV3 colorsensor = new ColorSensorV3(i2cport);
    // private static ColorMatch colormatcher = new ColorMatch();
     private static AHRS gyro = new AHRS(Port.kUSB);
@@ -89,7 +89,7 @@ public class DriveTrain extends Subsystem {
         motorLeft1.getPIDController().setD(RobotMap.DriveTrain_D_Value);
         motorLeft1.getPIDController().setOutputRange(-0.5, 0.5);
         double rotations = distanceIN/Math.PI/RobotMap.DRIVE_WHEEL_DIAMETER*8.45;
-        double reference = rotations*12.5/11;
+        double reference = rotations*12.5;
         motorLeft1.getPIDController().setReference(reference, CANSparkMax.ControlType.kPosition, 0);
         motorRight1.follow(motorLeft1, true);
         motorRight2.follow(motorLeft1, true);
@@ -143,7 +143,7 @@ public class DriveTrain extends Subsystem {
         }
         double n = output;
         output = Math.abs(error/setpointAngle)*n;
-        if(Math.abs(error) < 0.005 || turnDone){
+        if(Math.abs(error) < 0.5 || turnDone){
             output = 0;
             turnDone = true;
         } else if (Math.abs(output) < 0.07) {
@@ -195,6 +195,12 @@ public class DriveTrain extends Subsystem {
         motorRight2.restoreFactoryDefaults();
     }
 
+    public static void autoFollow(){
+        motorRight1.follow(motorLeft1, true);
+        motorRight2.follow(motorLeft1, true);
+        motorLeft2.follow(motorLeft1);
+    }
+
     public static double getPosition(){
         //* RobotMap.DRIVE_WHEEL_DIAMETER * Math.PI * (1/12)
         return motorLeft1.getEncoder().getPosition();
@@ -233,7 +239,7 @@ public class DriveTrain extends Subsystem {
     }  
     
     public static void writePositionToCSV(){
-        try (PrintWriter writer = new PrintWriter("DistanceErrorGraph.csv")) {
+        /*try (PrintWriter writer = new PrintWriter("DistanceErrorGraph.csv")) {
             System.out.println("We're good");
             StringBuilder sb = new StringBuilder();
             for(int i = 0; i < posColOne.size(); i++){
@@ -245,10 +251,11 @@ public class DriveTrain extends Subsystem {
             writer.write(sb.toString());      
           } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
-          }
+          }*/
     }    
 
     public static void writeAngleToCSV(){
+        /*
         try (PrintWriter writer = new PrintWriter("AngleErrorGraph.csv")) {
             System.out.println("We're good");
             StringBuilder sb = new StringBuilder();
@@ -262,6 +269,7 @@ public class DriveTrain extends Subsystem {
           } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
           }
+          */
     }    
 
   /*  public static Color getColor(){

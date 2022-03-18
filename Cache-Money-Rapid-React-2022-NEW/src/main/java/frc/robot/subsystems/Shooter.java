@@ -22,6 +22,7 @@ public class Shooter extends Subsystem {
     //Motor Variable setup
     private static TalonFX motor1= new TalonFX(RobotMap.SHOOTER_MOTOR_1_ID);
     private static TalonFX motor2= new TalonFX(RobotMap.SHOOTER_MOTOR_2_ID);
+    public static double Kadjust = 0;
     
     
    
@@ -64,13 +65,20 @@ public class Shooter extends Subsystem {
     }
     
     public static void ShootBraindead(double speed){
-        motor1.set(ControlMode.PercentOutput, speed);
-        motor2.set(ControlMode.PercentOutput, -speed);
+        motor1.set(ControlMode.PercentOutput, (speed + Kadjust));
+        motor2.set(ControlMode.PercentOutput, -(speed + Kadjust));
         SmartDashboard.putString("ShootBraindead(speed)", "executed");
+        System.out.println(Kadjust);
     }
 
     public static double getTargetArea(){
         return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
+    }
+
+    public static void speedAdjust(double adjust){
+        System.out.println("KADJUST PRE: " + Kadjust);
+        Kadjust = adjust + Kadjust;
+        System.out.println("KADJUST POST: " + Kadjust);
     }
 
    /* public static void setMotionMagic(double targetPos, double kF){

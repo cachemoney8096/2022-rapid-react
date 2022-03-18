@@ -19,7 +19,7 @@ public class Climb extends Subsystem {
     private static TalonFX rightPivot= new TalonFX(RobotMap.RIGHT_PIVOT_MOTOR);
 
     public static void setExtensionSpeed(double speed){
-        leftExtension.set(speed);
+        leftExtension.set(-speed);
         rightExtension.set(speed);   
     }
     public static void setExtensionLeft(double speed){

@@ -138,7 +138,7 @@ public class Robot extends TimedRobot {
         AutoSequence[0] = true;
       } else {
         Shooter.ShootBraindead(RobotMap.AUTO_SHOT_STRENGTH);
-        Intake.tilt(-RobotMap.TILT_DOWN_POWER);
+        Intake.tilt(-0.3);
       }
     } else if(!AutoSequence[1]){
       if(AutoTimer.timePassed(RobotMap.AUTO_SHOT_TIME)){
@@ -161,7 +161,7 @@ public class Robot extends TimedRobot {
         AutoSequence[3] = true;
         DriveTrain.resetGyro();
       } else {
-        DriveTrain.PIDMove(-60, 0.005, 0.0, 0.0);
+        DriveTrain.PIDMove(-116.17, 0.005, 0.0, 0.0);
       }
     } else if(!AutoSequence[4]){
       if(DriveTrain.turnCompleted()){
@@ -261,7 +261,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     SmartDashboard.putString("teleop.intialize", "executed");
-   
+    DriveTrain.resetMotors();
   }
   /** This function is called periodically during operator control. */
   @Override
