@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -23,15 +24,21 @@ public class Climb extends Subsystem {
         rightExtension.set(speed);   
     }
     public static void setExtensionLeft(double speed){
-        leftExtension.set(speed);
-          
+        leftExtension.set(-speed);  
     }
+
     public static void setExtensionRight(double speed){
         rightExtension.set(speed);   
     }
     public static void setPivotMotorSpeed(double speed){
         leftPivot.set(ControlMode.PercentOutput, speed);
         rightPivot.set(ControlMode.PercentOutput, speed);
+    }
+
+    public static void setBrakeMode(){
+        leftExtension.setIdleMode(IdleMode.kBrake);
+        rightExtension.setIdleMode(IdleMode.kBrake);
+        
     }
 
     public static void PIDExtend(double distanceIN, double kP, double kI, double kD){

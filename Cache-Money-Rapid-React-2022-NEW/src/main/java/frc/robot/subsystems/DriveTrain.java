@@ -161,7 +161,7 @@ public class DriveTrain extends Subsystem {
     }
 
     public static boolean distanceCompleted(){ 
-        if(DriveTrain.getVelocity() < 0.01 && Math.abs(DriveTrain.getPosition()) > 20.0){
+        if(Math.abs(DriveTrain.getVelocity()) < 0.01 && Math.abs(DriveTrain.getPosition()) > 20.0){
             DriveTrain.setPosition(0);
             DriveTrain.resetGyro();
             return true;

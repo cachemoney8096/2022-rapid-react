@@ -58,6 +58,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putString("robot init", "executed");
     CameraServer.startAutomaticCapture();
     Robot.m_oi = new OI();
+    Climb.setBrakeMode();
   }
 
   /**
@@ -87,6 +88,7 @@ public class Robot extends TimedRobot {
     System.out.println("Auto selected: " + m_autoSelected);
     DriveTrain.setPosition(0);
     DriveTrain.resetGyro();
+    Climb.setBrakeMode();
   }
 
   /** This function is called periodically during autonomous. */
@@ -94,18 +96,23 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     switch (m_autoSelected) {
       case kCustomAuto:
-        CompetitionAutoSequence(false);
+        CIRAutoSequence();
+        //CompetitionAutoSequence(false);
         //DriveTrain.PIDturn(-90, 0.05, 0.5, 0.0, 0.0, 0.0); //STEP TWO
       case kDefaultAuto:
-        CompetitionAutoSequence(true);
+        CIRAutoSequence();
+        //CompetitionAutoSequence(true);
         //DriveTrain.PIDturn(-90, 0.05, 0.5, 0.0, 0.0, 0.0); //STEP TWO
       default:
-        
-        if(ballRight){
+        //if(DriveTrain.distanceCompleted()){
+        CIRAutoSequence();
+        //DriveTrain.PIDMove(-200, 0.005, 0.0, 0.0);
+        //}
+        /*if(ballRight){
           CompetitionAutoSequence(true);
         } else {
           CompetitionAutoSequence(false);
-        }
+        }*/
 
         // DriveTrain.PIDMove(-60, 0.005, 0.0, 0.0); //STEP ONE
         //DriveTrain.PIDturn(-90, 0.05, 0.5, 0.0, 0.0, 0.0); //STEP TWO
@@ -132,13 +139,47 @@ public class Robot extends TimedRobot {
     }
   }
 
+  public static void CIRAutoSequence(){
+    if(!AutoSequence[0]){
+      if(AutoTimer.timePassed(RobotMap.SHOT_CHARGE_TIME)){
+        AutoSequence[0] = true;
+      } else {
+        Shooter.ShootBraindead(RobotMap.AUTO_SHOT_STRENGTH);
+        Intake.tilt(0.3);
+      }
+    } else if(!AutoSequence[1]){
+      if(AutoTimer.timePassed(RobotMap.AUTO_SHOT_TIME)){
+        AutoSequence[1] = true;
+        Intake.BackIndex(0.0);
+        Shooter.ShootBraindead(0.0);
+      } else {
+        Intake.Limit();
+        Intake.BackIndex(0.4);
+      }
+    } else if(!AutoSequence[2]){
+      if(AutoTimer.timePassed(RobotMap.TILT_UP_TIME)){
+        AutoSequence[2] = true;
+        Intake.tilt(0.0);
+      } else {
+        Intake.tilt(RobotMap.TILT_UP_POWER);
+      }
+    } else if(!AutoSequence[3]){
+      if(AutoTimer.timePassed(3)){
+        DriveTrain.move(0, 0);
+        AutoSequence[3] = true;
+      } else {
+        DriveTrain.move(-0.5, -0.5);
+      }
+    }
+  }
+
   public static void CompetitionAutoSequence(boolean turnRight){
     if(!AutoSequence[0]){
       if(AutoTimer.timePassed(RobotMap.SHOT_CHARGE_TIME)){
         AutoSequence[0] = true;
       } else {
         Shooter.ShootBraindead(RobotMap.AUTO_SHOT_STRENGTH);
-        Intake.tilt(-0.3);
+        Intake.tilt(0.3);
       }
     } else if(!AutoSequence[1]){
       if(AutoTimer.timePassed(RobotMap.AUTO_SHOT_TIME)){
@@ -161,7 +202,7 @@ public class Robot extends TimedRobot {
         AutoSequence[3] = true;
         DriveTrain.resetGyro();
       } else {
-        DriveTrain.PIDMove(-116.17, 0.005, 0.0, 0.0);
+        DriveTrain.PIDMove(-200, 0.005, 0.0, 0.0);
       }
     } else if(!AutoSequence[4]){
       if(DriveTrain.turnCompleted()){
@@ -174,11 +215,11 @@ public class Robot extends TimedRobot {
         DriveTrain.PIDturn(kDir*90, 0.05, 0.5, 0, 0, 0);
       }
     } else if(!AutoSequence[5]){
-      if(DriveTrain.distanceCompleted()){
-        AutoSequence[5] = true;
-      } else {
-        DriveTrain.PIDMove(0, 0.005, 0.0, 0.0);
-      }
+      //if(DriveTrain.distanceCompleted()){
+        //AutoSequence[5] = true;
+      //} else {
+      DriveTrain.PIDMove(-200, 0.005, 0, 0);
+      //}
     } else if(!AutoSequence[6]){
       if(AutoTimer.timePassed(RobotMap.TILT_DOWN_TIME)){
         AutoSequence[6] = true;
@@ -262,6 +303,7 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     SmartDashboard.putString("teleop.intialize", "executed");
     DriveTrain.resetMotors();
+    Climb.setBrakeMode();
   }
   /** This function is called periodically during operator control. */
   @Override
