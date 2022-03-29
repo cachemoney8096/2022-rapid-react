@@ -302,5 +302,10 @@ public class DriveTrain extends Subsystem {
         
     }
 
+    @Override
+    public void periodic(){
+        
+    }
+
 }
     

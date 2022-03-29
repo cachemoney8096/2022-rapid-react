@@ -3,7 +3,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.util.Color;
 
 import frc.robot.command.TankDrive;
-
+//put these in individual functions or classes or whatever
 public class RobotMap {
   //Drive Train Motor IDs
   public static final int  MOTOR_LEFT_1_ID = 9;  
