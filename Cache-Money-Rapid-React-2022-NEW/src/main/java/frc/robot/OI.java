@@ -5,16 +5,19 @@ import frc.robot.command.*;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class OI {
-     //Button inputs
+     //Joystick inputs
     public static Joystick xbox = new Joystick(RobotMap.DRIVERCONTROLLER);
     public static Joystick joystick = new Joystick(RobotMap.BUTTONCONTROLLER);
+
+    //Driver Buttons
     public static Button BlueButton = new JoystickButton(xbox,RobotMap.BUTTON_BLUE);
+    public static Button LeftBumpButton = new JoystickButton(xbox,RobotMap.BUTTON_LEFTBUMP);
+
+    //Joystick Buttons
     public static Button RedButton = new JoystickButton(joystick,RobotMap.BUTTON_RED);
     public static Button GreenButton = new JoystickButton(joystick,RobotMap.BUTTON_GREEN);
     public static Button YellowButton = new JoystickButton(joystick,RobotMap.BUTTON_YELLOW);
     public static Button BlueJoystickButton = new JoystickButton(joystick, RobotMap.BUTTON_BLUE);
-    public static Button LeftBumpButton = new JoystickButton(xbox,RobotMap.BUTTON_LEFTBUMP);
-    public static Button RightBumpButton = new JoystickButton(xbox,RobotMap.BUTTON_RIGHTBUMP);
     public static Button BackButton = new JoystickButton(joystick,RobotMap.BUTTON_BACK);
     public static Button StartButton = new JoystickButton(joystick,RobotMap.BUTTON_START);
     public static Button joystickLeftBumpButton = new JoystickButton(joystick, RobotMap.BUTTON_LEFTBUMP);
@@ -29,7 +32,7 @@ public class OI {
         //BLUE, GREEN, AND RED BUTTONS HAVE BEEN DECOMISSIONED
 
 
-        RightBumpButton.whileHeld(new IntakeBalls());
+        joystickRightStickButton.whileHeld(new IntakeBalls());
         //LeftBumpButton.whileHeld(new IndexBalls());
 
         StartButton.whileHeld(new AutomatedClimb());
@@ -39,7 +42,6 @@ public class OI {
         joystickRightBumpButton.whileHeld(new IndexSingle());
 
         joystickLeftStickButton.whenPressed(new SpeedAdjustment());
-        joystickRightStickButton.whenPressed(new SpeedAdjustment());
     }
 
     public boolean bluePressed(){

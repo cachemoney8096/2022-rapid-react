@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.util.Color;
 
 import frc.robot.command.TankDrive;
@@ -14,6 +15,8 @@ public class RobotMap {
   public static final double DriveTrain_I_Value= 0.0001;
   public static final double DriveTrain_D_Value= 0.005;
   public static final double DRIVE_WHEEL_DIAMETER = 4;
+  public static final double DRIVE_WHEEL_CIRCUMFERENCE = Math.PI * DRIVE_WHEEL_DIAMETER;
+  //diameter is in inches
 
  
   //Shooter Motor IDs
@@ -151,6 +154,26 @@ public class RobotMap {
   public static final double TILT_UP_POWER = 0.3;
   public static final double INDEX_TIME = 0.3;
   public static final double MOVE_CORRECTION_TIME = 1.0;
+
+  //Path Following Values (All Units are in SI Units -- Meters, Seconds, Volts)
+  public static final double TRACK_WIDTH = 0;
+  public static final DifferentialDriveKinematics DRIVE_KINEMATICS =  new DifferentialDriveKinematics(TRACK_WIDTH);
+
+  public static double kA_DRIVE;
+  public static double kV_DRIVE;
+  public static double kS_DRIVE;
+  public static final double kP_DRIVE_VEL = 0;
+  /*
+  public static final int kEncoderCPR = 1024;
+  public static final double kWheelDiameterMeters = 0.15;
+  public static final double kEncoderDistancePerPulse = (kWheelDiameterMeters * Math.PI) / (double) kEncoderCPR;
+*/
+  public static final double MAX_SPEED = 3;
+  public static final double MAX_ACCELERATION = 3;
+  public static final double k_RAMSETE_B = 2;
+  public static final double k_RAMSETE_ZETA = 0.7;
+
+
 
 
   

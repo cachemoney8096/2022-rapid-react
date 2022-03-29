@@ -1,10 +1,13 @@
 package frc.robot.subsystems;
 
 
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
@@ -24,16 +27,23 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.SparkMaxRelativeEncoder;
 */
 
+//Code from https://github.com/wpilibsuite/allwpilib/blob/main/wpilibjExamples/src/main/java/edu/wpi/first/wpilibj/examples/ramsetecommand/subsystems/DriveSubsystem.java and https://github.com/alexander-beaver/TalonTrajectoryExample/blob/master/src/main/java/frc/robot/subsystems/Drivetrain.java
 public class DriveTrain extends Subsystem { 
     //I2C Port Setup  
     private static I2C.Port i2cport = I2C.Port.kOnboard;
+
     //Motor Variable setup
     public static CANSparkMax motorLeft1 = new CANSparkMax(RobotMap.MOTOR_LEFT_1_ID, MotorType.kBrushless);
     public static CANSparkMax motorLeft2 = new CANSparkMax(RobotMap.MOTOR_LEFT_2_ID, MotorType.kBrushless);
     public static CANSparkMax motorRight1 = new CANSparkMax(RobotMap.MOTOR_RIGHT_1_ID, MotorType.kBrushless);
     public static CANSparkMax motorRight2 = new CANSparkMax(RobotMap.MOTOR_RIGHT_2_ID, MotorType.kBrushless);
-  //  private static ColorSensorV3 colorsensor = new ColorSensorV3(i2cport);
-   // private static ColorMatch colormatcher = new ColorMatch();
+    private final MotorControllerGroup leftControllers = new MotorControllerGroup(motorLeft1, motorLeft2);
+    private final MotorControllerGroup rightControllers = new MotorControllerGroup(motorRight1, motorRight2);
+    
+    private final DifferentialDrive m_drive = new DifferentialDrive(leftControllers, rightControllers);
+    
+    //private static ColorSensorV3 colorsensor = new ColorSensorV3(i2cport);
+    //private static ColorMatch colormatcher = new ColorMatch();
     private static AHRS gyro = new AHRS(Port.kUSB);
 
     public static boolean initAngleNeeded = true;
@@ -57,6 +67,13 @@ public class DriveTrain extends Subsystem {
     public static double currentRotations = 0;
 
     public static boolean turnDone = false;
+
+    public static DifferentialDriveOdometry m_odometry = new DifferentialDriveOdometry(gyro.getRotation2d());
+
+    @Override
+    public void periodic(){
+        m_odometry.update(gyro.getRotation2d(), motorLeft1.getEncoder().getDistance(), motorRight1.getEncoder().getDistance());
+    }
 
     public static void setLeftMotors(double speed){
         motorLeft1.set(speed); 
@@ -299,11 +316,6 @@ public class DriveTrain extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        
-    }
-
-    @Override
-    public void periodic(){
         
     }
 
