@@ -51,7 +51,7 @@ public class TankDrive extends Command{
     //The Left is pos the right is neg
     double kSpeed = 1.0;
     if(Robot.m_oi.leftBumpPressed()){
-      kSpeed = 0.5;
+      kSpeed = 0.4;
     }
     double right = (speed + turn) * kSpeed;
     double left = (speed - turn) * kSpeed;
