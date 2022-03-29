@@ -59,6 +59,7 @@ public class Robot extends TimedRobot {
     CameraServer.startAutomaticCapture();
     Robot.m_oi = new OI();
     Climb.setBrakeMode();
+    Intake.setTiltBrakeMode();
   }
 
   /**
@@ -89,6 +90,7 @@ public class Robot extends TimedRobot {
     DriveTrain.setPosition(0);
     DriveTrain.resetGyro();
     Climb.setBrakeMode();
+    Intake.setTiltBrakeMode();
   }
 
   /** This function is called periodically during autonomous. */
@@ -304,6 +306,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putString("teleop.intialize", "executed");
     DriveTrain.resetMotors();
     Climb.setBrakeMode();
+    Intake.setTiltBrakeMode();
   }
   /** This function is called periodically during operator control. */
   @Override

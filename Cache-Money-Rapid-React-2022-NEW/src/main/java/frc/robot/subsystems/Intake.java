@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 import frc.robot.RobotMap;
 import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -20,6 +22,10 @@ public class Intake extends Subsystem {
         leftTilt.set(ControlMode.PercentOutput, -speed); 
         //rightTilt.set(ControlMode.PercentOutput, speed);
  
+    }
+
+    public static void setTiltBrakeMode(){
+        leftTilt.setNeutralMode(NeutralMode.Brake);
     }
 
     public static void tiltPID(double position, double kP, double kD, double kF){
