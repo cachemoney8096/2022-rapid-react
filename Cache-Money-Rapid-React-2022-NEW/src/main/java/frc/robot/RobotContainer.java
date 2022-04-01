@@ -36,7 +36,7 @@ public class RobotContainer {
                 new Pose2d(3, 0, new Rotation2d(0)), 
                 config);
 
-        RamseteCommand ramseteCommand = 
+        /*RamseteCommand ramseteCommand = 
             new RamseteCommand(
                 exampleTrajectory,
                 m_drivetrain::getPose, 
@@ -49,9 +49,9 @@ public class RobotContainer {
                 m_drivetrain);
 
         m_drivetrain.resetOdometry(exampleTrajectory.getInitialPose());
-
-        return ramseteCommand.andThen(() -> m_drivetrain.tankDriveVolts(0, 0));
-            
+        */
+        //return ramseteCommand.andThen(() -> m_drivetrain.tankDriveVolts(0, 0));
+          return null;  
 
     }
     

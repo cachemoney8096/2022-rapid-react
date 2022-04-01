@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public class Intake extends Subsystem {   
     //Motor Variable setup
-  public static final int TILT_INTAKE_MOTOR= 0;
+ 
     private static TalonFX leftTilt= new TalonFX(RobotMap.LEFT_TILT_INTAKE_MOTOR);
     //private static TalonFX rightTilt = new TalonFX(RobotMap.RIGHT_TILT_INTAKE_MOTOR);
     private static TalonFX go= new TalonFX(RobotMap.GO_INTAKE_MOTOR);
@@ -17,13 +17,18 @@ public class Intake extends Subsystem {
     private static CANSparkMax IndexMotor2 = new CANSparkMax(RobotMap.FrontIndexMotorRight, MotorType.kBrushless);
     private static CANSparkMax IndexMotor3 = new CANSparkMax(RobotMap.BackIndexMotorLeft, MotorType.kBrushless);
     private static CANSparkMax IndexMotor4 = new CANSparkMax(RobotMap.BackIndexMotorRight, MotorType.kBrushless);
-    
+    public static double Kadjust1 = 0;
+
     public static void tilt(double speed){
-        leftTilt.set(ControlMode.PercentOutput, -speed); 
+        leftTilt.set(ControlMode.PercentOutput, -(speed+Kadjust1)); 
         //rightTilt.set(ControlMode.PercentOutput, speed);
  
     }
-
+    public static void speedAdjust(double adjust){
+        System.out.println("KADJUST PRE: " + Kadjust1);
+        Kadjust1 = adjust + Kadjust1;
+        System.out.println("KADJUST POST: " + Kadjust1);
+    }
     public static void setTiltBrakeMode(){
         leftTilt.setNeutralMode(NeutralMode.Brake);
     }

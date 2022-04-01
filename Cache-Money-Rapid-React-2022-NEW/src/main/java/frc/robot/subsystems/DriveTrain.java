@@ -69,11 +69,11 @@ public class DriveTrain extends Subsystem {
     public static boolean turnDone = false;
 
     public static DifferentialDriveOdometry m_odometry = new DifferentialDriveOdometry(gyro.getRotation2d());
-
+    /*
     @Override
     public void periodic(){
         m_odometry.update(gyro.getRotation2d(), motorLeft1.getEncoder().getDistance(), motorRight1.getEncoder().getDistance());
-    }
+    }*/
 
     public static void setLeftMotors(double speed){
         motorLeft1.set(speed); 
@@ -106,7 +106,7 @@ public class DriveTrain extends Subsystem {
         motorLeft1.getPIDController().setD(RobotMap.DriveTrain_D_Value);
         motorLeft1.getPIDController().setOutputRange(-0.5, 0.5);
         double rotations = distanceIN/Math.PI/RobotMap.DRIVE_WHEEL_DIAMETER*8.45;
-        double reference = rotations*12.5;
+        double reference = rotations*12.5*11;
         motorLeft1.getPIDController().setReference(reference, CANSparkMax.ControlType.kPosition, 0);
         motorRight1.follow(motorLeft1, true);
         motorRight2.follow(motorLeft1, true);

@@ -22,8 +22,8 @@ public class OI {
     public static Button StartButton = new JoystickButton(joystick,RobotMap.BUTTON_START);
     public static Button joystickLeftBumpButton = new JoystickButton(joystick, RobotMap.BUTTON_LEFTBUMP);
     public static Button joystickRightBumpButton = new JoystickButton(joystick, RobotMap.BUTTON_RIGHTBUMP);
-    public static Button joystickLeftStickButton = new JoystickButton(joystick, RobotMap.BUTTON_LEFTSTICK);
-    public static Button joystickRightStickButton = new JoystickButton(joystick, RobotMap.BUTTON_RIGHTSTICK);
+    public static Button joystickLeftStickButton = new JoystickButton(xbox, RobotMap.BUTTON_LEFTSTICK);
+    public static Button joystickRightStickButton = new JoystickButton(xbox, RobotMap.BUTTON_RIGHTSTICK);
 
 
     public OI(){ 
@@ -32,20 +32,20 @@ public class OI {
         //BLUE, GREEN, AND RED BUTTONS HAVE BEEN DECOMISSIONED
 
 
-        joystickRightStickButton.whileHeld(new IntakeBalls());
-        //LeftBumpButton.whileHeld(new IndexBalls());
+        joystickRightBumpButton.whileHeld(new IntakeBalls());
+        joystickLeftBumpButton.whileHeld(new IndexBalls());
 
         StartButton.whileHeld(new AutomatedClimb());
         BackButton.whileHeld(new AutomatedClimb());
         
-        joystickLeftBumpButton.whileHeld(new IndexSingle());
-        joystickRightBumpButton.whileHeld(new IndexSingle());
+        //joystickLeftBumpButton.whileHeld(new IndexSingle());
+        //joystickRightBumpButton.whileHeld(new IndexSingle());
 
-        joystickLeftStickButton.whenPressed(new SpeedAdjustment());
+        //joystickLeftStickButton.whenPressed(new SpeedAdjustment());
     }
 
     public boolean bluePressed(){
-        return BlueButton.get();
+        return BlueJoystickButton.get();
     }
     // blue used for tilt, yellow used for index backwards
     public boolean yellowPressed(){
@@ -70,9 +70,9 @@ public class OI {
         return StartButton.get();
     }
 
-    public boolean rightBumpPressed(){
+  /*  public boolean rightBumpPressed(){
         return joystickRightBumpButton.get();
-    }
+    }*/
 
     public double getDriverRawAxisXbox(int axis){
         return xbox.getRawAxis(axis);

@@ -38,6 +38,7 @@ public class IntakeBalls extends Command{
     protected void execute() {
         Intake.Limit();
         go();
+        System.out.println("executed");
     }
 
     @Override

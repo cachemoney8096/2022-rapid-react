@@ -175,6 +175,165 @@ public class Robot extends TimedRobot {
     }
   }
 
+  public static void MidwestAutoSequence (boolean turnRight){
+    if(!AutoSequence[0]){
+      if(DriveTrain.distanceCompleted()){
+        AutoSequence[0] = true;
+      } else {
+        DriveTrain.PIDMove(200, 0.005, 0.0, 0.0);
+      }
+    } else if(!AutoSequence[6]){
+      if(AutoTimer.timePassed(RobotMap.TILT_DOWN_TIME)){
+        AutoSequence[6] = true;
+        Intake.tilt(0.0);
+      } else {
+        Intake.go(0.75);
+        Intake.tilt(-RobotMap.TILT_DOWN_POWER);
+      }
+    } else if(!AutoSequence[7]){
+      if(AutoTimer.timePassed(RobotMap.INDEX_TIME)){
+        AutoSequence[7] = true;
+        Intake.go(0.0);
+        Intake.BackIndex(0.0);
+      } else {
+        Intake.go(0.75);
+        Intake.BackIndex(0.4);
+      }
+    } else if(!AutoSequence[8]){
+      if(AutoTimer.timePassed(RobotMap.TILT_UP_TIME)){
+        AutoSequence[8] = true;
+        Intake.tilt(0.0);
+        DriveTrain.resetGyro();
+      } else {
+        Intake.tilt(RobotMap.TILT_UP_POWER);
+      }
+    } else if(!AutoSequence[4]){
+      if(DriveTrain.turnCompleted()){
+        AutoSequence[4] = true;
+      } else {
+        int kDir = 1;
+        if(!turnRight){
+          kDir = -1;
+        }
+        DriveTrain.PIDturn(kDir*180, 0.05, 0.5, 0, 0, 0);
+      }
+    } else if(!AutoSequence[1]){
+      if(AutoTimer.timePassed(RobotMap.AUTO_SHOT_TIME)){
+        AutoSequence[1] = true;
+        Intake.BackIndex(0.0);
+        Shooter.ShootBraindead(0.0);
+      } else {
+        Intake.Limit();
+        Intake.BackIndex(0.4);
+      }
+    } else if(!AutoSequence[2]){
+      if(AutoTimer.timePassed(RobotMap.TILT_UP_TIME)){
+        AutoSequence[2] = true;
+        Intake.tilt(0.0);
+      } else {
+        Intake.tilt(RobotMap.TILT_UP_POWER);
+      }
+    } else if(!AutoSequence[3]){
+      if(DriveTrain.distanceCompleted()){
+        AutoSequence[3] = true;
+        DriveTrain.resetGyro();
+      } else {
+        DriveTrain.PIDMove(-200, 0.005, 0.0, 0.0);
+      }
+    } else if(!AutoSequence[4]){
+      if(DriveTrain.turnCompleted()){
+        AutoSequence[4] = true;
+      } else {
+        int kDir = 1;
+        if(!turnRight){
+          kDir = -1;
+        }
+        DriveTrain.PIDturn(kDir*90, 0.05, 0.5, 0, 0, 0);
+      }
+    } else if(!AutoSequence[5]){
+      //if(DriveTrain.distanceCompleted()){
+        //AutoSequence[5] = true;
+      //} else {
+      DriveTrain.PIDMove(-200, 0.005, 0, 0);
+      //}
+    } else if(!AutoSequence[6]){
+      if(AutoTimer.timePassed(RobotMap.TILT_DOWN_TIME)){
+        AutoSequence[6] = true;
+        Intake.tilt(0.0);
+      } else {
+        Intake.go(0.75);
+        Intake.tilt(-RobotMap.TILT_DOWN_POWER);
+      }
+    } else if(!AutoSequence[7]){
+      if(AutoTimer.timePassed(RobotMap.INDEX_TIME)){
+        AutoSequence[7] = true;
+        Intake.go(0.0);
+        Intake.BackIndex(0.0);
+      } else {
+        Intake.go(0.75);
+        Intake.BackIndex(0.4);
+      }
+    } else if(!AutoSequence[8]){
+      if(AutoTimer.timePassed(RobotMap.TILT_UP_TIME)){
+        AutoSequence[8] = true;
+        Intake.tilt(0.0);
+        DriveTrain.resetGyro();
+      } else {
+        Intake.tilt(RobotMap.TILT_UP_POWER);
+      }
+    } else if(!AutoSequence[9]){
+      if(DriveTrain.turnCompleted()){
+        AutoSequence[9] = true;
+      } else {
+        int kDir = -1;
+        if(!turnRight){
+          kDir = 1;
+        }
+        DriveTrain.PIDturn(90*kDir, 0.05, 0.5, 0, 0, 0);
+      }
+    } else if(!AutoSequence[10]){
+      if(DriveTrain.distanceCompleted()){
+        AutoSequence[10] = true;
+      } else {
+        DriveTrain.PIDMove(116.17, 0.005, 0.0, 0.0);
+      }
+    } else if(!AutoSequence[11]){
+      if(AutoTimer.timePassed(RobotMap.MOVE_CORRECTION_TIME)){
+        AutoSequence[11] = true;
+      } else {
+        DriveTrain.move(0.2,0.2);
+      }
+    } else if(!AutoSequence[12]){
+      if(AutoTimer.timePassed(RobotMap.SHOT_CHARGE_TIME)){
+        AutoSequence[12] = true;
+        Intake.tilt(0.0);
+      } else {
+        Intake.tilt(-RobotMap.TILT_DOWN_POWER);
+        Shooter.ShootBraindead(0.5);
+      }
+    } else if(!AutoSequence[13]){
+      if(AutoTimer.timePassed(RobotMap.SHOT_TIME)){
+        AutoSequence[13] = true;
+      } else {
+        Intake.Limit();
+        Intake.BackIndex(0.4);
+      }
+    } else if(!AutoSequence[14]){
+      if(AutoTimer.timePassed(0.3)){
+        AutoSequence[14] = true;
+      } else {
+        Shooter.ShootBraindead(0.0);
+      }
+    }
+    int yuh = 0;
+    while (AutoSequence[yuh] == true){
+      yuh++;
+    }
+    System.out.println("Auto Sequence: " + yuh);
+    System.out.println("Velocity: " + DriveTrain.getGyroRate());
+    System.out.println("Position: " + DriveTrain.getGyroAngle());
+  }
+
   public static void CompetitionAutoSequence(boolean turnRight){
     if(!AutoSequence[0]){
       if(AutoTimer.timePassed(RobotMap.SHOT_CHARGE_TIME)){

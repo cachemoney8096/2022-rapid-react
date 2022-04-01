@@ -62,7 +62,7 @@ public class ShootBalls extends Command{
     }
   }
 
-  public double SpeedAdjustment(){
+  /*public double SpeedAdjustment(){
     double adjust= 0.5; 
     if(OI.RightBumpButton.get()){
         adjust+=.1;
@@ -70,9 +70,9 @@ public class ShootBalls extends Command{
     else if(OI.LeftBumpButton.get()){
         adjust-=.1;
     }
-        return adjust;
-    
-}
+    return adjust;
+ */   
+//}
 
   public static double getInitialVelocity(boolean upper){
     double dH = 0;
