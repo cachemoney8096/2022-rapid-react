@@ -9,6 +9,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import edu.wpi.first.cameraserver.CameraServer;
 import frc.robot.subsystems.AutoTimer;
 import frc.robot.subsystems.Climb;
@@ -59,7 +62,7 @@ public class Robot extends TimedRobot {
     CameraServer.startAutomaticCapture();
     Robot.m_oi = new OI();
     Climb.setBrakeMode();
-    Intake.setTiltBrakeMode();
+    //Intake.setTiltBrakeMode();
   }
 
   /**
@@ -90,7 +93,13 @@ public class Robot extends TimedRobot {
     DriveTrain.setPosition(0);
     DriveTrain.resetGyro();
     Climb.setBrakeMode();
-    Intake.setTiltBrakeMode();
+    for(int i = 0; i < 10; i++){
+      AutoSequence[i] = false;
+    }
+    AutoSequence[0] = false;
+    AutoSequence[1] = false;
+    AutoSequence[2] = false;
+    //Intake.setTiltBrakeMode();
   }
 
   /** This function is called periodically during autonomous. */
@@ -98,16 +107,22 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     switch (m_autoSelected) {
       case kCustomAuto:
-        CIRAutoSequence();
+        MidwestAutoSequence();
         //CompetitionAutoSequence(false);
+        //DriveTrain.PIDMove(40, 0.005, 0.0, 0.0);
+        //DriveTrain.PIDMove(-12, 0.005, 0.0, 0.0);
+        //System.out.println("Encoder Value: " + DriveTrain.getPosition());
         //DriveTrain.PIDturn(-90, 0.05, 0.5, 0.0, 0.0, 0.0); //STEP TWO
       case kDefaultAuto:
-        CIRAutoSequence();
+        //DriveTrain.PIDMove(40, 0.005, 0.0, 0.0);
+        //DriveTrain.PIDMove(-12, 0.005, 0.0, 0.0);
+        //System.out.println("Encoder Value: " + DriveTrain.getPosition());
+        MidwestAutoSequence();
         //CompetitionAutoSequence(true);
         //DriveTrain.PIDturn(-90, 0.05, 0.5, 0.0, 0.0, 0.0); //STEP TWO
       default:
         //if(DriveTrain.distanceCompleted()){
-        CIRAutoSequence();
+        MidwestAutoSequence();
         //DriveTrain.PIDMove(-200, 0.005, 0.0, 0.0);
         //}
         /*if(ballRight){
@@ -116,7 +131,9 @@ public class Robot extends TimedRobot {
           CompetitionAutoSequence(false);
         }*/
 
-        // DriveTrain.PIDMove(-60, 0.005, 0.0, 0.0); //STEP ONE
+        //DriveTrain.PIDMove(40.5, 0.005, 0.0, 0.0);
+        //DriveTrain.PIDMove(-12, 0.005, 0.0, 0.0);
+        System.out.println("Encoder Value: " + DriveTrain.getPosition()); //STEP ONE
         //DriveTrain.PIDturn(-90, 0.05, 0.5, 0.0, 0.0, 0.0); //STEP TWO
 
         /*
@@ -141,7 +158,7 @@ public class Robot extends TimedRobot {
     }
   }
 
-  public static void CIRAutoSequence(){
+  /*public static void CIRAutoSequence(){
     if(!AutoSequence[0]){
       if(AutoTimer.timePassed(RobotMap.SHOT_CHARGE_TIME)){
         AutoSequence[0] = true;
@@ -173,156 +190,96 @@ public class Robot extends TimedRobot {
         DriveTrain.move(-0.5, -0.5);
       }
     }
-  }
+  }*/
 
-  public static void MidwestAutoSequence (boolean turnRight){
+  public static void MidwestAutoSequence(){
     if(!AutoSequence[0]){
       if(DriveTrain.distanceCompleted()){
         AutoSequence[0] = true;
+        DriveTrain.move(0,0);
       } else {
-        DriveTrain.PIDMove(200, 0.005, 0.0, 0.0);
-      }
-    } else if(!AutoSequence[6]){
-      if(AutoTimer.timePassed(RobotMap.TILT_DOWN_TIME)){
-        AutoSequence[6] = true;
-        Intake.tilt(0.0);
-      } else {
-        Intake.go(0.75);
-        Intake.tilt(-RobotMap.TILT_DOWN_POWER);
-      }
-    } else if(!AutoSequence[7]){
-      if(AutoTimer.timePassed(RobotMap.INDEX_TIME)){
-        AutoSequence[7] = true;
-        Intake.go(0.0);
-        Intake.BackIndex(0.0);
-      } else {
-        Intake.go(0.75);
-        Intake.BackIndex(0.4);
-      }
-    } else if(!AutoSequence[8]){
-      if(AutoTimer.timePassed(RobotMap.TILT_UP_TIME)){
-        AutoSequence[8] = true;
-        Intake.tilt(0.0);
-        DriveTrain.resetGyro();
-      } else {
-        Intake.tilt(RobotMap.TILT_UP_POWER);
-      }
-    } else if(!AutoSequence[4]){
-      if(DriveTrain.turnCompleted()){
-        AutoSequence[4] = true;
-      } else {
-        int kDir = 1;
-        if(!turnRight){
-          kDir = -1;
-        }
-        DriveTrain.PIDturn(kDir*180, 0.05, 0.5, 0, 0, 0);
+        DriveTrain.PIDMove(40.5, 0.005, 0.0, 0.0);
       }
     } else if(!AutoSequence[1]){
-      if(AutoTimer.timePassed(RobotMap.AUTO_SHOT_TIME)){
+      if(AutoTimer.timePassed(RobotMap.TILT_DOWN_TIME)){
         AutoSequence[1] = true;
-        Intake.BackIndex(0.0);
-        Shooter.ShootBraindead(0.0);
+        Intake.tilt(0.0);
       } else {
-        Intake.Limit();
-        Intake.BackIndex(0.4);
+        Intake.tilt(RobotMap.TILT_DOWN_POWER);
       }
     } else if(!AutoSequence[2]){
-      if(AutoTimer.timePassed(RobotMap.TILT_UP_TIME)){
+      if(AutoTimer.timePassed(0.6)){
         AutoSequence[2] = true;
+      }
+    }else if(!AutoSequence[3]){
+      if(AutoTimer.timePassed(RobotMap.INDEX_TIME)){
+        AutoSequence[3] = true;
+        Intake.go(0.0);
+        Intake.FrontIndex(0.0);
+        DriveTrain.move(0,0);
         Intake.tilt(0.0);
       } else {
-        Intake.tilt(RobotMap.TILT_UP_POWER);
-      }
-    } else if(!AutoSequence[3]){
-      if(DriveTrain.distanceCompleted()){
-        AutoSequence[3] = true;
-        DriveTrain.resetGyro();
-      } else {
-        DriveTrain.PIDMove(-200, 0.005, 0.0, 0.0);
+        Intake.go(0.65);
+        Intake.FrontIndex(0.4);
+        DriveTrain.move(0.04, 0.04);
+        Intake.tilt(0.15);
       }
     } else if(!AutoSequence[4]){
-      if(DriveTrain.turnCompleted()){
-        AutoSequence[4] = true;
-      } else {
-        int kDir = 1;
-        if(!turnRight){
-          kDir = -1;
-        }
-        DriveTrain.PIDturn(kDir*90, 0.05, 0.5, 0, 0, 0);
-      }
-    } else if(!AutoSequence[5]){
-      //if(DriveTrain.distanceCompleted()){
-        //AutoSequence[5] = true;
-      //} else {
-      DriveTrain.PIDMove(-200, 0.005, 0, 0);
-      //}
-    } else if(!AutoSequence[6]){
-      if(AutoTimer.timePassed(RobotMap.TILT_DOWN_TIME)){
-        AutoSequence[6] = true;
-        Intake.tilt(0.0);
-      } else {
-        Intake.go(0.75);
-        Intake.tilt(-RobotMap.TILT_DOWN_POWER);
-      }
-    } else if(!AutoSequence[7]){
-      if(AutoTimer.timePassed(RobotMap.INDEX_TIME)){
-        AutoSequence[7] = true;
-        Intake.go(0.0);
-        Intake.BackIndex(0.0);
-      } else {
-        Intake.go(0.75);
-        Intake.BackIndex(0.4);
-      }
-    } else if(!AutoSequence[8]){
       if(AutoTimer.timePassed(RobotMap.TILT_UP_TIME)){
-        AutoSequence[8] = true;
+        AutoSequence[4] = true;
         Intake.tilt(0.0);
         DriveTrain.resetGyro();
       } else {
-        Intake.tilt(RobotMap.TILT_UP_POWER);
+        Intake.tilt(-RobotMap.TILT_UP_POWER);
       }
-    } else if(!AutoSequence[9]){
+    } else if(!AutoSequence[5]){
       if(DriveTrain.turnCompleted()){
-        AutoSequence[9] = true;
+        AutoSequence[5] = true;
+        DriveTrain.resetGyro();
+        DriveTrain.setPosition(0.0);
+        DriveTrain.resetMotors();
       } else {
-        int kDir = -1;
-        if(!turnRight){
-          kDir = 1;
-        }
-        DriveTrain.PIDturn(90*kDir, 0.05, 0.5, 0, 0, 0);
+        DriveTrain.PIDturn(170, 0.05, 0.5, 0, 0, 0);
       }
-    } else if(!AutoSequence[10]){
-      if(DriveTrain.distanceCompleted()){
-        AutoSequence[10] = true;
+    } else if(!AutoSequence[6]){
+      if(AutoTimer.timePassed(1.4)){
+        DriveTrain.move(0, 0);
+        AutoSequence[6] = true;
       } else {
-        DriveTrain.PIDMove(116.17, 0.005, 0.0, 0.0);
-      }
-    } else if(!AutoSequence[11]){
-      if(AutoTimer.timePassed(RobotMap.MOVE_CORRECTION_TIME)){
-        AutoSequence[11] = true;
-      } else {
-        DriveTrain.move(0.2,0.2);
-      }
-    } else if(!AutoSequence[12]){
+        //DriveTrain.move(0, 0);
+        DriveTrain.move(0.5, 0.5);
+      } 
+    } else if(!AutoSequence[7]){
       if(AutoTimer.timePassed(RobotMap.SHOT_CHARGE_TIME)){
-        AutoSequence[12] = true;
-        Intake.tilt(0.0);
+        AutoSequence[7] = true;
       } else {
-        Intake.tilt(-RobotMap.TILT_DOWN_POWER);
-        Shooter.ShootBraindead(0.5);
+        Shooter.ShootBraindead(RobotMap.AUTO_SHOT_STRENGTH);
+        Intake.tilt(0.175);
       }
-    } else if(!AutoSequence[13]){
-      if(AutoTimer.timePassed(RobotMap.SHOT_TIME)){
-        AutoSequence[13] = true;
+    } else if(!AutoSequence[8]){
+      if(AutoTimer.timePassed(RobotMap.AUTO_SHOT_TIME)){
+        AutoSequence[8] = true;
+        Intake.BackIndex(0.0);
+        Intake.FrontIndex(0.0);
+        Shooter.ShootBraindead(0.0);
       } else {
         Intake.Limit();
+        Intake.FrontIndex(0.4);
         Intake.BackIndex(0.4);
       }
-    } else if(!AutoSequence[14]){
-      if(AutoTimer.timePassed(0.3)){
-        AutoSequence[14] = true;
+    } else if(!AutoSequence[9]){
+      if(AutoTimer.timePassed(RobotMap.TILT_UP_TIME)){
+        AutoSequence[9] = true;
+        Intake.tilt(0.0);
       } else {
-        Shooter.ShootBraindead(0.0);
+        Intake.tilt(RobotMap.TILT_UP_POWER);
+      }
+    } else if(!AutoSequence[10]){
+      if(AutoTimer.timePassed(3)){
+        DriveTrain.move(0, 0);
+        AutoSequence[10] = true;
+      } else {
+        DriveTrain.move(-0.5, -0.5);
       }
     }
     int yuh = 0;
@@ -330,16 +287,13 @@ public class Robot extends TimedRobot {
       yuh++;
     }
     System.out.println("Auto Sequence: " + yuh);
-    System.out.println("Velocity: " + DriveTrain.getGyroRate());
-    System.out.println("Position: " + DriveTrain.getGyroAngle());
   }
 
-  public static void CompetitionAutoSequence(boolean turnRight){
+  /*public static void CompetitionAutoSequence(boolean turnRight){
     if(!AutoSequence[0]){
       if(AutoTimer.timePassed(RobotMap.SHOT_CHARGE_TIME)){
         AutoSequence[0] = true;
       } else {
-        Shooter.ShootBraindead(RobotMap.AUTO_SHOT_STRENGTH);
         Intake.tilt(0.3);
       }
     } else if(!AutoSequence[1]){
@@ -482,6 +436,9 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     DriveTrain.writePositionToCSV();
     DriveTrain.writeAngleToCSV();
+    for(int i = 0; i < 10; i++){
+      AutoSequence[i] = false;
+    }
   }
   /** This function is called periodically when disabled. */
   @Override

@@ -20,9 +20,15 @@ public class Intake extends Subsystem {
     public static double Kadjust1 = 0;
 
     public static void tilt(double speed){
-        leftTilt.set(ControlMode.PercentOutput, -(speed+Kadjust1)); 
+        leftTilt.set(ControlMode.PercentOutput, -(speed)); 
+        //leftTilt.set(ControlMode.PercentOutput, 0); 
         //rightTilt.set(ControlMode.PercentOutput, speed);
+        System.out.println("RUNNING");
  
+    }
+
+    public static void resetKadjust(){
+        Kadjust1 = 0;
     }
     public static void speedAdjust(double adjust){
         System.out.println("KADJUST PRE: " + Kadjust1);
@@ -33,12 +39,12 @@ public class Intake extends Subsystem {
         leftTilt.setNeutralMode(NeutralMode.Brake);
     }
 
-    public static void tiltPID(double position, double kP, double kD, double kF){
+    /*public static void tiltPID(double position, double kP, double kD, double kF){
         leftTilt.config_kP(0, kP);
         leftTilt.config_kD(0, kD);
         leftTilt.config_kF(0, kF);
         leftTilt.set(ControlMode.Position, position);
-    }
+    }*/
     public static void go(double speed){
         go.set(ControlMode.PercentOutput, speed);
     }

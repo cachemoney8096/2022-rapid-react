@@ -1,4 +1,4 @@
-/*package frc.robot.command;
+package frc.robot.command;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.Timer;
@@ -37,11 +37,12 @@ public class IndexSingle extends Command{
     @Override
     protected void execute() {
         Intake.Limit();
-        if(Robot.m_oi.rightBumpPressed()){
+        Intake.BackIndex(0.4);
+        /*if(Robot.m_oi.rightBumpPressed()){
             Intake.FrontIndex(0.4);
         } else {
             Intake.BackIndex(0.4);
-        }
+        }*/
     }
 
     @Override
@@ -68,4 +69,3 @@ public class IndexSingle extends Command{
         return bindexDone;
     }
 }
-*/

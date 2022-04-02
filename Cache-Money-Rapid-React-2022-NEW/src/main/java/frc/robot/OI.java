@@ -14,15 +14,15 @@ public class OI {
     public static Button LeftBumpButton = new JoystickButton(xbox,RobotMap.BUTTON_LEFTBUMP);
 
     //Joystick Buttons
-    public static Button RedButton = new JoystickButton(joystick,RobotMap.BUTTON_RED);
-    public static Button GreenButton = new JoystickButton(joystick,RobotMap.BUTTON_GREEN);
-    public static Button YellowButton = new JoystickButton(joystick,RobotMap.BUTTON_YELLOW);
-    public static Button BlueJoystickButton = new JoystickButton(joystick, RobotMap.BUTTON_BLUE);
-    public static Button BackButton = new JoystickButton(joystick,RobotMap.BUTTON_BACK);
-    public static Button StartButton = new JoystickButton(joystick,RobotMap.BUTTON_START);
-    public static Button joystickLeftBumpButton = new JoystickButton(joystick, RobotMap.BUTTON_LEFTBUMP);
-    public static Button joystickRightBumpButton = new JoystickButton(joystick, RobotMap.BUTTON_RIGHTBUMP);
-    public static Button joystickLeftStickButton = new JoystickButton(xbox, RobotMap.BUTTON_LEFTSTICK);
+    public static Button RedButton = new JoystickButton(joystick,RobotMap.BUTTON_RED); //CLIMB SINGLE RIGHT
+    public static Button GreenButton = new JoystickButton(joystick,RobotMap.BUTTON_GREEN); //CLIMB SINGLE LEFT
+    public static Button YellowButton = new JoystickButton(joystick,RobotMap.BUTTON_YELLOW); //INDEX OUT
+    public static Button BlueJoystickButton = new JoystickButton(joystick, RobotMap.BUTTON_BLUE); //TILT UP
+    public static Button BackButton = new JoystickButton(joystick,RobotMap.BUTTON_BACK); //CLIMB DOWN
+    public static Button StartButton = new JoystickButton(joystick,RobotMap.BUTTON_START); //CLIMB UP
+    public static Button joystickLeftBumpButton = new JoystickButton(joystick, RobotMap.BUTTON_LEFTBUMP); //INDEX BALLS
+    public static Button joystickRightBumpButton = new JoystickButton(joystick, RobotMap.BUTTON_RIGHTBUMP); //INTAKE BALLS
+    public static Button joystickLeftStickButton = new JoystickButton(xbox, RobotMap.BUTTON_LEFTSTICK); //
     public static Button joystickRightStickButton = new JoystickButton(xbox, RobotMap.BUTTON_RIGHTSTICK);
 
 
@@ -32,7 +32,7 @@ public class OI {
         //BLUE, GREEN, AND RED BUTTONS HAVE BEEN DECOMISSIONED
 
 
-        joystickRightBumpButton.whileHeld(new IntakeBalls());
+        joystickRightBumpButton.whileHeld(new IntakeBalls());//previously intake
         joystickLeftBumpButton.whileHeld(new IndexBalls());
 
         StartButton.whileHeld(new AutomatedClimb());
@@ -41,7 +41,8 @@ public class OI {
         //joystickLeftBumpButton.whileHeld(new IndexSingle());
         //joystickRightBumpButton.whileHeld(new IndexSingle());
 
-        //joystickLeftStickButton.whenPressed(new SpeedAdjustment());
+        joystickLeftStickButton.whenPressed(new SpeedAdjustment());
+        joystickRightStickButton.whenPressed(new SpeedAdjustmentIntake());
     }
 
     public boolean bluePressed(){

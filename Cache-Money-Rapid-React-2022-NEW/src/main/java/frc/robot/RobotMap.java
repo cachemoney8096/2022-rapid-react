@@ -11,8 +11,8 @@ public class RobotMap {
   public static final int  MOTOR_LEFT_2_ID = 11;
   public static final int  MOTOR_RIGHT_1_ID = 10;
   public static final int  MOTOR_RIGHT_2_ID = 8;
-  public static final double DriveTrain_P_Value= 2.95;
-  public static final double DriveTrain_I_Value= 0.0001;
+  public static final double DriveTrain_P_Value= 0.3;
+  public static final double DriveTrain_I_Value= 0.00;
   public static final double DriveTrain_D_Value= 0.005;
   public static final double DRIVE_WHEEL_DIAMETER = 4;
   public static final double DRIVE_WHEEL_CIRCUMFERENCE = Math.PI * DRIVE_WHEEL_DIAMETER;
@@ -149,10 +149,10 @@ public class RobotMap {
   public static final double AUTO_SHOT_STRENGTH = 0.55;
   public static final double AUTO_SHOT_TIME = 1;
   public static final double TILT_UP_TIME = 0.3;
-  public static final double TILT_DOWN_TIME = 0.3;
-  public static final double TILT_DOWN_POWER = 0.2;  
+  public static final double TILT_DOWN_TIME = 0.75;
+  public static final double TILT_DOWN_POWER = 0.175;  
   public static final double TILT_UP_POWER = 0.3;
-  public static final double INDEX_TIME = 0.3;
+  public static final double INDEX_TIME = 3.0;
   public static final double MOVE_CORRECTION_TIME = 1.0;
 
   //Path Following Values (All Units are in SI Units -- Meters, Seconds, Volts)

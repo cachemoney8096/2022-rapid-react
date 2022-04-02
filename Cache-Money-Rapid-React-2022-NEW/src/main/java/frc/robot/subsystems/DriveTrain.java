@@ -37,10 +37,10 @@ public class DriveTrain extends Subsystem {
     public static CANSparkMax motorLeft2 = new CANSparkMax(RobotMap.MOTOR_LEFT_2_ID, MotorType.kBrushless);
     public static CANSparkMax motorRight1 = new CANSparkMax(RobotMap.MOTOR_RIGHT_1_ID, MotorType.kBrushless);
     public static CANSparkMax motorRight2 = new CANSparkMax(RobotMap.MOTOR_RIGHT_2_ID, MotorType.kBrushless);
-    private final MotorControllerGroup leftControllers = new MotorControllerGroup(motorLeft1, motorLeft2);
-    private final MotorControllerGroup rightControllers = new MotorControllerGroup(motorRight1, motorRight2);
+    //private final MotorControllerGroup leftControllers = new MotorControllerGroup(motorLeft1, motorLeft2);
+    //private final MotorControllerGroup rightControllers = new MotorControllerGroup(motorRight1, motorRight2);
     
-    private final DifferentialDrive m_drive = new DifferentialDrive(leftControllers, rightControllers);
+    //private final DifferentialDrive m_drive = new DifferentialDrive(leftControllers, rightControllers);
     
     //private static ColorSensorV3 colorsensor = new ColorSensorV3(i2cport);
     //private static ColorMatch colormatcher = new ColorMatch();
@@ -104,9 +104,9 @@ public class DriveTrain extends Subsystem {
         motorLeft1.getPIDController().setP(RobotMap.DriveTrain_P_Value);
         motorLeft1.getPIDController().setI(RobotMap.DriveTrain_I_Value);
         motorLeft1.getPIDController().setD(RobotMap.DriveTrain_D_Value);
-        motorLeft1.getPIDController().setOutputRange(-0.5, 0.5);
+        motorLeft1.getPIDController().setOutputRange(-0.4, 0.4);
         double rotations = distanceIN/Math.PI/RobotMap.DRIVE_WHEEL_DIAMETER*8.45;
-        double reference = rotations*12.5*11;
+        double reference = distanceIN*0.85; //rotations*12.5*11;
         motorLeft1.getPIDController().setReference(reference, CANSparkMax.ControlType.kPosition, 0);
         motorRight1.follow(motorLeft1, true);
         motorRight2.follow(motorLeft1, true);
@@ -178,7 +178,7 @@ public class DriveTrain extends Subsystem {
     }
 
     public static boolean distanceCompleted(){ 
-        if(Math.abs(DriveTrain.getVelocity()) < 0.01 && Math.abs(DriveTrain.getPosition()) > 20.0){
+        if(Math.abs(DriveTrain.getVelocity()) < 0.01 && Math.abs(DriveTrain.getPosition()) > 30.0){
             DriveTrain.setPosition(0);
             DriveTrain.resetGyro();
             return true;
@@ -219,7 +219,6 @@ public class DriveTrain extends Subsystem {
     }
 
     public static double getPosition(){
-        //* RobotMap.DRIVE_WHEEL_DIAMETER * Math.PI * (1/12)
         return motorLeft1.getEncoder().getPosition();
     }
 
