@@ -174,6 +174,9 @@ public class RobotMap {
   public static final double k_RAMSETE_B = 2;
   public static final double k_RAMSETE_ZETA = 0.7;
 
+  
+  public static final int SERVO_DIO_PORT = 0;
+
 
 
 

@@ -42,6 +42,7 @@ public class Robot extends TimedRobot {
   //Initializing Subsystems
   public static Intake m_intake= new Intake();
   public static Intake m_index = new Intake();
+  public static Intake m_lock = new Intake();
   public static Climb m_climb = new Climb();
   public static DriveTrain m_drivetrain = new DriveTrain();
   public static Shooter m_shooter = new Shooter();

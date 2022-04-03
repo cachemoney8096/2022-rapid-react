@@ -5,6 +5,8 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import frc.robot.RobotMap;
 import com.revrobotics.CANSparkMax;
+
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public class Intake extends Subsystem {   
@@ -17,6 +19,7 @@ public class Intake extends Subsystem {
     private static CANSparkMax IndexMotor2 = new CANSparkMax(RobotMap.FrontIndexMotorRight, MotorType.kBrushless);
     private static CANSparkMax IndexMotor3 = new CANSparkMax(RobotMap.BackIndexMotorLeft, MotorType.kBrushless);
     private static CANSparkMax IndexMotor4 = new CANSparkMax(RobotMap.BackIndexMotorRight, MotorType.kBrushless);
+    private static Servo lockServo = new Servo(RobotMap.SERVO_DIO_PORT);
     public static double Kadjust1 = 0;
 
     public static void tilt(double speed){
@@ -65,6 +68,14 @@ public class Intake extends Subsystem {
         System.out.println(IndexMotor4.getEncoder().getVelocity());
     }
     
+    public static void setLockAngle(double degrees){
+        lockServo.setAngle(degrees);
+    }
+
+    public static double getLockAngle(){
+        return lockServo.getAngle();
+    }
+
     @Override
     protected void initDefaultCommand() {
         
