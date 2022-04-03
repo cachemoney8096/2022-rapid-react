@@ -11,7 +11,7 @@ public class OI {
 
     //Driver Buttons
     public static Button BlueButton = new JoystickButton(xbox,RobotMap.BUTTON_BLUE);
-    public static Button LeftBumpButton = new JoystickButton(xbox,RobotMap.BUTTON_LEFTBUMP);
+    public static Button rightBumpButton = new JoystickButton(xbox,RobotMap.BUTTON_RIGHTBUMP);
 
     //Joystick Buttons
     public static Button RedButton = new JoystickButton(joystick,RobotMap.BUTTON_RED); //CLIMB SINGLE RIGHT
@@ -59,8 +59,8 @@ public class OI {
         return RedButton.get();
     }
 
-    public boolean leftBumpPressed(){
-        return LeftBumpButton.get();
+    public boolean rightBumpPressed(){
+        return rightBumpButton.get();
     }
 
     public boolean leftStickPressed(){

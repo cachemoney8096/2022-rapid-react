@@ -62,6 +62,8 @@ public class Robot extends TimedRobot {
     CameraServer.startAutomaticCapture();
     Robot.m_oi = new OI();
     Climb.setBrakeMode();
+    DriveTrain.setPosition(0);
+    DriveTrain.resetGyro();
     //Intake.setTiltBrakeMode();
   }
 
@@ -93,7 +95,7 @@ public class Robot extends TimedRobot {
     DriveTrain.setPosition(0);
     DriveTrain.resetGyro();
     Climb.setBrakeMode();
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < 14; i++){
       AutoSequence[i] = false;
     }
     AutoSequence[0] = false;
@@ -221,8 +223,8 @@ public class Robot extends TimedRobot {
       } else {
         Intake.go(0.65);
         Intake.FrontIndex(0.4);
-        DriveTrain.move(0.04, 0.04);
-        Intake.tilt(0.15);
+        DriveTrain.move(0.06, 0.06);
+        Intake.tilt(0.075);
       }
     } else if(!AutoSequence[4]){
       if(AutoTimer.timePassed(RobotMap.TILT_UP_TIME)){
@@ -239,26 +241,45 @@ public class Robot extends TimedRobot {
         DriveTrain.setPosition(0.0);
         DriveTrain.resetMotors();
       } else {
-        DriveTrain.PIDturn(170, 0.05, 0.5, 0, 0, 0);
+        DriveTrain.PIDturn(170, 0.2, 0.5, 0, 0, 0);
       }
     } else if(!AutoSequence[6]){
-      if(AutoTimer.timePassed(1.4)){
+      if(AutoTimer.timePassed(0.85)){
         DriveTrain.move(0, 0);
         AutoSequence[6] = true;
       } else {
         //DriveTrain.move(0, 0);
-        DriveTrain.move(0.5, 0.5);
+        DriveTrain.move(0.75, 0.75);
       } 
     } else if(!AutoSequence[7]){
-      if(AutoTimer.timePassed(RobotMap.SHOT_CHARGE_TIME)){
+      if(AutoTimer.timePassed(RobotMap.TILT_SHOT_TIME)){
         AutoSequence[7] = true;
+        Intake.tilt(0.0);
       } else {
         Shooter.ShootBraindead(RobotMap.AUTO_SHOT_STRENGTH);
-        Intake.tilt(0.175);
+        Intake.tilt(RobotMap.TILT_DOWN_POWER);
       }
     } else if(!AutoSequence[8]){
-      if(AutoTimer.timePassed(RobotMap.AUTO_SHOT_TIME)){
+      if(AutoTimer.timePassed((RobotMap.SHOT_CHARGE_TIME - RobotMap.TILT_SHOT_TIME))){
         AutoSequence[8] = true;
+      } else {
+        Intake.tilt(0.0);
+      }
+    } else if(!AutoSequence[9]){
+      if(AutoTimer.timePassed(RobotMap.AUTO_SHOT_TIME)){
+        AutoSequence[9] = true;
+        Intake.BackIndex(0.0);
+      } else {
+        Intake.Limit();
+        Intake.BackIndex(0.4);
+      }
+    } else if(!AutoSequence[10]){
+      if(AutoTimer.timePassed(0.5)){
+        AutoSequence[10] = true;
+      }
+    } else if(!AutoSequence[11]){
+      if(AutoTimer.timePassed(RobotMap.AUTO_SHOT_TIME)){
+        AutoSequence[11] = true;
         Intake.BackIndex(0.0);
         Intake.FrontIndex(0.0);
         Shooter.ShootBraindead(0.0);
@@ -267,21 +288,21 @@ public class Robot extends TimedRobot {
         Intake.FrontIndex(0.4);
         Intake.BackIndex(0.4);
       }
-    } else if(!AutoSequence[9]){
+    } else if(!AutoSequence[12]){
       if(AutoTimer.timePassed(RobotMap.TILT_UP_TIME)){
-        AutoSequence[9] = true;
+        AutoSequence[12] = true;
         Intake.tilt(0.0);
       } else {
-        Intake.tilt(RobotMap.TILT_UP_POWER);
+        Intake.tilt(-RobotMap.TILT_UP_POWER);
       }
-    } else if(!AutoSequence[10]){
+    } /*else if(!AutoSequence[13]){
       if(AutoTimer.timePassed(3)){
         DriveTrain.move(0, 0);
-        AutoSequence[10] = true;
+        AutoSequence[13] = true;
       } else {
         DriveTrain.move(-0.5, -0.5);
       }
-    }
+    }*/
     int yuh = 0;
     while (AutoSequence[yuh] == true){
       yuh++;
@@ -436,13 +457,18 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     DriveTrain.writePositionToCSV();
     DriveTrain.writeAngleToCSV();
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < 14; i++){
       AutoSequence[i] = false;
     }
+    DriveTrain.resetGyro();
+    DriveTrain.setPosition(0);
   }
   /** This function is called periodically when disabled. */
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+    DriveTrain.resetGyro();
+    DriveTrain.setPosition(0);
+  }
 
   /** This function is called once when test mode is enabled. */
   @Override

@@ -144,15 +144,16 @@ public class RobotMap {
   public static final int MOTOR_TEST_ID = 25;
 
   //AUTONOMOUS VALUES
-  public static final int AUTONOMOUS_LENGTH = 15;
-  public static final double SHOT_CHARGE_TIME = 2.0;
-  public static final double AUTO_SHOT_STRENGTH = 0.55;
+  public static final int AUTONOMOUS_LENGTH = 20;
+  public static final double SHOT_CHARGE_TIME = 1.5;
+  public static final double AUTO_SHOT_STRENGTH = 0.485;
+  public static final double TILT_SHOT_TIME = 0.3;
   public static final double AUTO_SHOT_TIME = 1;
   public static final double TILT_UP_TIME = 0.3;
   public static final double TILT_DOWN_TIME = 0.75;
-  public static final double TILT_DOWN_POWER = 0.175;  
+  public static final double TILT_DOWN_POWER = 0.16;  
   public static final double TILT_UP_POWER = 0.3;
-  public static final double INDEX_TIME = 3.0;
+  public static final double INDEX_TIME = 2.5;
   public static final double MOVE_CORRECTION_TIME = 1.0;
 
   //Path Following Values (All Units are in SI Units -- Meters, Seconds, Volts)

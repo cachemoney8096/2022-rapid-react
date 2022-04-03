@@ -153,10 +153,10 @@ public class DriveTrain extends Subsystem {
 
         double output = p; // + d; //+ i + d + f;
         System.out.println("Initial Output: " + output);
-        if(output > 0.5){
-            output = 0.5;
-        } else if(output < -0.5){
-            output = -0.5;
+        if(output > 0.7){
+            output = 0.7;
+        } else if(output < -0.7){
+            output = -0.7;
         }
         double n = output;
         output = Math.abs(error/setpointAngle)*n;
