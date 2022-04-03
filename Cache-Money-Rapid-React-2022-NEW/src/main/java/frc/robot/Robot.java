@@ -65,7 +65,7 @@ public class Robot extends TimedRobot {
     Climb.setBrakeMode();
     DriveTrain.setPosition(0);
     DriveTrain.resetGyro();
-    //Intake.setTiltBrakeMode();
+    Intake.setTiltBrakeMode();
   }
 
   /**

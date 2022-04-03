@@ -151,8 +151,8 @@ public class RobotMap {
   public static final double AUTO_SHOT_TIME = 1;
   public static final double TILT_UP_TIME = 0.3;
   public static final double TILT_DOWN_TIME = 0.75;
-  public static final double TILT_DOWN_POWER = 0.16;  
-  public static final double TILT_UP_POWER = 0.3;
+  public static final double TILT_DOWN_POWER = 0.175;  
+  public static final double TILT_UP_POWER = 0.35;
   public static final double INDEX_TIME = 2.5;
   public static final double MOVE_CORRECTION_TIME = 1.0;
 
