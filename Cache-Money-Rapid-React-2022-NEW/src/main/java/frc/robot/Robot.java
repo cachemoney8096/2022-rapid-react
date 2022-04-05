@@ -10,8 +10,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import edu.wpi.first.cameraserver.CameraServer;
 import frc.robot.subsystems.AutoTimer;
 import frc.robot.subsystems.Climb;

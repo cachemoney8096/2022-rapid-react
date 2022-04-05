@@ -2,6 +2,7 @@ package frc.robot.command;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class IntakeLock extends Command{
 
@@ -12,9 +13,9 @@ public class IntakeLock extends Command{
         requires(Robot.m_lock);
         locking = lockMode;
         if(lockMode){
-            setpoint = 90;
+            setpoint = RobotMap.SERVO_LOCK_ANGLE;
         } else {
-            setpoint = 0;
+            setpoint = RobotMap.SERVO_REST_ANGLE;
         }
     }
 

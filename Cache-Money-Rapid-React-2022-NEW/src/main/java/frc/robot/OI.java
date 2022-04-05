@@ -12,6 +12,8 @@ public class OI {
     //Driver Buttons
     public static Button BlueButton = new JoystickButton(xbox,RobotMap.BUTTON_BLUE);
     public static Button rightBumpButton = new JoystickButton(xbox,RobotMap.BUTTON_RIGHTBUMP);
+    public static Button XBoxGreenButton = new JoystickButton(xbox, RobotMap.BUTTON_GREEN);
+    public static Button XBoxRedButton = new JoystickButton(xbox, RobotMap.BUTTON_RED);
 
     //Joystick Buttons
     public static Button RedButton = new JoystickButton(joystick,RobotMap.BUTTON_RED); //CLIMB SINGLE RIGHT
@@ -28,6 +30,8 @@ public class OI {
 
     public OI(){ 
         SmartDashboard.putString("oi constructor", "executed");
+        XBoxGreenButton.whenPressed(new IntakeLock(true));
+        XBoxRedButton.whenPressed(new IntakeLock(false));
         YellowButton.whileHeld(new IndexBalls());
         //BLUE, GREEN, AND RED BUTTONS HAVE BEEN DECOMISSIONED
 

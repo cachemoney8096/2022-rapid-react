@@ -174,8 +174,10 @@ public class RobotMap {
   public static final double k_RAMSETE_B = 2;
   public static final double k_RAMSETE_ZETA = 0.7;
 
-  
+  //Intake Locks
   public static final int SERVO_DIO_PORT = 0;
+  public static final double SERVO_REST_ANGLE = 0;
+  public static final double SERVO_LOCK_ANGLE = 90;
 
 
 
