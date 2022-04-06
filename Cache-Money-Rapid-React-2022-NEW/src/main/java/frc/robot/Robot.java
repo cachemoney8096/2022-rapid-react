@@ -74,7 +74,8 @@ public class Robot extends TimedRobot {
    * SmartDashboard integrated updating.
    */
   @Override
-  public void robotPeriodic() {}
+  public void robotPeriodic() {
+  }
 
   /**
    * This autonomous (along with the chooser code above) shows how to select between different
@@ -92,6 +93,7 @@ public class Robot extends TimedRobot {
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
     System.out.println("Auto selected: " + m_autoSelected);
     DriveTrain.setPosition(0);
+    Intake.setLockAngle(50);
     DriveTrain.resetGyro();
     Climb.setBrakeMode();
     for(int i = 0; i < 14; i++){
@@ -115,6 +117,7 @@ public class Robot extends TimedRobot {
         //System.out.println("Encoder Value: " + DriveTrain.getPosition());
         //DriveTrain.PIDturn(-90, 0.05, 0.5, 0.0, 0.0, 0.0); //STEP TWO
       case kDefaultAuto:
+        //Intake.setLockAngle(90);
         //DriveTrain.PIDMove(40, 0.005, 0.0, 0.0);
         //DriveTrain.PIDMove(-12, 0.005, 0.0, 0.0);
         //System.out.println("Encoder Value: " + DriveTrain.getPosition());
@@ -124,6 +127,7 @@ public class Robot extends TimedRobot {
       default:
         //if(DriveTrain.distanceCompleted()){
         MidwestAutoSequence();
+        //Intake.setLockAngle(90);
         //DriveTrain.PIDMove(-200, 0.005, 0.0, 0.0);
         //}
         /*if(ballRight){
@@ -134,7 +138,7 @@ public class Robot extends TimedRobot {
 
         //DriveTrain.PIDMove(40.5, 0.005, 0.0, 0.0);
         //DriveTrain.PIDMove(-12, 0.005, 0.0, 0.0);
-        System.out.println("Encoder Value: " + DriveTrain.getPosition()); //STEP ONE
+        //System.out.println("Encoder Value: " + DriveTrain.getPosition()); //STEP ONE
         //DriveTrain.PIDturn(-90, 0.05, 0.5, 0.0, 0.0, 0.0); //STEP TWO
 
         /*

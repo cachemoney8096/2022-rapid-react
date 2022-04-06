@@ -19,15 +19,13 @@ public class Intake extends Subsystem {
     private static CANSparkMax IndexMotor2 = new CANSparkMax(RobotMap.FrontIndexMotorRight, MotorType.kBrushless);
     private static CANSparkMax IndexMotor3 = new CANSparkMax(RobotMap.BackIndexMotorLeft, MotorType.kBrushless);
     private static CANSparkMax IndexMotor4 = new CANSparkMax(RobotMap.BackIndexMotorRight, MotorType.kBrushless);
-    private static Servo lockServo = new Servo(RobotMap.SERVO_DIO_PORT);
+    private static Servo lockServo = new Servo(2);
     public static double Kadjust1 = 0;
 
     public static void tilt(double speed){
         leftTilt.set(ControlMode.PercentOutput, -(speed)); 
         //leftTilt.set(ControlMode.PercentOutput, 0); 
-        //rightTilt.set(ControlMode.PercentOutput, speed);
-        System.out.println("RUNNING");
- 
+        //rightTilt.set(ControlMode.PercentOutput, speed); 
     }
 
     public static void resetKadjust(){

@@ -30,8 +30,8 @@ public class OI {
 
     public OI(){ 
         SmartDashboard.putString("oi constructor", "executed");
-        XBoxGreenButton.whenPressed(new IntakeLock(true));
-        XBoxRedButton.whenPressed(new IntakeLock(false));
+        XBoxGreenButton.whenPressed(new IntakeUnlock());
+        XBoxRedButton.whenPressed(new IntakeLock());
         YellowButton.whileHeld(new IndexBalls());
         //BLUE, GREEN, AND RED BUTTONS HAVE BEEN DECOMISSIONED
 

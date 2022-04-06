@@ -48,7 +48,7 @@ public class Tilt extends Command {
     public static void tiltTrig(){
         double valTrig = Robot.m_oi.getDriverRawAxisJoystick(2);
         double speed = valTrig * 0.2;
-        if(speed < 0.06){
+        if(speed <= 0.06){
             speed = 0;
         } else if(speed < 0.12 && speed > 0.06){
             speed = 0.12;

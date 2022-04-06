@@ -4,10 +4,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class IntakeLock extends Command{
+public class IntakeUnlock extends Command{
 
+    public static boolean locking;
+    public static double setpoint = 0.0;
 
-    public IntakeLock(){
+    public IntakeUnlock(){
     }
 
     @Override
@@ -17,7 +19,7 @@ public class IntakeLock extends Command{
     
     @Override
     protected boolean isFinished() {
-        if(Math.abs((Intake.getLockAngle())-15) < 0.5){
+        if(Math.abs((Intake.getLockAngle() - 50)) < 0.5){
             System.out.println("TRUE");
             return true;
         }
@@ -35,7 +37,7 @@ public class IntakeLock extends Command{
             Intake.setLockAngle(0.0);
         }
         System.out.println("Intake Angle: " + Intake.getLockAngle());*/
-        Intake.setLockAngle(15.0);
+        Intake.setLockAngle(50);
         System.out.println("Intake Angle: " + Intake.getLockAngle());
     }
 
