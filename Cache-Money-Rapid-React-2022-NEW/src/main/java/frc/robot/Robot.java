@@ -94,6 +94,7 @@ public class Robot extends TimedRobot {
     System.out.println("Auto selected: " + m_autoSelected);
     DriveTrain.setPosition(0);
     Intake.setLockAngle(50);
+    Intake.resetLimit();
     DriveTrain.resetGyro();
     Climb.setBrakeMode();
     for(int i = 0; i < 14; i++){
@@ -103,6 +104,7 @@ public class Robot extends TimedRobot {
     AutoSequence[1] = false;
     AutoSequence[2] = false;
     //Intake.setTiltBrakeMode();
+    Intake.setIndexerBrakeMode();
   }
 
   /** This function is called periodically during autonomous. */
@@ -110,92 +112,57 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     switch (m_autoSelected) {
       case kCustomAuto:
+        //CIRAutoSequence();
         MidwestAutoSequence();
-        //CompetitionAutoSequence(false);
-        //DriveTrain.PIDMove(40, 0.005, 0.0, 0.0);
-        //DriveTrain.PIDMove(-12, 0.005, 0.0, 0.0);
-        //System.out.println("Encoder Value: " + DriveTrain.getPosition());
-        //DriveTrain.PIDturn(-90, 0.05, 0.5, 0.0, 0.0, 0.0); //STEP TWO
       case kDefaultAuto:
-        //Intake.setLockAngle(90);
-        //DriveTrain.PIDMove(40, 0.005, 0.0, 0.0);
-        //DriveTrain.PIDMove(-12, 0.005, 0.0, 0.0);
-        //System.out.println("Encoder Value: " + DriveTrain.getPosition());
+        //CIRAutoSequence();
         MidwestAutoSequence();
-        //CompetitionAutoSequence(true);
-        //DriveTrain.PIDturn(-90, 0.05, 0.5, 0.0, 0.0, 0.0); //STEP TWO
       default:
-        //if(DriveTrain.distanceCompleted()){
+        //CIRAutoSequence();
         MidwestAutoSequence();
-        //Intake.setLockAngle(90);
-        //DriveTrain.PIDMove(-200, 0.005, 0.0, 0.0);
-        //}
-        /*if(ballRight){
-          CompetitionAutoSequence(true);
-        } else {
-          CompetitionAutoSequence(false);
-        }*/
-
-        //DriveTrain.PIDMove(40.5, 0.005, 0.0, 0.0);
-        //DriveTrain.PIDMove(-12, 0.005, 0.0, 0.0);
-        //System.out.println("Encoder Value: " + DriveTrain.getPosition()); //STEP ONE
-        //DriveTrain.PIDturn(-90, 0.05, 0.5, 0.0, 0.0, 0.0); //STEP TWO
-
-        /*
-        //INTAKE TEST
-        if(DriveTrain.distanceCompleted(1)){
-        Intake.Limit();
-        IntakeBalls.go();
-        IntakeBalls.FrontIndex();
-        IndexBalls.BackIndex();
-        }
-
-        /* AUTONOMOUS SEQUENCE 
-        1) Shoot
-        2) INTAKE BALL
-        3) SHOOT BALLLS
-        --- THE REST IS OPTIONAL FOR CIR
-        4) TURN W/ GYRO
-        5) MOVE FORWARD
-        6) INTAKE BALL
-        7) TURN W/GYRO
-        8) SHOOT BALL  */
     }
   }
 
-  /*public static void CIRAutoSequence(){
+  public static void CIRAutoSequence(){
     if(!AutoSequence[0]){
-      if(AutoTimer.timePassed(RobotMap.SHOT_CHARGE_TIME)){
+      if(AutoTimer.timePassed(RobotMap.TILT_SHOT_TIME)){
         AutoSequence[0] = true;
+        Intake.tilt(0);
       } else {
         Shooter.ShootBraindead(RobotMap.AUTO_SHOT_STRENGTH);
-        Intake.tilt(0.3);
+        Intake.tilt(RobotMap.TILT_DOWN_POWER);
       }
     } else if(!AutoSequence[1]){
-      if(AutoTimer.timePassed(RobotMap.AUTO_SHOT_TIME)){
+      if(AutoTimer.timePassed((RobotMap.SHOT_CHARGE_TIME - RobotMap.TILT_SHOT_TIME))){
         AutoSequence[1] = true;
+      } else {
+        Intake.tilt(0.0);
+      }
+    } else if(!AutoSequence[2]){
+      if(AutoTimer.timePassed(RobotMap.AUTO_SHOT_TIME)){
+        AutoSequence[2] = true;
         Intake.BackIndex(0.0);
         Shooter.ShootBraindead(0.0);
       } else {
         Intake.Limit();
         Intake.BackIndex(0.4);
       }
-    } else if(!AutoSequence[2]){
+    } else if(!AutoSequence[3]){
       if(AutoTimer.timePassed(RobotMap.TILT_UP_TIME)){
-        AutoSequence[2] = true;
+        AutoSequence[3] = true;
         Intake.tilt(0.0);
       } else {
-        Intake.tilt(RobotMap.TILT_UP_POWER);
+        Intake.tilt(-RobotMap.TILT_UP_POWER);
       }
-    } else if(!AutoSequence[3]){
-      if(AutoTimer.timePassed(3)){
+    } else if(!AutoSequence[4]){
+      if(AutoTimer.timePassed(4)){
         DriveTrain.move(0, 0);
-        AutoSequence[3] = true;
+        AutoSequence[4] = true;
       } else {
         DriveTrain.move(-0.5, -0.5);
       }
     }
-  }*/
+  }
 
   public static void MidwestAutoSequence(){
     if(!AutoSequence[0]){
@@ -203,7 +170,7 @@ public class Robot extends TimedRobot {
         AutoSequence[0] = true;
         DriveTrain.move(0,0);
       } else {
-        DriveTrain.PIDMove(40.5, 0.005, 0.0, 0.0);
+        DriveTrain.PIDMove(40, 0.005, 0.0, 0.0);
       }
     } else if(!AutoSequence[1]){
       if(AutoTimer.timePassed(RobotMap.TILT_DOWN_TIME)){
@@ -223,8 +190,10 @@ public class Robot extends TimedRobot {
         Intake.FrontIndex(0.0);
         DriveTrain.move(0,0);
         Intake.tilt(0.0);
+        Intake.BackIndex(0);
       } else {
         Intake.go(0.65);
+        Intake.BackIndex(-0.4);
         Intake.FrontIndex(0.4);
         DriveTrain.move(0.06, 0.06);
         Intake.tilt(0.075);
@@ -244,15 +213,15 @@ public class Robot extends TimedRobot {
         DriveTrain.setPosition(0.0);
         DriveTrain.resetMotors();
       } else {
-        DriveTrain.PIDturn(170, 0.2, 0.5, 0, 0, 0);
+        DriveTrain.PIDturn(170, 0.504, 0.5, 0, 0, 0);
       }
     } else if(!AutoSequence[6]){
-      if(AutoTimer.timePassed(0.85)){
+      if(AutoTimer.timePassed(0.923)){
         DriveTrain.move(0, 0);
         AutoSequence[6] = true;
       } else {
         //DriveTrain.move(0, 0);
-        DriveTrain.move(0.75, 0.75);
+        DriveTrain.move(0.65, 0.65);
       } 
     } else if(!AutoSequence[7]){
       if(AutoTimer.timePassed(RobotMap.TILT_SHOT_TIME)){
@@ -277,9 +246,9 @@ public class Robot extends TimedRobot {
         Intake.BackIndex(0.4);
       }
     } else if(!AutoSequence[10]){
-      if(AutoTimer.timePassed(0.5)){
+      if(AutoTimer.timePassed(0.3)){
         AutoSequence[10] = true;
-      }
+      } 
     } else if(!AutoSequence[11]){
       if(AutoTimer.timePassed(RobotMap.AUTO_SHOT_TIME)){
         AutoSequence[11] = true;
@@ -288,6 +257,7 @@ public class Robot extends TimedRobot {
         Shooter.ShootBraindead(0.0);
       } else {
         Intake.Limit();
+        Shooter.ShootBraindead(RobotMap.AUTO_SHOT_STRENGTH);
         Intake.FrontIndex(0.4);
         Intake.BackIndex(0.4);
       }
@@ -323,7 +293,7 @@ public class Robot extends TimedRobot {
     } else if(!AutoSequence[1]){
       if(AutoTimer.timePassed(RobotMap.AUTO_SHOT_TIME)){
         AutoSequence[1] = true;
-        Intake.BackIndex(0.0);
+        Intake.BackIndex(0.0)``;1
         Shooter.ShootBraindead(0.0);
       } else {
         Intake.Limit();
@@ -444,6 +414,7 @@ public class Robot extends TimedRobot {
     DriveTrain.resetMotors();
     Climb.setBrakeMode();
     Intake.setTiltBrakeMode();
+    Intake.setLimit();
   }
   /** This function is called periodically during operator control. */
   @Override
@@ -453,6 +424,9 @@ public class Robot extends TimedRobot {
     Tilt.tiltTrig();
     ShootBalls.shootTrig();
     TankDrive.move();
+    Intake.disableLimit();
+    Intake.enableLimit();
+    Intake.printLimitStatus();
   }
 
   /** This function is called once when the robot is disabled. */

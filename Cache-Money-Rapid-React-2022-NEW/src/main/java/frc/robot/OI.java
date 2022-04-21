@@ -10,11 +10,11 @@ public class OI {
     public static Joystick joystick = new Joystick(RobotMap.BUTTONCONTROLLER);
 
     //Driver Buttons
-    public static Button BlueButton = new JoystickButton(xbox,RobotMap.BUTTON_BLUE);
     public static Button rightBumpButton = new JoystickButton(xbox,RobotMap.BUTTON_RIGHTBUMP);
     public static Button XBoxGreenButton = new JoystickButton(xbox, RobotMap.BUTTON_GREEN);
     public static Button XBoxRedButton = new JoystickButton(xbox, RobotMap.BUTTON_RED);
-
+    public static Button XBoxBlueButton = new JoystickButton(xbox, RobotMap.BUTTON_BLUE);
+    public static Button XboxYellowButton = new JoystickButton(xbox, RobotMap.BUTTON_YELLOW);
     //Joystick Buttons
     public static Button RedButton = new JoystickButton(joystick,RobotMap.BUTTON_RED); //CLIMB SINGLE RIGHT
     public static Button GreenButton = new JoystickButton(joystick,RobotMap.BUTTON_GREEN); //CLIMB SINGLE LEFT
@@ -26,10 +26,12 @@ public class OI {
     public static Button joystickRightBumpButton = new JoystickButton(joystick, RobotMap.BUTTON_RIGHTBUMP); //INTAKE BALLS
     public static Button joystickLeftStickButton = new JoystickButton(xbox, RobotMap.BUTTON_LEFTSTICK); //
     public static Button joystickRightStickButton = new JoystickButton(xbox, RobotMap.BUTTON_RIGHTSTICK);
-
+    
 
     public OI(){ 
         SmartDashboard.putString("oi constructor", "executed");
+        //XboxBlueButton.whenPressed(new IntakeLimit(false));
+        //XboxYellowButton.whenPressed(new IntakeLimit(true));
         XBoxGreenButton.whenPressed(new IntakeUnlock());
         XBoxRedButton.whenPressed(new IntakeLock());
         YellowButton.whileHeld(new IndexBalls());
@@ -45,8 +47,12 @@ public class OI {
         //joystickLeftBumpButton.whileHeld(new IndexSingle());
         //joystickRightBumpButton.whileHeld(new IndexSingle());
 
-        joystickLeftStickButton.whenPressed(new SpeedAdjustment());
-        joystickRightStickButton.whenPressed(new SpeedAdjustmentIntake());
+        //joystickLeftStickButton.whenPressed(new SpeedAdjustment());
+        //joystickRightStickButton.whenPressed(new SpeedAdjustmentIntake());
+    }
+
+    public boolean XboxBluePressed(){
+        return XBoxBlueButton.get();
     }
 
     public boolean bluePressed(){
@@ -56,6 +62,11 @@ public class OI {
     public boolean yellowPressed(){
         return YellowButton.get();
     }
+
+    public boolean XboxYellowPressed(){
+        return XboxYellowButton.get();
+    }
+
     public boolean greenPressed(){
         return GreenButton.get();
     }

@@ -38,6 +38,7 @@ public class IntakeBalls extends Command{
     protected void execute() {
         Intake.Limit();
         go();
+        Intake.tilt(0.15);
         System.out.println("executed");
     }
 
@@ -45,11 +46,13 @@ public class IntakeBalls extends Command{
     protected void end() {
         Intake.FrontIndex(0);
         Intake.go(0.0);
+        Intake.tilt(0.0);
         initTimeNeeded = true;
     }
 
     public static void go(){
-        Intake.go(0.85);
+        Intake.go(0.7);
+        
         Intake.FrontIndex(0.25);
     }
     

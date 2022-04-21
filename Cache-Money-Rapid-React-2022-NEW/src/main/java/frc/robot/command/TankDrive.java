@@ -53,9 +53,18 @@ public class TankDrive extends Command{
     if(Robot.m_oi.rightBumpPressed()){
       kSpeed = 0.4;
     }
+    
     double right = (speed + turn) * kSpeed;
     double left = (speed - turn) * kSpeed;
-    DriveTrain.move(left,right);
+    if(Math.abs(speed)>0.1){
+      DriveTrain.move(left,right);
+    }else if(Math.abs(turn)>0.1 ){
+      DriveTrain.move(left,right);
+    }else{
+      DriveTrain.move(0,0);
+     System.out.println("deadzone");
+    }
+    
   }
 
   public static void PIDTurn(double angle){  

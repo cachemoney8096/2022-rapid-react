@@ -160,11 +160,11 @@ public class DriveTrain extends Subsystem {
         }
         double n = output;
         output = Math.abs(error/setpointAngle)*n;
-        if(Math.abs(error) < 0.5 || turnDone){
+        if(Math.abs(error) < 1.0 || turnDone){
             output = 0;
             turnDone = true;
-        } else if (Math.abs(output) < 0.07) {
-            output = output/Math.abs(output)*0.07;
+        } else if (Math.abs(output) < 0.1) {
+            output = output/Math.abs(output)*0.1;
         }
         System.out.println("Gyro Angle: " + gyro.getAngle());
         System.out.println("Gyro Rate: " + gyro.getRate());

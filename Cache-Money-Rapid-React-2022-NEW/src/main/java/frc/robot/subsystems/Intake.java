@@ -3,6 +3,9 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
+import com.revrobotics.CANSparkMax.IdleMode;
+
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import com.revrobotics.CANSparkMax;
 
@@ -19,6 +22,8 @@ public class Intake extends Subsystem {
     private static CANSparkMax IndexMotor2 = new CANSparkMax(RobotMap.FrontIndexMotorRight, MotorType.kBrushless);
     private static CANSparkMax IndexMotor3 = new CANSparkMax(RobotMap.BackIndexMotorLeft, MotorType.kBrushless);
     private static CANSparkMax IndexMotor4 = new CANSparkMax(RobotMap.BackIndexMotorRight, MotorType.kBrushless);
+
+    private static boolean limitDisabled = false;
     private static Servo lockServo = new Servo(2);
     public static double Kadjust1 = 0;
 
@@ -38,6 +43,10 @@ public class Intake extends Subsystem {
     }
     public static void setTiltBrakeMode(){
         leftTilt.setNeutralMode(NeutralMode.Brake);
+    }
+    public static void setIndexerBrakeMode(){
+        IndexMotor3.setIdleMode(IdleMode.kBrake);
+        IndexMotor4.setIdleMode(IdleMode.kBrake);
     }
 
     /*public static void tiltPID(double position, double kP, double kD, double kF){
@@ -72,6 +81,52 @@ public class Intake extends Subsystem {
 
     public static double getLockAngle(){
         return lockServo.getAngle();
+    }
+
+    public static void setLimit(){
+        leftTilt.configForwardSoftLimitThreshold(-5000);
+        leftTilt.configReverseSoftLimitThreshold(-24000);//TILT DOWN
+        leftTilt.configForwardSoftLimitEnable(true);
+        leftTilt.configReverseSoftLimitEnable(true);
+        System.out.println("LIMITING TILT");
+    }
+
+    public static void unsetLimit(){
+        //leftTilt.setSelectedSensorPosition(0);
+        leftTilt.configForwardSoftLimitEnable(false);
+        leftTilt.configReverseSoftLimitEnable(false);
+        System.out.println("UNLIMITING TILT");
+    } 
+
+    public static void resetLimit(){
+        Intake.unsetLimit();
+        leftTilt.setSelectedSensorPosition(0);
+        Intake.setLimit();
+
+    }
+
+    public static void enableLimit(){
+        if(Robot.m_oi.XboxBluePressed()){
+            leftTilt.setSelectedSensorPosition(0);
+            Intake.setLimit();
+            limitDisabled = false;
+        }
+
+    }
+
+    public static void disableLimit(){
+        if(Robot.m_oi.XboxYellowPressed()){
+            Intake.unsetLimit();
+            limitDisabled = true;
+        }
+    }
+
+    public static void printLimitStatus(){
+        if(limitDisabled){
+            System.out.println("LIMIT DISABLED");
+        } else {
+            System.out.println("LIMIT ENABLED");
+        }
     }
 
     @Override
