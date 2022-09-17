@@ -421,8 +421,8 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     SmartDashboard.putString("teleop.periodic", "executed");
     Scheduler.getInstance().run();
-    Tilt.tiltTrig();
-    ShootBalls.shootTrig();
+    // Tilt.tiltTrig();
+    // ShootBalls.shootTrig();
     TankDrive.move();
     Intake.disableLimit();
     Intake.enableLimit();

@@ -15,10 +15,12 @@ public class ShootBalls extends Command{
   public static boolean[] shotprogression = new boolean[RobotMap.SHOT_PROGRESSION_LENGTH];
   public static boolean startTimeNeeded = true;
   public static double startTime = 0.0;
-  public ShootBalls(boolean twoballs){
+  private boolean shoot;
+  public ShootBalls(boolean twoballs, boolean shoot){
     requires(Robot.m_shooter);
     //requires(Robot.m_intake);
     TwoBalls = twoballs;
+    this.shoot = shoot;
   }
   // Called when the command is initially scheduled.
   @Override
@@ -43,6 +45,11 @@ public class ShootBalls extends Command{
     } else {
       Shooter.ShootBraindead(0.6);
     }*/
+    if(shoot){
+      Shooter.ShootBraindead(0.48);
+    } else {
+      Shooter.ShootBraindead(0);
+    }
 
     
   }
@@ -113,6 +120,8 @@ public class ShootBalls extends Command{
     }
     Shooter.ShootBraindead(speed);
   }
+
+
 
   public static void ShootTime(double shotlength, int arrayIndex){
     if(startTimeNeeded){

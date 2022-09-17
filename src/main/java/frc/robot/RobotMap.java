@@ -21,8 +21,8 @@ public class RobotMap {
  
   //Shooter Motor IDs
   //Motor 1 = left, motor 2 = right
-  public static final int  SHOOTER_MOTOR_1_ID = TankDrive.whatIsNinePlusTen() - 1;
-  public static final int  SHOOTER_MOTOR_2_ID = TankDrive.whatIsNinePlusTen();
+  public static final int  SHOOTER_MOTOR_1_ID = TankDrive.whatIsNinePlusTen() - 1; //20
+  public static final int  SHOOTER_MOTOR_2_ID = TankDrive.whatIsNinePlusTen(); //21
   public static final int Shooter_Vel_Value= 0; 
   public static final int Shooter_FF_Value= 0;  
   public static final int BraindeadShootValue = 0;
@@ -49,8 +49,8 @@ public class RobotMap {
 
 
   //Controller IDs
-  public static final int  DRIVERCONTROLLER = 0;
-  public static final int  BUTTONCONTROLLER = 1;
+  public static final int  DRIVERCONTROLLER = 1;
+  public static final int  BUTTONCONTROLLER = 0;
 
   public static final int RIGHT_STICK_X = 4;
   public static final int LEFT_STICK_Y = 1;

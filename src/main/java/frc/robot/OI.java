@@ -2,7 +2,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.*;
 import frc.robot.command.*;
-
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class OI {
      //Joystick inputs
@@ -19,7 +19,7 @@ public class OI {
     public static Button RedButton = new JoystickButton(joystick,RobotMap.BUTTON_RED); //CLIMB SINGLE RIGHT
     public static Button GreenButton = new JoystickButton(joystick,RobotMap.BUTTON_GREEN); //CLIMB SINGLE LEFT
     public static Button YellowButton = new JoystickButton(joystick,RobotMap.BUTTON_YELLOW); //INDEX OUT
-    public static Button BlueJoystickButton = new JoystickButton(joystick, RobotMap.BUTTON_BLUE); //TILT UP
+    public static Button BlueButton = new JoystickButton(joystick, RobotMap.BUTTON_BLUE); //TILT UP
     public static Button BackButton = new JoystickButton(joystick,RobotMap.BUTTON_BACK); //CLIMB DOWN
     public static Button StartButton = new JoystickButton(joystick,RobotMap.BUTTON_START); //CLIMB UP
     public static Button joystickLeftBumpButton = new JoystickButton(joystick, RobotMap.BUTTON_LEFTBUMP); //INDEX BALLS
@@ -30,25 +30,19 @@ public class OI {
 
     public OI(){ 
         SmartDashboard.putString("oi constructor", "executed");
-        //XboxBlueButton.whenPressed(new IntakeLimit(false));
-        //XboxYellowButton.whenPressed(new IntakeLimit(true));
-        XBoxGreenButton.whenPressed(new IntakeUnlock());
-        XBoxRedButton.whenPressed(new IntakeLock());
-        YellowButton.whileHeld(new IndexBalls());
-        //BLUE, GREEN, AND RED BUTTONS HAVE BEEN DECOMISSIONED
+        RedButton.whileHeld(new IndexBalls(false));
+        joystickRightBumpButton.whileHeld(new IndexBalls(true));
 
-
-        joystickRightBumpButton.whileHeld(new IntakeBalls());//previously intake
-        joystickLeftBumpButton.whileHeld(new IndexBalls());
+        YellowButton.whileHeld(new ShootBalls(true, true));
+        YellowButton.whenReleased(new ShootBalls(true, false));
 
         StartButton.whileHeld(new AutomatedClimb());
         BackButton.whileHeld(new AutomatedClimb());
-        
-        //joystickLeftBumpButton.whileHeld(new IndexSingle());
-        //joystickRightBumpButton.whileHeld(new IndexSingle());
 
-        //joystickLeftStickButton.whenPressed(new SpeedAdjustment());
-        //joystickRightStickButton.whenPressed(new SpeedAdjustmentIntake());
+        GreenButton.whileHeld(new Tilt(false));
+        BlueButton.whileHeld(new Tilt(true));
+
+        joystickRightBumpButton.whileHeld(new IntakeBalls());
     }
 
     public boolean XboxBluePressed(){
@@ -56,7 +50,7 @@ public class OI {
     }
 
     public boolean bluePressed(){
-        return BlueJoystickButton.get();
+        return BlueButton.get();
     }
     // blue used for tilt, yellow used for index backwards
     public boolean yellowPressed(){

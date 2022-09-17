@@ -3,6 +3,7 @@ import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Robot;
+import frc.robot.OI;
 
 public class IndexBalls extends Command{
 
@@ -13,8 +14,10 @@ public class IndexBalls extends Command{
     public static double binitTime = 0;
     public static boolean bindexDone = false;
 
-    public IndexBalls(){
-        requires(Robot.m_index);
+    private boolean index_forward;
+
+    public IndexBalls(boolean forward){
+        index_forward = forward;
     }
 
     @Override
@@ -37,12 +40,12 @@ public class IndexBalls extends Command{
     @Override
     protected void execute() {
         Intake.Limit();
-        if(Robot.m_oi.yellowPressed()){
-            Intake.FrontIndex(-0.4);
-            Intake.BackIndex(-0.4);
-        } else {
+        if(index_forward == true){
             Intake.FrontIndex(0.4);
             Intake.BackIndex(0.4);
+        } else {
+            Intake.FrontIndex(-0.4);
+            Intake.BackIndex(-0.4);
         }
     }
 

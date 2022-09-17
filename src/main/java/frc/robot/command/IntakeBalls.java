@@ -39,7 +39,7 @@ public class IntakeBalls extends Command{
         Intake.Limit();
         go();
         Intake.tilt(0.15);
-        System.out.println("executed");
+        // System.out.println("executed");
     }
 
     @Override
