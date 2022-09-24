@@ -415,7 +415,7 @@ public class Robot extends TimedRobot {
     Climb.setBrakeMode();
     Intake.setTiltBrakeMode();
     Intake.setLimit();
-    Shooter.SetPID(0.2, 0.0005, 3.5, 0.05, 200.0);
+    Shooter.SetPID(RobotMap.SHOOTER_kP, RobotMap.SHOOTER_kI, RobotMap.SHOOTER_kD, RobotMap.SHOOTER_kF, RobotMap.SHOOTER_IZONE);
   }
   /** This function is called periodically during operator control. */
   @Override
