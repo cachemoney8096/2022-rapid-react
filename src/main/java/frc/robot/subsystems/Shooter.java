@@ -79,8 +79,8 @@ public class Shooter extends Subsystem {
     }
     
     public static void ShootBraindead(double speed){
-        motor1.set(ControlMode.Velocity, (8350 + Kadjust));
-        motor2.set(ControlMode.Velocity, -(8350 + Kadjust));
+        motor1.set(ControlMode.Velocity, (RobotMap.SHOOTER_SETPOINT + Kadjust));
+        motor2.set(ControlMode.Velocity, -(RobotMap.SHOOTER_SETPOINT + Kadjust));
         SmartDashboard.putString("ShootBraindead(speed)", "executed");
         System.out.println(Kadjust);
     }

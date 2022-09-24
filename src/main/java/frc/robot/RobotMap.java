@@ -137,6 +137,7 @@ public class RobotMap {
   public static final double SHOOTER_kD = 3.5;
   public static final double SHOOTER_kF = 0.05;
   public static final double SHOOTER_IZONE = 200.0;
+  public static final int SHOOTER_SETPOINT = 8350;
 
   //Conversion Factors
   public static final double CONVERT_ANGULAR_VELOCITY_TO_LINEAR_FALCON = 20*Math.PI*0.050038/2048;
