@@ -49,6 +49,20 @@ public class Shooter extends Subsystem {
         motor2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     }*/
 
+    public static void SetPID(double kP, double kI, double kD, double kF, double iZone){
+        motor1.config_kP(0, kP);
+        motor1.config_kI(0, kI);
+        motor1.config_kD(0, kD);
+        motor1.config_kF(0, kF);
+        motor1.config_IntegralZone(0, iZone);
+        
+        motor2.config_kP(0, kP);
+        motor2.config_kI(0, kI);
+        motor2.config_kD(0, kD);
+        motor2.config_kF(0, kF);
+        motor2.config_IntegralZone(0, iZone);
+    }
+
     public static double getHorizontalOffsetAngle(){
         return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
     }
@@ -65,8 +79,8 @@ public class Shooter extends Subsystem {
     }
     
     public static void ShootBraindead(double speed){
-        motor1.set(ControlMode.PercentOutput, (speed + Kadjust));
-        motor2.set(ControlMode.PercentOutput, -(speed + Kadjust));
+        motor1.set(ControlMode.Velocity, (RobotMap.SHOOTER_SETPOINT + Kadjust));
+        motor2.set(ControlMode.Velocity, -(RobotMap.SHOOTER_SETPOINT + Kadjust));
         SmartDashboard.putString("ShootBraindead(speed)", "executed");
         System.out.println(Kadjust);
     }
