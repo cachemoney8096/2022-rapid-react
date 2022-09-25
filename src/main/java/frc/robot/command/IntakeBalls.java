@@ -52,7 +52,7 @@ public class IntakeBalls extends Command{
 
     public static void go(){
         Intake.go(0.7);
-        
+        Intake.FrontIndex(0.4);
         Intake.FrontIndex(0.25);
     }
     
