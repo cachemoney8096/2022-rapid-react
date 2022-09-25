@@ -33,8 +33,8 @@ public class OI {
         RedButton.whileHeld(new IndexBalls(false));
         joystickRightBumpButton.whileHeld(new IndexBalls(true));
 
-        YellowButton.whileHeld(new ShootBalls(true, true));
-        YellowButton.whenReleased(new ShootBalls(true, false));
+        XboxYellowButton.whileHeld(new ShootBalls(true, true));
+        XboxYellowButton.whenReleased(new ShootBalls(true, false));
 
         StartButton.whileHeld(new AutomatedClimb());
         BackButton.whileHeld(new AutomatedClimb());
@@ -42,7 +42,7 @@ public class OI {
         GreenButton.whileHeld(new Tilt(false));
         BlueButton.whileHeld(new Tilt(true));
 
-        joystickRightBumpButton.whileHeld(new IntakeBalls());
+        rightBumpButton.whileHeld(new IntakeBalls());
     }
 
     public boolean XboxBluePressed(){
