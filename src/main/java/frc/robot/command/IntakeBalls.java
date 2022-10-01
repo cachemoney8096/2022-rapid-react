@@ -38,7 +38,7 @@ public class IntakeBalls extends Command{
     protected void execute() {
         Intake.Limit();
         go();
-        Intake.tilt(0.50);
+        Intake.tilt(0.15);
         // System.out.println("executed");
     }
 

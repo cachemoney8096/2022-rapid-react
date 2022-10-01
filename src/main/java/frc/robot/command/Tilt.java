@@ -66,7 +66,7 @@ public class Tilt extends Command {
         if(m_Up == false){
             tiltPower=0.15;
         }else{
-            tiltPower=-1;
+            tiltPower=-0.25;
         }
         Intake.tilt(tiltPower);
         }
