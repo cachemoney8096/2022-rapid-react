@@ -84,49 +84,49 @@ public class Intake extends Subsystem {
     }
 
     public static void setLimit(){
-        leftTilt.configForwardSoftLimitThreshold(-5000);
-        leftTilt.configReverseSoftLimitThreshold(-24000);//TILT DOWN
-        leftTilt.configForwardSoftLimitEnable(true);
-        leftTilt.configReverseSoftLimitEnable(true);
-        System.out.println("LIMITING TILT");
+        // leftTilt.configForwardSoftLimitThreshold(-5000);
+        // leftTilt.configReverseSoftLimitThreshold(-24000);//TILT DOWN
+        // leftTilt.configForwardSoftLimitEnable(true);
+        // leftTilt.configReverseSoftLimitEnable(true);
+        // System.out.println("LIMITING TILT");
     }
 
     public static void unsetLimit(){
-        //leftTilt.setSelectedSensorPosition(0);
-        leftTilt.configForwardSoftLimitEnable(false);
-        leftTilt.configReverseSoftLimitEnable(false);
-        System.out.println("UNLIMITING TILT");
+        // leftTilt.setSelectedSensorPosition(0);
+        // leftTilt.configForwardSoftLimitEnable(false);
+        // leftTilt.configReverseSoftLimitEnable(false);
+        // System.out.println("UNLIMITING TILT");
     } 
 
     public static void resetLimit(){
-        Intake.unsetLimit();
-        leftTilt.setSelectedSensorPosition(0);
-        Intake.setLimit();
+        // Intake.unsetLimit();
+        // leftTilt.setSelectedSensorPosition(0);
+        // Intake.setLimit();
 
     }
 
     public static void enableLimit(){
-        if(Robot.m_oi.XboxBluePressed()){
-            leftTilt.setSelectedSensorPosition(0);
-            Intake.setLimit();
-            limitDisabled = false;
-        }
+        // if(Robot.m_oi.XboxBluePressed()){
+        //     leftTilt.setSelectedSensorPosition(0);
+        //     Intake.setLimit();
+        //     limitDisabled = false;
+        // }
 
     }
 
     public static void disableLimit(){
-        if(Robot.m_oi.XboxYellowPressed()){
-            Intake.unsetLimit();
-            limitDisabled = true;
-        }
+        // if(Robot.m_oi.XboxYellowPressed()){
+        //     Intake.unsetLimit();
+        //     limitDisabled = true;
+        // }
     }
 
     public static void printLimitStatus(){
-        if(limitDisabled){
-            System.out.println("LIMIT DISABLED");
-        } else {
-            System.out.println("LIMIT ENABLED");
-        }
+        // if(limitDisabled){
+        //     System.out.println("LIMIT DISABLED");
+        // } else {
+        //     System.out.println("LIMIT ENABLED");
+        // }
     }
 
     @Override
