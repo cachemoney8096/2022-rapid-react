@@ -33,8 +33,7 @@ public class OI {
         RedButton.whileHeld(new IndexBalls(false));
         joystickRightBumpButton.whileHeld(new IndexBalls(true));
 
-        XboxYellowButton.whileHeld(new ShootBalls(true, true));
-        XboxYellowButton.whenReleased(new ShootBalls(true, false));
+        XboxYellowButton.whileHeld(new ShootBalls(true));
 
         StartButton.whileHeld(new AutomatedClimb());
         BackButton.whileHeld(new AutomatedClimb());
