@@ -15,7 +15,7 @@ public class ShootBalls extends Command{
   public static boolean[] shotprogression = new boolean[RobotMap.SHOT_PROGRESSION_LENGTH];
   public static boolean startTimeNeeded = true;
   public static double startTime = 0.0;
-  private static boolean shootOn;
+  private boolean shootOn;
   public ShootBalls(boolean twoballs, boolean shoot){
     requires(Robot.m_shooter);
     //requires(Robot.m_intake);
