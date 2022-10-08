@@ -44,8 +44,8 @@ public class TankDrive extends Command{
       return 21;
   }
   public static void move(){
-    System.out.println("Left Stick: " + Robot.m_oi.getDriverRawAxisXbox(RobotMap.LEFT_STICK_Y));
-    System.out.println("Right Stick: " + Robot.m_oi.getDriverRawAxisXbox(RobotMap.RIGHT_STICK_X));
+    // System.out.println("Left Stick: " + Robot.m_oi.getDriverRawAxisXbox(RobotMap.LEFT_STICK_Y));
+    // System.out.println("Right Stick: " + Robot.m_oi.getDriverRawAxisXbox(RobotMap.RIGHT_STICK_X));
     double speed = -Robot.m_oi.getDriverRawAxisXbox(RobotMap.LEFT_STICK_Y);
     double turn = -Robot.m_oi.getDriverRawAxisXbox(RobotMap.RIGHT_STICK_X);
     //The Left is pos the right is neg
@@ -62,7 +62,7 @@ public class TankDrive extends Command{
       DriveTrain.move(left,right);
     }else{
       DriveTrain.move(0,0);
-     System.out.println("deadzone");
+    //  System.out.println("deadzone");
     }
     
   }
@@ -126,11 +126,11 @@ public class TankDrive extends Command{
   }
 
   public static void PrintVars(){
-    System.out.println("slightForward: " + slightForward);
-    System.out.println("arrived: " + arrived);
-    System.out.println("slightBackward: " + slightBackward);
-    System.out.println("initAngle: " + initAngle);
-    System.out.println("initGyroAngle: " + initGyroAngle);
+    // System.out.println("slightForward: " + slightForward);
+    // System.out.println("arrived: " + arrived);
+    // System.out.println("slightBackward: " + slightBackward);
+    // System.out.println("initAngle: " + initAngle);
+    // System.out.println("initGyroAngle: " + initGyroAngle);
   }
   
 }

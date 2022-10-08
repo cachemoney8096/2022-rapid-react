@@ -91,7 +91,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_autoSelected = m_chooser.getSelected();
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-    System.out.println("Auto selected: " + m_autoSelected);
+    // System.out.println("Auto selected: " + m_autoSelected);
     DriveTrain.setPosition(0);
     Intake.setLockAngle(50);
     Intake.resetLimit();
@@ -280,7 +280,7 @@ public class Robot extends TimedRobot {
     while (AutoSequence[yuh] == true){
       yuh++;
     }
-    System.out.println("Auto Sequence: " + yuh);
+    // System.out.println("Auto Sequence: " + yuh);
   }
 
   /*public static void CompetitionAutoSequence(boolean turnRight){
