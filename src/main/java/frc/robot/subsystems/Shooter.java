@@ -82,7 +82,7 @@ public class Shooter extends Subsystem {
         motor1.set(ControlMode.Velocity, (RobotMap.SHOOTER_SETPOINT + Kadjust));
         motor2.set(ControlMode.Velocity, -(RobotMap.SHOOTER_SETPOINT + Kadjust));
         SmartDashboard.putString("ShootBraindead(speed)", "executed");
-        System.out.println(Kadjust);
+        // System.out.println(Kadjust);
     }
 
     public static double getTargetArea(){
@@ -90,9 +90,9 @@ public class Shooter extends Subsystem {
     }
 
     public static void speedAdjust(double adjust){
-        System.out.println("KADJUST PRE: " + Kadjust);
+        // System.out.println("KADJUST PRE: " + Kadjust);
         Kadjust = adjust + Kadjust;
-        System.out.println("KADJUST POST: " + Kadjust);
+        // System.out.println("KADJUST POST: " + Kadjust);
     }
 
    /* public static void setMotionMagic(double targetPos, double kF){

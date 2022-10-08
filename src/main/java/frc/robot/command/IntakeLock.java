@@ -18,11 +18,11 @@ public class IntakeLock extends Command{
     @Override
     protected boolean isFinished() {
         if(Math.abs((Intake.getLockAngle())-15) < 0.5){
-            System.out.println("TRUE");
+            // System.out.println("TRUE");
             return true;
         }
-        System.out.println("FALSE");
-        System.out.println("Intake Angle: " + Intake.getLockAngle());
+        // System.out.println("FALSE");
+        // System.out.println("Intake Angle: " + Intake.getLockAngle());
         return false;
     }
 
@@ -36,7 +36,7 @@ public class IntakeLock extends Command{
         }
         System.out.println("Intake Angle: " + Intake.getLockAngle());*/
         Intake.setLockAngle(15.0);
-        System.out.println("Intake Angle: " + Intake.getLockAngle());
+        // System.out.println("Intake Angle: " + Intake.getLockAngle());
     }
 
     @Override

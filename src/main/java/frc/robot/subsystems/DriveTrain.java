@@ -111,7 +111,7 @@ public class DriveTrain extends Subsystem {
         motorRight1.follow(motorLeft1, true);
         motorRight2.follow(motorLeft1, true);
         motorLeft2.follow(motorLeft1);
-        System.out.println("Encoder Value: " + DriveTrain.getPosition());
+        // System.out.println("Encoder Value: " + DriveTrain.getPosition());
 
         if(initPosNeeded){
             initPos = DriveTrain.getPosition()/8.45*Math.PI*RobotMap.DRIVE_WHEEL_DIAMETER;
@@ -152,7 +152,7 @@ public class DriveTrain extends Subsystem {
         double f = setpointAngle * kF; */
 
         double output = p; // + d; //+ i + d + f;
-        System.out.println("Initial Output: " + output);
+        // System.out.println("Initial Output: " + output);
         if(output > 0.7){
             output = 0.7;
         } else if(output < -0.7){
@@ -166,12 +166,12 @@ public class DriveTrain extends Subsystem {
         } else if (Math.abs(output) < 0.1) {
             output = output/Math.abs(output)*0.1;
         }
-        System.out.println("Gyro Angle: " + gyro.getAngle());
-        System.out.println("Gyro Rate: " + gyro.getRate());
-        System.out.println("Error: " +  error);
-        System.out.println("kP: " + p);
-        System.out.println("kD: " + d);
-        System.out.println("Final Output: " + output);
+        // System.out.println("Gyro Angle: " + gyro.getAngle());
+        // System.out.println("Gyro Rate: " + gyro.getRate());
+        // System.out.println("Error: " +  error);
+        // System.out.println("kP: " + p);
+        // System.out.println("kD: " + d);
+        // System.out.println("Final Output: " + output);
 
        
         DriveTrain.turnMove(output);

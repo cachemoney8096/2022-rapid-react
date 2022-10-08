@@ -21,6 +21,8 @@ public class ShootBalls extends Command{
     //requires(Robot.m_intake);
     TwoBalls = twoballs;
     shootOn = shoot;
+    System.out.println("CONSTRUCTOR");
+
   }
   // Called when the command is initially scheduled.
   @Override
@@ -29,8 +31,10 @@ public class ShootBalls extends Command{
     SmartDashboard.putString("ShootBalls.intialize", "executed");
     if(shootOn){
       Shooter.ShootBraindead(0.48);
+      System.out.println("INIT TRUE");
     } else {
       Shooter.ShootBraindead(0);
+      System.out.println("INIT FALSE");
     }
   }
 

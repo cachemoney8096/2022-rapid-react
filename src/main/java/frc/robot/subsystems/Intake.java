@@ -37,9 +37,9 @@ public class Intake extends Subsystem {
         Kadjust1 = 0;
     }
     public static void speedAdjust(double adjust){
-        System.out.println("KADJUST PRE: " + Kadjust1);
+        // System.out.println("KADJUST PRE: " + Kadjust1);
         Kadjust1 = adjust + Kadjust1;
-        System.out.println("KADJUST POST: " + Kadjust1);
+        // System.out.println("KADJUST POST: " + Kadjust1);
     }
     public static void setTiltBrakeMode(){
         leftTilt.setNeutralMode(NeutralMode.Brake);
@@ -71,8 +71,8 @@ public class Intake extends Subsystem {
     public static void BackIndex(double speed){
         IndexMotor3.set(-speed);
         IndexMotor4.set(speed);
-        System.out.println(IndexMotor3.getEncoder().getVelocity());
-        System.out.println(IndexMotor4.getEncoder().getVelocity());
+        // System.out.println(IndexMotor3.getEncoder().getVelocity());
+        // System.out.println(IndexMotor4.getEncoder().getVelocity());
     }
     
     public static void setLockAngle(double degrees){
