@@ -92,11 +92,7 @@ public class Intake extends Subsystem {
     }
 
     public static void unsetLimit(){
-<<<<<<< HEAD
         // leftTilt.setSelectedSensorPosition(0);
-=======
-        //leftTilt.setSelectedSensorPosition(0);
->>>>>>> shooter-controls
         // leftTilt.configForwardSoftLimitEnable(false);
         // leftTilt.configReverseSoftLimitEnable(false);
         // System.out.println("UNLIMITING TILT");

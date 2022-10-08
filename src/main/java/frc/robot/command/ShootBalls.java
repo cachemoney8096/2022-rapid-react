@@ -21,7 +21,6 @@ public class ShootBalls extends Command{
     //requires(Robot.m_intake);
     TwoBalls = twoballs;
     shootOn = shoot;
-    System.out.println("CONSTRUCTOR");
 
   }
   // Called when the command is initially scheduled.
@@ -29,7 +28,6 @@ public class ShootBalls extends Command{
   // variables and mapping out buttons for the controller when it starts
   public void initialize() {
     Shooter.ShootPID(shootOn);
-    System.out.println("INITIALIZE: " + shootOn);
   }
 
   //variables and mapping out buttons called 50 times per second
