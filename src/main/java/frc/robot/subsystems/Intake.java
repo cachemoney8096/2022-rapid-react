@@ -122,19 +122,11 @@ public class Intake extends Subsystem {
     }
 
     public static void printLimitStatus(){
-<<<<<<< HEAD
         // if(limitDisabled){
         //     System.out.println("LIMIT DISABLED");
         // } else {
         //     System.out.println("LIMIT ENABLED");
         // }
-=======
-        if(limitDisabled){
-            // System.out.println("LIMIT DISABLED");
-        } else {
-            // System.out.println("LIMIT ENABLED");
-        }
->>>>>>> shooter-controls
     }
 
     @Override
