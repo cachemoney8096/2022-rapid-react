@@ -92,7 +92,11 @@ public class Intake extends Subsystem {
     }
 
     public static void unsetLimit(){
+<<<<<<< HEAD
         // leftTilt.setSelectedSensorPosition(0);
+=======
+        //leftTilt.setSelectedSensorPosition(0);
+>>>>>>> shooter-controls
         // leftTilt.configForwardSoftLimitEnable(false);
         // leftTilt.configReverseSoftLimitEnable(false);
         // System.out.println("UNLIMITING TILT");
@@ -122,11 +126,19 @@ public class Intake extends Subsystem {
     }
 
     public static void printLimitStatus(){
+<<<<<<< HEAD
         // if(limitDisabled){
         //     System.out.println("LIMIT DISABLED");
         // } else {
         //     System.out.println("LIMIT ENABLED");
         // }
+=======
+        if(limitDisabled){
+            // System.out.println("LIMIT DISABLED");
+        } else {
+            // System.out.println("LIMIT ENABLED");
+        }
+>>>>>>> shooter-controls
     }
 
     @Override
