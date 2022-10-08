@@ -54,7 +54,7 @@ public class Climb extends Subsystem {
         double reference = rotations*12.5/11;
         leftExtension.getPIDController().setReference(reference, CANSparkMax.ControlType.kPosition, 0);
         //rightExtension.follow(leftExtension, false);
-        System.out.println("Encoder Value: " + leftExtension.getEncoder().getPosition());
+        // System.out.println("Encoder Value: " + leftExtension.getEncoder().getPosition());
     }
 
     public static void setExtensionPosition(double position){

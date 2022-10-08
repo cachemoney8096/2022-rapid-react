@@ -79,10 +79,18 @@ public class Shooter extends Subsystem {
     }
     
     public static void ShootBraindead(double speed){
-        motor1.set(ControlMode.Velocity, (RobotMap.SHOOTER_SETPOINT + Kadjust));
-        motor2.set(ControlMode.Velocity, -(RobotMap.SHOOTER_SETPOINT + Kadjust));
-        SmartDashboard.putString("ShootBraindead(speed)", "executed");
-        System.out.println(Kadjust);
+        motor1.set(ControlMode.PercentOutput, (speed + Kadjust));
+        motor2.set(ControlMode.PercentOutput, -(speed + Kadjust));
+    }
+
+    public static void ShootPID(boolean shoot){
+        if(shoot){
+            motor1.set(ControlMode.Velocity, (RobotMap.SHOOTER_SETPOINT + Kadjust));
+            motor2.set(ControlMode.Velocity, -(RobotMap.SHOOTER_SETPOINT + Kadjust));
+        } else {
+            motor1.set(ControlMode.PercentOutput, 0);
+            motor2.set(ControlMode.PercentOutput, 0);
+        }
     }
 
     public static double getTargetArea(){
@@ -90,9 +98,9 @@ public class Shooter extends Subsystem {
     }
 
     public static void speedAdjust(double adjust){
-        System.out.println("KADJUST PRE: " + Kadjust);
+        // System.out.println("KADJUST PRE: " + Kadjust);
         Kadjust = adjust + Kadjust;
-        System.out.println("KADJUST POST: " + Kadjust);
+        // System.out.println("KADJUST POST: " + Kadjust);
     }
 
    /* public static void setMotionMagic(double targetPos, double kF){

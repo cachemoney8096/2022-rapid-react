@@ -15,18 +15,19 @@ public class ShootBalls extends Command{
   public static boolean[] shotprogression = new boolean[RobotMap.SHOT_PROGRESSION_LENGTH];
   public static boolean startTimeNeeded = true;
   public static double startTime = 0.0;
-  private boolean shoot;
+  private boolean shootOn;
   public ShootBalls(boolean twoballs, boolean shoot){
     requires(Robot.m_shooter);
     //requires(Robot.m_intake);
     TwoBalls = twoballs;
-    this.shoot = shoot;
+    shootOn = shoot;
+
   }
   // Called when the command is initially scheduled.
   @Override
   // variables and mapping out buttons for the controller when it starts
   public void initialize() {
-    SmartDashboard.putString("ShootBalls.intialize", "executed");
+    Shooter.ShootPID(shootOn);
   }
 
   //variables and mapping out buttons called 50 times per second
@@ -45,28 +46,24 @@ public class ShootBalls extends Command{
     } else {
       Shooter.ShootBraindead(0.6);
     }*/
-    if(shoot){
-      Shooter.ShootBraindead(0.48);
-    } else {
-      Shooter.ShootBraindead(0);
-    }
 
     
   }
   // When the stop button is hit, the motors turn off
   @Override
   public void end() {
-    Shooter.ShootBraindead(0);
+    // Shooter.ShootBraindead(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(TwoBalls){
+    /*if(TwoBalls){
       return shotprogression[RobotMap.SHOT_PROGRESSION_LENGTH - 1];
     } else {
       return shotprogression[0];
-    }
+    }*/
+    return true;
   }
 
   /*public double SpeedAdjustment(){
