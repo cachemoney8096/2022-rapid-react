@@ -28,14 +28,8 @@ public class ShootBalls extends Command{
   @Override
   // variables and mapping out buttons for the controller when it starts
   public void initialize() {
-    SmartDashboard.putString("ShootBalls.intialize", "executed");
-    if(shootOn){
-      Shooter.ShootBraindead(0.48);
-      System.out.println("INIT TRUE");
-    } else {
-      Shooter.ShootBraindead(0);
-      System.out.println("INIT FALSE");
-    }
+    Shooter.ShootPID(shootOn);
+    System.out.println("INITIALIZE: " + shootOn);
   }
 
   //variables and mapping out buttons called 50 times per second
@@ -60,7 +54,7 @@ public class ShootBalls extends Command{
   // When the stop button is hit, the motors turn off
   @Override
   public void end() {
-    Shooter.ShootBraindead(0);
+    // Shooter.ShootBraindead(0);
   }
 
   // Returns true when the command should end.
