@@ -50,7 +50,7 @@ public class RobotMap {
 
   //Controller IDs
   public static final int  DRIVERCONTROLLER = 0;
-  public static final int  BUTTONCONTROLLER = 1;
+  public static final int  OPERATORCONTROLLER = 1;
 
   public static final int RIGHT_STICK_X = 4;
   public static final int LEFT_STICK_Y = 1;
