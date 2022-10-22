@@ -30,12 +30,8 @@ import frc.robot.command.Tilt;
  * project.
  */
 public class Robot extends TimedRobot {
-  private static final String kDefaultAuto = "Default";
-  private static final String kCustomAuto = "My Auto";
-  private String m_autoSelected;
   public static boolean ballRight = true;
   public static OI m_oi;
-  private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
   //Initializing Subsystems
   public static Intake m_intake= new Intake();
@@ -54,10 +50,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-    m_chooser.addOption("My Auto", kCustomAuto);
-    SmartDashboard.putData("Auto choices", m_chooser);
-    SmartDashboard.putString("robot init", "executed");
     CameraServer.startAutomaticCapture();
     Robot.m_oi = new OI();
     Climb.setBrakeMode();
@@ -89,9 +81,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autoSelected = m_chooser.getSelected();
-    // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-    // System.out.println("Auto selected: " + m_autoSelected);
     DriveTrain.setPosition(0);
     Intake.setLockAngle(50);
     Intake.resetLimit();
@@ -110,21 +99,11 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    switch (m_autoSelected) {
-      case kCustomAuto:
-        //CIRAutoSequence();
-        MidwestAutoSequence();
-      case kDefaultAuto:
-        //CIRAutoSequence();
-        MidwestAutoSequence();
-      default:
-        //CIRAutoSequence();
-        MidwestAutoSequence();
-    }
+    MidwestAutoSequence();
   }
 
   // public static void CIRAutoSequence(){
-  //   if(!AutoSequence[0]){
+  //   if(!AutoSequence[0]){iu
   //     if(AutoTimer.timePassed(RobotMap.TILT_SHOT_TIME)){
   //       AutoSequence[0] = true;
   //       Intake.tilt(0);
@@ -420,7 +399,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    SmartDashboard.putString("teleop.periodic", "executed");
+    SmartDashboard.putNumber("Shooter Velocity", m_shooter.getVelocity());
     Scheduler.getInstance().run();
     // Tilt.tiltTrig();
     // ShootBalls.shootTrig();
