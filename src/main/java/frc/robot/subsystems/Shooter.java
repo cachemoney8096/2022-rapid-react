@@ -119,4 +119,8 @@ public class Shooter extends Subsystem {
         
     }
 
+    public double getVelocity(){
+        return motor1.getSelectedSensorVelocity();
+    }
+
 }

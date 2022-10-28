@@ -110,7 +110,7 @@ public class ShootBalls extends Command{
   }
 
   public static void shootTrig(){
-    double trigVal = Robot.m_oi.getDriverRawAxisJoystick(3);
+    double trigVal = Robot.m_oi.getOperatorRawAxis(3);
     double speed = trigVal *0.48;
     if(speed < 0.4 && speed > 0.2){
       speed = 0.48;

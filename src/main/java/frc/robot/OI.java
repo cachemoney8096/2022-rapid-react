@@ -5,93 +5,70 @@ import frc.robot.command.*;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class OI {
-     //Joystick inputs
-    public static Joystick xbox = new Joystick(RobotMap.DRIVERCONTROLLER);
-    public static Joystick joystick = new Joystick(RobotMap.BUTTONCONTROLLER);
+    /** Controller objects */
+    public static Joystick driver = new Joystick(RobotMap.DRIVERCONTROLLER);
+    public static Joystick operator = new Joystick(RobotMap.OPERATORCONTROLLER);
 
-    //Driver Buttons
-    public static Button rightBumpButton = new JoystickButton(xbox,RobotMap.BUTTON_RIGHTBUMP);
-    public static Button XBoxGreenButton = new JoystickButton(xbox, RobotMap.BUTTON_GREEN);
-    public static Button XBoxRedButton = new JoystickButton(xbox, RobotMap.BUTTON_RED);
-    public static Button XBoxBlueButton = new JoystickButton(xbox, RobotMap.BUTTON_BLUE);
-    public static Button XboxYellowButton = new JoystickButton(xbox, RobotMap.BUTTON_YELLOW);
-    //Joystick Buttons
-    public static Button RedButton = new JoystickButton(joystick,RobotMap.BUTTON_RED); //CLIMB SINGLE RIGHT
-    public static Button GreenButton = new JoystickButton(joystick,RobotMap.BUTTON_GREEN); //CLIMB SINGLE LEFT
-    public static Button YellowButton = new JoystickButton(joystick,RobotMap.BUTTON_YELLOW); //INDEX OUT
-    public static Button BlueButton = new JoystickButton(joystick, RobotMap.BUTTON_BLUE); //TILT UP
-    public static Button BackButton = new JoystickButton(joystick,RobotMap.BUTTON_BACK); //CLIMB DOWN
-    public static Button StartButton = new JoystickButton(joystick,RobotMap.BUTTON_START); //CLIMB UP
-    public static Button joystickLeftBumpButton = new JoystickButton(joystick, RobotMap.BUTTON_LEFTBUMP); //INDEX BALLS
-    public static Button joystickRightBumpButton = new JoystickButton(joystick, RobotMap.BUTTON_RIGHTBUMP); //INTAKE BALLS
-    public static Button joystickLeftStickButton = new JoystickButton(xbox, RobotMap.BUTTON_LEFTSTICK); //
-    public static Button joystickRightStickButton = new JoystickButton(xbox, RobotMap.BUTTON_RIGHTSTICK);
-    
+    /** Driver buttons */
+    public static Button driverA = new JoystickButton(driver, RobotMap.BUTTON_GREEN);
+    public static Button driverB = new JoystickButton(driver, RobotMap.BUTTON_RED);
+    public static Button driverX = new JoystickButton(driver, RobotMap.BUTTON_BLUE);
+    public static Button driverY = new JoystickButton(driver, RobotMap.BUTTON_YELLOW);
+    public static Button driverRB = new JoystickButton(driver,RobotMap.BUTTON_RIGHTBUMP);
 
-    public OI(){ 
-        SmartDashboard.putString("oi constructor", "executed");
-        RedButton.whileHeld(new IndexBalls(false));
-        joystickRightBumpButton.whileHeld(new IndexBalls(true));
+    /** Operator buttons */
+    public static Button operatorA = new JoystickButton(operator,RobotMap.BUTTON_GREEN);
+    public static Button operatorB = new JoystickButton(operator,RobotMap.BUTTON_RED);
+    public static Button operatorX = new JoystickButton(operator, RobotMap.BUTTON_BLUE);
+    public static Button operatorY = new JoystickButton(operator,RobotMap.BUTTON_YELLOW);
+    public static Button operatorLB = new JoystickButton(operator, RobotMap.BUTTON_LEFTBUMP);
+    public static Button operatorRB = new JoystickButton(operator, RobotMap.BUTTON_RIGHTBUMP);
+    public static Button operatorLT = new JoystickButton(driver, RobotMap.BUTTON_LEFTSTICK);
+    public static Button operatorRT = new JoystickButton(driver, RobotMap.BUTTON_RIGHTSTICK);
+    public static Button operatorBackButton = new JoystickButton(operator,RobotMap.BUTTON_BACK);
+    public static Button operatorStartButton = new JoystickButton(operator,RobotMap.BUTTON_START);
 
-        XboxYellowButton.whileHeld(new ShootBalls(true, true));
-        XboxYellowButton.whenReleased(new ShootBalls(true, false));
+    public OI(){
+        operatorB.whileHeld(new IndexBalls(false)); //Index out
+        operatorRB.whileHeld(new IndexBalls(true)); //Index in
 
-        StartButton.whileHeld(new AutomatedClimb());
-        BackButton.whileHeld(new AutomatedClimb());
+        driverY.whileHeld(new ShootBalls(true, true)); //Shoot
+        driverY.whenReleased(new ShootBalls(true, false)); //Shoot stop
 
-        GreenButton.whileHeld(new Tilt(false));
-        BlueButton.whileHeld(new Tilt(true));
+        operatorStartButton.whileHeld(new AutomatedClimb()); //Climb up
+        operatorBackButton.whileHeld(new AutomatedClimb()); //Climb down
 
-        rightBumpButton.whileHeld(new IntakeBalls());
+        operatorA.whileHeld(new Tilt(false)); //Intake down
+        operatorX.whileHeld(new Tilt(true)); //Intake up
+
+        driverRB.whileHeld(new IntakeBalls()); //Run intake
     }
 
-    public boolean XboxBluePressed(){
-        return XBoxBlueButton.get();
-    }
-
+    /** TODO: remove once tiltTrig is removed */
     public boolean bluePressed(){
-        return BlueButton.get();
-    }
-    // blue used for tilt, yellow used for index backwards
-    public boolean yellowPressed(){
-        return YellowButton.get();
-    }
-
-    public boolean XboxYellowPressed(){
-        return XboxYellowButton.get();
+        return operatorX.get();
     }
 
     public boolean greenPressed(){
-        return GreenButton.get();
+        return operatorA.get();
     }
+
     public boolean redPressed(){
-        return RedButton.get();
+        return operatorB.get();
     }
 
     public boolean rightBumpPressed(){
-        return rightBumpButton.get();
-    }
-
-    public boolean leftStickPressed(){
-        return joystickLeftStickButton.get();
+        return driverRB.get();
     }
 
     public boolean startPressed(){
-        return StartButton.get();
+        return operatorStartButton.get();
     }
 
-  /*  public boolean rightBumpPressed(){
-        return joystickRightBumpButton.get();
-    }*/
-
-    public double getDriverRawAxisXbox(int axis){
-        return xbox.getRawAxis(axis);
+    public double getDriverRawAxis(int axis){
+        return driver.getRawAxis(axis);
     }
-    public double getDriverRawAxisJoystick(int axis){
-        return joystick.getRawAxis(axis);
+    public double getOperatorRawAxis(int axis){
+        return operator.getRawAxis(axis);
     }
-    
-    
-    
-    
 }

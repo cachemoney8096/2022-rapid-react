@@ -26,9 +26,9 @@ public class SpeedAdjustmentIntake extends Command{
 
     @Override
     protected void execute() {
-        if(Robot.m_oi.getDriverRawAxisJoystick(1)<0.0){
+        if(Robot.m_oi.getOperatorRawAxis(1)<0.0){
             Intake.speedAdjust(-0.05);
-        } else if(Robot.m_oi.getDriverRawAxisJoystick(1)>0.0) {
+        } else if(Robot.m_oi.getOperatorRawAxis(1)>0.0) {
             Intake.speedAdjust(0.05);
         }
         buttonPressed = true;
