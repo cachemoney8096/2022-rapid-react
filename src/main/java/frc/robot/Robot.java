@@ -103,7 +103,7 @@ public class Robot extends TimedRobot {
   }
 
   // public static void CIRAutoSequence(){
-  //   if(!AutoSequence[0]){iu
+  //   if(!AutoSequence[0]){
   //     if(AutoTimer.timePassed(RobotMap.TILT_SHOT_TIME)){
   //       AutoSequence[0] = true;
   //       Intake.tilt(0);
