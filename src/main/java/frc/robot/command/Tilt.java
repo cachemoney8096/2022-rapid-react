@@ -2,6 +2,7 @@ package frc.robot.command;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Timer;
 public class Tilt extends Command {
@@ -66,7 +67,8 @@ public class Tilt extends Command {
         if(m_Up == false){
             tiltPower=0.15;
         }else{
-            tiltPower=-0.25;
+            tiltPower=RobotMap.TILT_UP_POWER;
+            System.out.println("UP POWER: " + tiltPower);
         }
         Intake.tilt(tiltPower);
         }

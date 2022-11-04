@@ -183,7 +183,7 @@ public class Robot extends TimedRobot {
         Intake.tilt(0.0);
         DriveTrain.resetGyro();
       } else {
-        Intake.tilt(-RobotMap.TILT_UP_POWER);
+        Intake.tilt(RobotMap.TILT_UP_POWER);
       }
     } else if(!AutoSequence[5]){
       if(DriveTrain.turnCompleted()){
@@ -245,7 +245,7 @@ public class Robot extends TimedRobot {
         AutoSequence[12] = true;
         Intake.tilt(0.0);
       } else {
-        Intake.tilt(-RobotMap.TILT_UP_POWER);
+        Intake.tilt(RobotMap.TILT_UP_POWER);
       }
     } /*else if(!AutoSequence[13]){
       if(AutoTimer.timePassed(3)){
