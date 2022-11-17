@@ -49,7 +49,7 @@ public class TankDrive extends Command{
     double speed = -Robot.m_oi.getDriverRawAxis(RobotMap.LEFT_STICK_Y);
     double turn = -Robot.m_oi.getDriverRawAxis(RobotMap.RIGHT_STICK_X);
     //The Left is pos the right is neg
-    double kSpeed = 1.0;
+    double kSpeed = 1;
     if(Robot.m_oi.rightBumpPressed()){
       kSpeed = 0.4;
     }

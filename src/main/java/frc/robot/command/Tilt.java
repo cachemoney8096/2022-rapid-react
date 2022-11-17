@@ -65,7 +65,7 @@ public class Tilt extends Command {
         double tiltPower=0;
         
         if(m_Up == false){
-            tiltPower=0.15;
+            tiltPower=0.2;
         }else{
             tiltPower=RobotMap.TILT_UP_POWER;
             System.out.println("UP POWER: " + tiltPower);

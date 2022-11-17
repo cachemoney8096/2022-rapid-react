@@ -2,7 +2,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-
+import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.revrobotics.CANSparkMax.IdleMode;
 
 import frc.robot.Robot;
@@ -15,7 +15,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public class Intake extends Subsystem {   
     //Motor Variable setup
  
-    private static TalonFX leftTilt= new TalonFX(RobotMap.LEFT_TILT_INTAKE_MOTOR);
+    private static TalonFX leftTilt = new TalonFX(RobotMap.LEFT_TILT_INTAKE_MOTOR);
     //private static TalonFX rightTilt = new TalonFX(RobotMap.RIGHT_TILT_INTAKE_MOTOR);
     private static TalonFX go= new TalonFX(RobotMap.GO_INTAKE_MOTOR);
     private static CANSparkMax IndexMotor1 = new CANSparkMax(RobotMap.FrontIndexMotorLeft, MotorType.kBrushless);
@@ -28,6 +28,7 @@ public class Intake extends Subsystem {
     public static double Kadjust1 = 0;
 
     public static void tilt(double speed){
+        leftTilt.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20, 20, 0.1));
         leftTilt.set(ControlMode.PercentOutput, -(speed)); 
         //leftTilt.set(ControlMode.PercentOutput, 0); 
         //rightTilt.set(ControlMode.PercentOutput, speed); 
